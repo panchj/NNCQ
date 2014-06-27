@@ -1,0 +1,5 @@
+D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.UI\bin\Debug\NNCQ.UI.dll
+D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.UI\bin\Debug\NNCQ.UI.pdb
+D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.UI\obj\Debug\NNCQ.UI.csprojResolveAssemblyReference.cache
+D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.UI\obj\Debug\NNCQ.UI.dll
+D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.UI\obj\Debug\NNCQ.UI.pdb
