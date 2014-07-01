@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Hosting;
@@ -13,32 +14,19 @@ namespace NNCQ.Web.Controllers
         {
             return View();
         }
+
+
         [HttpPost]
-        //[ValidateAntiForgeryToken]
-        public JsonResult Upload(HttpPostedFileBase uploadedFile)
+        public ContentResult Upload(HttpPostedFileBase file1)
         {
-            // Validate the uploaded file
-            if (uploadedFile == null || uploadedFile.ContentType != "image/jpeg")
-            {
-                // Return bad request error code
-                return Json(new
-                {
-                    statusCode = 400,
-                    status = "Bad Request! Upload Failed",
-                    file = string.Empty
-                }, "text/html");
-            }
+            var aFile = file1.FileName;
 
-            // Save the file to the server
-            uploadedFile.SaveAs(HostingEnvironment.MapPath("/UploadFiles/" + uploadedFile.FileName));
+            var defaultUploadFilesUrl = Server.MapPath(Request["folder"] + "\\UploadFiles\\");
+            var fileName = "" + Path.GetFileName(file1.FileName).ToLower(); ;
+            var saveFile = defaultUploadFilesUrl + fileName;
+            file1.SaveAs(saveFile);
 
-            // Return success code
-            return Json(new
-            {
-                statusCode = 200,
-                status = "Image uploaded.",
-                file = uploadedFile.FileName,
-            }, "text/html");
+            return Content("<img src='../../UploadFiles/" + fileName + "' />");
         }
 
     }

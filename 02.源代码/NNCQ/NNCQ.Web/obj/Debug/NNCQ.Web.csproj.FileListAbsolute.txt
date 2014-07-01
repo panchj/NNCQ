@@ -51,3 +51,10 @@ D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\Microsoft.AspNet.Identity.Core.
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\EntityFramework.xml
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\obj\Debug\NNCQ.Web.dll
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\obj\Debug\NNCQ.Web.pdb
+D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\EntityFramework.SqlServer.dll
+D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\System.Net.Http.Extensions.dll
+D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\System.Net.Http.Primitives.dll
+D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\EntityFramework.SqlServer.xml
+D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\System.Net.Http.Extensions.xml
+D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\System.Net.Http.Primitives.xml
+D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\obj\Debug\NNCQ.Web.csproj.App.config
