@@ -142,7 +142,6 @@
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.widget.min.js" />
     <Content Include="Scripts\jquery.xdr-transport.js" />
-    <Content Include="Scripts\modernizr-2.0.6-development-only.js" />
     <Content Include="Scripts\modernizr-2.7.2.js" />
     <Content Include="Web.config" />
   </ItemGroup>

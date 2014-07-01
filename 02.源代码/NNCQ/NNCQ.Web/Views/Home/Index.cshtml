@@ -9,48 +9,49 @@
         <input type="file" name="uploadedFile" id="fileupload" />
     }
 
-<script type="text/javascript">
+@section Scripts {
+    <script>
 
-    $(document).ready(function () {
-        //
-        // Handles the file upload
-        //
-        $('#fileupload').fileupload({
-            // Only submit the file if it is jpg file
-            add: function (e, data) {
-                var goUpload = true;
-                var uploadFile = data.files[0];
-                // Only allow JPG files
-                if (!(/\.(jpg)$/i).test(uploadFile.name)) {
-                    alert("Incorrect file format. Please try again.");
-                    goUpload = false;
-                }
-                if (goUpload == true) {
-                    data.submit();
-                }
-            },
-            type: 'post',
-            // Handles the server side validation on file type
-            done: function (e, data) {
-                var jsonArray = JSON.parse(data.result);
-                // If it's success, redirect to the next page
-                if (jsonArray["statusCode"] == 200) {
-                    alert(jsonArray["status"]);
-                    // Redirect
-                } else {
-                    alert(jsonArray["status"]);
-                }
-            },
-            //progressall: function (e, data) {
-            //    // Handle the progress bar
-            //    var progress = parseInt(data.loaded / data.total * 100, 10);
-            //    $('#progress .bar').css(
-            //        'width',
-            //        progress + '%'
-            //    );
-            //}
+        $(document).ready(function () {
+            //
+            // Handles the file upload
+            //
+            $('#fileupload').fileupload({
+                // Only submit the file if it is jpg file
+                add: function (e, data) {
+                    var goUpload = true;
+                    var uploadFile = data.files[0];
+                    // Only allow JPG files
+                    if (!(/\.(jpg)$/i).test(uploadFile.name)) {
+                        alert("Incorrect file format. Please try again.");
+                        goUpload = false;
+                    }
+                    if (goUpload == true) {
+                        data.submit();
+                    }
+                },
+                type: 'post',
+                // Handles the server side validation on file type
+                done: function (e, data) {
+                    var jsonArray = JSON.parse(data.result);
+                    // If it's success, redirect to the next page
+                    if (jsonArray["statusCode"] == 200) {
+                        alert(jsonArray["status"]);
+                        // Redirect
+                    } else {
+                        alert(jsonArray["status"]);
+                    }
+                },
+                //progressall: function (e, data) {
+                //    // Handle the progress bar
+                //    var progress = parseInt(data.loaded / data.total * 100, 10);
+                //    $('#progress .bar').css(
+                //        'width',
+                //        progress + '%'
+                //    );
+                //}
+            });
         });
-    });
 
-
-</script>
+    </script>
+}

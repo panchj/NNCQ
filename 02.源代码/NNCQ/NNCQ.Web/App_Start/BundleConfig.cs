@@ -18,10 +18,7 @@ namespace NNCQ.Web.App_Start
                 "~/Scripts/jquery.mousewheel.js",
                 "~/Scripts/jquery.fileupload.js",
                 "~/Scripts/jquery.iframe-transport.js",
-                "~/Scripts/jquery.xdr-transport.js"
-                )
-                
-                );
+                "~/Scripts/jquery.xdr-transport.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                 "~/Scripts/modernizr-*"));
