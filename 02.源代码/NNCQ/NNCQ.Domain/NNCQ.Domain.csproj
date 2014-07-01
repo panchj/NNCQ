@@ -83,6 +83,7 @@
     <Compile Include="Core\IEntity.cs" />
     <Compile Include="Core\IEntityRepository.cs" />
     <Compile Include="Core\PaginatedList.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Organization\Department.cs" />
     <Compile Include="Organization\DepartmentExtensions.cs" />
     <Compile Include="Organization\Person.cs" />
