@@ -8,24 +8,23 @@ using System.Threading.Tasks;
 
 namespace NNCQ.Domain.Organization
 {
-    public class PersonsInDepartment:IEntity
+    /// <summary>
+    /// 个人身份证件类型
+    /// </summary>
+    public class CredentialsType : IEntity
     {
         [Key]
         public Guid ID { get; set; }
-        [StringLength(10)]
-        public string Name { get; set; }
         [StringLength(50)]
+        public string Name { get; set; }
+        [StringLength(1000)]
         public string Description { get; set; }
         [StringLength(50)]
         public string SortCode { get; set; }
 
-        public virtual Department Department { get; set; }
-        public virtual Person Person { get; set; }
-
-        public PersonsInDepartment() 
+        public CredentialsType() 
         {
             this.ID = Guid.NewGuid();
         }
-
     }
 }

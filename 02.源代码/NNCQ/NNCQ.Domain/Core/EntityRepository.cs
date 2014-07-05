@@ -18,6 +18,11 @@ namespace NNCQ.Domain.Core
             _entitiesContext = context;
         }
 
+        public virtual void Save()
+        {
+            _entitiesContext.SaveChanges();
+        }
+
         public virtual IQueryable<T> GetAll()
         {
             return _entitiesContext.Set<T>();
@@ -33,12 +38,12 @@ namespace NNCQ.Domain.Core
             return query;
         }
 
-        public T GetSingle(Guid id)
+        public virtual T GetSingle(Guid id)
         {
             return GetAll().FirstOrDefault(x => x.ID == id);
         }
 
-        public T GetSingleBy(Expression<Func<T, bool>> predicate)
+        public virtual T GetSingleBy(Expression<Func<T, bool>> predicate)
         {
             return _entitiesContext.Set<T>().Where(predicate).FirstOrDefault();
         }
@@ -74,16 +79,49 @@ namespace NNCQ.Domain.Core
             _entitiesContext.Set<T>().Add(entity);
         }
 
+        public virtual void AddAndSave(T entity)
+        {
+            Add(entity);
+            Save();
+        }
+
         public virtual void Edit(T entity)
         {
             DbEntityEntry dbEntityEntry = _entitiesContext.Entry<T>(entity);
             dbEntityEntry.State = EntityState.Modified;
         }
 
+        public virtual void EditAndSave(T entity) 
+        {
+            Edit(entity);
+            Save();
+        }
+
+        public virtual void AddOrEdit(T entity) 
+        {
+            var p = GetAll().FirstOrDefault(x => x.ID == entity.ID);
+            if (p == null)
+                Add(entity);
+            else
+                Edit(entity);
+        }
+
+        public virtual void AddOrEditAndSave(T entity) 
+        {
+            AddOrEdit(entity);
+            Save();
+        }
+
         public virtual void Delete(T entity)
         {
             DbEntityEntry dbEntityEntry = _entitiesContext.Entry<T>(entity);
             dbEntityEntry.State = EntityState.Deleted;
+        }
+
+        public virtual void DeleteAndSave(T entity) 
+        {
+            Delete(entity);
+            Save();
         }
 
         public virtual void DeleteGraph(T entity)
@@ -93,20 +131,12 @@ namespace NNCQ.Domain.Core
             dbSet.Remove(entity);
         }
 
-        public virtual void Save()
+        public virtual void DeleteGraphAndSave(T entity) 
         {
-            _entitiesContext.SaveChanges();
-        }
-
-        public virtual void SaveOrUpdate(T entity)
-        {
-            var p = GetAll().FirstOrDefault(x => x.ID == entity.ID);
-            if (p == null)
-                Add(entity);
-            else
-                Edit(entity);
+            DeleteGraph(entity);
             Save();
         }
+
 
         public virtual IQueryable<T1> GetAllIncludingRelevance<T1>(params Expression<Func<T1, object>>[] includeProperties)
         {
@@ -140,29 +170,58 @@ namespace NNCQ.Domain.Core
             return (T1)dbSet.Where(predicate).FirstOrDefault();
         }
 
-        public virtual IQueryable<T1> GetMultiRelevanceBy<T1>(Expression<Func<T1, bool>> predicate)
+        public virtual IQueryable<T1> FindRelevanceBy<T1>(Expression<Func<T1, bool>> predicate)
         {
             var dbSet = _entitiesContext.Set(typeof(T1)) as IQueryable<T1>;
             return (IQueryable<T1>)dbSet.Where(predicate);
         }
 
-
-        public void SaveRelevance<T1>(T1 entity)
+        public virtual void AddRelevance<T1>(T1 entity)
         {
             var dbSet = _entitiesContext.Set(typeof(T1));
             dbSet.Add(entity);
-            _entitiesContext.SaveChanges();
         }
 
-        public void EditRelevance<T1>(T1 entity)
+        public virtual void AddAndSaveRelevance<T1>(T1 entity) 
+        {
+            AddRelevance<T1>(entity);
+            Save();
+        }
+
+        public virtual void EditRelevance<T1>(T1 entity)
         {
             var tempBo = Activator.CreateInstance(typeof(T1));
             tempBo = entity;
             var dbSet = _entitiesContext.Set(typeof(T1));
             dbSet.Attach(tempBo);
             _entitiesContext.Entry(tempBo).State = EntityState.Modified;
-            _entitiesContext.SaveChanges();
 
         }
+
+        public virtual void EditAndSaveRelevance<T1>(T1 entity)
+        {
+            EditRelevance<T1>(entity);
+            Save();
+        }
+
+
+        public virtual void DeleteRelevance<T1>(T1 entity) 
+        {
+            var tempBo = Activator.CreateInstance(typeof(T1));
+            tempBo = entity;
+            var dbSet = _entitiesContext.Set(typeof(T1));
+
+            dbSet.Attach(entity);
+            dbSet.Remove(entity);
+        }
+
+        public virtual void DeleteAndSaveRelevance<T1>(T1 entity) 
+        {
+            DeleteRelevance<T1>(entity);
+            Save();
+        }
+
+
+
     }
 }

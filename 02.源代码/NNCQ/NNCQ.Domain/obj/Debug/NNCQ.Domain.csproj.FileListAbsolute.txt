@@ -24,4 +24,3 @@ D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Domain\bin\Debug\Microsoft.Owin.Securit
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Domain\bin\Debug\Newtonsoft.Json.xml
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Domain\obj\Debug\NNCQ.Domain.dll
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Domain\obj\Debug\NNCQ.Domain.pdb
-D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Domain\obj\Debug\NNCQ.Domain.csprojResolveAssemblyReference.cache

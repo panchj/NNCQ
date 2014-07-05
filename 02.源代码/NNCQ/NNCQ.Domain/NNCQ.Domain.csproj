@@ -86,9 +86,13 @@
     <Compile Include="Core\IEntityRepository.cs" />
     <Compile Include="Core\IQueryableExtensions.cs" />
     <Compile Include="Core\PaginatedList.cs" />
+    <Compile Include="Migrations\AppSeed.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Organization\CredentialsType.cs" />
     <Compile Include="Organization\Department.cs" />
     <Compile Include="Organization\DepartmentExtensions.cs" />
+    <Compile Include="Organization\DepartmentType.cs" />
+    <Compile Include="Organization\DepartmentTypeInDepartment.cs" />
     <Compile Include="Organization\Person.cs" />
     <Compile Include="Organization\PersonsInDepartment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
