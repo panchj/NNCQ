@@ -5,12 +5,8 @@ D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\Antlr3.Runtime.dll
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\EntityFramework.dll
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\EntityFramework.SqlServer.dll
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\Microsoft.AspNet.Web.Optimization.WebForms.dll
-D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\Microsoft.Practices.ServiceLocation.dll
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\Microsoft.Practices.Unity.Configuration.dll
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\Microsoft.Practices.Unity.dll
-D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\Microsoft.Practices.Unity.Interception.Configuration.dll
-D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\Microsoft.Practices.Unity.Interception.dll
-D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\Microsoft.Practices.Unity.Mvc.dll
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\Microsoft.Practices.Unity.RegistrationByConvention.dll
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\Newtonsoft.Json.dll
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\NNCQ.Domain.dll
@@ -25,7 +21,6 @@ D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\System.Web.Webpages.Deployment.
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\System.Web.Webpages.dll
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\System.Web.Webpages.Razor.dll
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\Unity.Mvc5.dll
-D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\WebActivatorEx.dll
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\WebGrease.dll
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\Microsoft.AspNet.Identity.EntityFramework.dll
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\Microsoft.AspNet.Identity.Core.dll
@@ -34,13 +29,8 @@ D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\NNCQ.UI.pdb
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\Antlr3.Runtime.pdb
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\EntityFramework.xml
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\EntityFramework.SqlServer.xml
-D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\Microsoft.Practices.ServiceLocation.pdb
-D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\Microsoft.Practices.ServiceLocation.xml
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\Microsoft.Practices.Unity.xml
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\Microsoft.Practices.Unity.Configuration.xml
-D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\Microsoft.Practices.Unity.Interception.xml
-D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\Microsoft.Practices.Unity.Interception.Configuration.xml
-D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\Microsoft.Practices.Unity.Mvc.xml
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\Microsoft.Practices.Unity.RegistrationByConvention.xml
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\Newtonsoft.Json.xml
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\System.Net.Http.Extensions.xml

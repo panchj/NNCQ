@@ -74,6 +74,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\ApplicationSystemBusinessType.cs" />
+    <Compile Include="Application\ApplicationSystemInformation.cs" />
     <Compile Include="Application\ApplicationUser.cs" />
     <Compile Include="Common\BusinessFile.cs" />
     <Compile Include="Common\BusinessImage.cs" />
@@ -82,6 +84,7 @@
     <Compile Include="Core\EntityRepository.cs" />
     <Compile Include="Core\IEntity.cs" />
     <Compile Include="Core\IEntityRepository.cs" />
+    <Compile Include="Core\IQueryableExtensions.cs" />
     <Compile Include="Core\PaginatedList.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Organization\Department.cs" />

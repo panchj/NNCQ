@@ -52,13 +52,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/01/2014 16:06:17</publishTime>
     </File>
     <File Include="bin/NNCQ.Domain.dll">
-      <publishTime>07/01/2014 17:12:18</publishTime>
+      <publishTime>07/02/2014 19:07:03</publishTime>
     </File>
     <File Include="bin/NNCQ.UI.dll">
       <publishTime>07/01/2014 17:12:18</publishTime>
     </File>
     <File Include="bin/NNCQ.Web.dll">
-      <publishTime>07/01/2014 19:51:26</publishTime>
+      <publishTime>07/04/2014 14:49:52</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Extensions.dll">
       <publishTime>07/01/2014 16:14:02</publishTime>
@@ -403,7 +403,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/01/2014 16:15:16</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>07/01/2014 16:15:17</publishTime>
+      <publishTime>07/02/2014 15:57:47</publishTime>
     </File>
     <File Include="Scripts/jquery-1.7.2.js">
       <publishTime>07/01/2014 09:18:18</publishTime>
@@ -469,7 +469,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/01/2014 09:04:54</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>07/01/2014 19:38:33</publishTime>
+      <publishTime>07/04/2014 14:38:26</publishTime>
+    </File>
+    <File Include="Views/Shared/_LayoutHome.cshtml">
+      <publishTime>07/02/2014 14:20:09</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutNncq.cshtml">
       <publishTime>07/01/2014 16:06:15</publishTime>
@@ -478,7 +481,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/01/2014 09:26:20</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/01/2014 17:12:19</publishTime>
+      <publishTime>07/04/2014 10:21:48</publishTime>
     </File>
   </ItemGroup>
 </Project>

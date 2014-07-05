@@ -16,6 +16,7 @@ namespace NNCQ.Web
         {
             AreaRegistration.RegisterAllAreas();
 
+            UnityConfig.RegisterComponents();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             BundleConfig.RegisterBundles(BundleTable.Bundles);

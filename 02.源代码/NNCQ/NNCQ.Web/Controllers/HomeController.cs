@@ -15,19 +15,5 @@ namespace NNCQ.Web.Controllers
             return View();
         }
 
-
-        [HttpPost]
-        public ContentResult Upload(HttpPostedFileBase file1)
-        {
-            var aFile = file1.FileName;
-
-            var defaultUploadFilesUrl = Server.MapPath(Request["folder"] + "\\UploadFiles\\");
-            var fileName = "" + Path.GetFileName(file1.FileName).ToLower(); ;
-            var saveFile = defaultUploadFilesUrl + fileName;
-            file1.SaveAs(saveFile);
-
-            return Content("<img src='../../UploadFiles/" + fileName + "' />");
-        }
-
     }
 }

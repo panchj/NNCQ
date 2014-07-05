@@ -4,7 +4,8 @@
 
 <form name="myForm" id="myForm" action="../../Home/Upload" method="POST" enctype="multipart/form-data">
     <input type="file" id="browseBox" name="file1" />
-    <a href="javascript:Test()">uuuu</a>
+    <input type="hidden" name="abc" value="test"/>
+    <a class="button" href="javascript:Test()">uuuu</a>
 </form>
 
 <div id="uploadTips">
@@ -13,38 +14,18 @@
 
 @section Scripts {
     <script>
-
         function Test() {
             var options = {
+
                 async: false,
                 type: "post",
-                success: uploadSuccessful,
-                error: uploadError
+                
+                success: function (data) {
+                    document.getElementById('uploadTips').innerHTML = data;
+                }
             }
 
             $("#myForm").ajaxSubmit(options);
         }
-
-        function upload() {
-            var options = {
-                async: false,
-                type:"post",
-                success: uploadSuccessful,
-                error: uploadError
-            }
-
-            $("#myForm").ajaxSubmit(options);
-            return false;
-        }
-
-        function uploadSuccessful(data) {
-            document.getElementById('uploadTips').innerHTML = data;
-            //alert(data);
-        }
-
-        function uploadError(jqXHR, textStatus, err) {
-            alert(jqXHR.responseText);
-        }
-
     </script>
 }
