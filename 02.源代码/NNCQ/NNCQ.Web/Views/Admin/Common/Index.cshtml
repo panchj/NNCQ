@@ -1,0 +1,20 @@
+﻿@model NNCQ.UI.Models.Web.MetroUICSS.MucPage_List
+
+@using NNCQ.UI.ExtensionsOfMvcHelper;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@if (Model != null)
+{
+    @Html.ForCommonPageView(Model)
+}
+else
+{
+    <p class="bg-lighterBlue padding20 fg-white" style="margin-right:20px">
+        设计进行中。
+    </p>
+}
+

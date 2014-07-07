@@ -33,6 +33,7 @@ namespace NNCQ.Domain.Application
         public string IconName { get; set; }                   // 任务对应的提示图标
         [StringLength(100)]
         public string BusinessEntityName { get; set; }         // 任务对应的主要的业务实体名称
+
         public bool IsForMeOnly { get; set; }                  // 任务处理的业务对象范围是否限于用户个人
         public bool IsForMyDepartmentOnly { get; set; }        // 任务处理的业务对象是否限于用户所在部门
         public bool IsForDefaultSystemRoleGroup { get; set; }  // 任务处理的业务对象是否限于用户归属的角色

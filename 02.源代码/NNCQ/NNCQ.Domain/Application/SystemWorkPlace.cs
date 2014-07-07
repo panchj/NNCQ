@@ -21,7 +21,7 @@ namespace NNCQ.Domain.Application
         [StringLength(100)]
         public string SortCode { get; set; }    // 工作区业务编码
 
-        public virtual ApplicationInformation AppInfo { get; set; }              // 归属的应用系统
+        public virtual ApplicationInformation AppInfo { get; set; }                    // 归属的应用系统
         public virtual ICollection<SystemWorkSection> SystemWorkSections { get; set; } // 工作区内的任务分类
 
         public SystemWorkPlace()

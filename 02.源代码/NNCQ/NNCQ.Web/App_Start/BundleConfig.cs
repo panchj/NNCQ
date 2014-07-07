@@ -11,7 +11,7 @@ namespace NNCQ.Web.App_Start
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                "~/Scripts/jquery-1.7.2.min.js",
+                "~/Scripts/jquery-2.1.1.min.js",
                 "~/Scripts/jquery.form.min.js",
                 "~/Scripts/jquery.unobtrusive-ajax.min.js",
                 "~/Scripts/jquery.widget.min.js",

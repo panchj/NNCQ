@@ -21,6 +21,7 @@ namespace NNCQ.Domain.Application
         public string SortCode { get; set; }
 
         public virtual ApplicationInformation AppInfo { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
         public ApplicaitionUserInApplication() 
         {

@@ -21,7 +21,7 @@ namespace NNCQ.Domain.Application
         public string SortCode { get; set; }                   // 任务业务编码
 
         public virtual SystemWorkTask SystemWorkTask { get; set; }
-        public virtual IdentityRole SystemRole { get; set; }
+        public virtual ApplicationRole SystemRole { get; set; }
 
         public SystemWorkTaskInRole() 
         {

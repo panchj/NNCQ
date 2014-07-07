@@ -1,0 +1,43 @@
+﻿@model IEnumerable<NNCQ.UI.Models.SelfReferentialItem>
+
+<div class="navigation-bar fixed-top">
+    <div class="navigation-bar-content">
+        <div class="element">
+            <span class="icon-grid-view"></span>&nbsp;<span style="font-size:17px">业务数据管理与维护系统 </span>
+        </div>
+        <span class="element-divider"></span>
+
+        @foreach (var item in Model.Where(p=>p.ID==p.ParentID).OrderBy(s => s.SortCode))
+        {
+            var rightString = "";
+            if (item.IconString == "icon-cog")
+            {
+                rightString = "place-right";
+            }
+
+            <div class="element place-right">
+                <a class="dropdown-toggle" href="#">
+                    <span class="@item.IconString"></span>@item.ItemName &nbsp;
+                </a>
+                @if (!String.IsNullOrEmpty(item.IconString))
+                {
+                    <span class="element-divider place-right"></span>
+                }
+                <ul class="dropdown-menu @rightString" data-role="dropdown">
+                    @foreach (var sItem in Model.Where(p => p.ParentID == item.ID && p.ParentID != p.ID).OrderBy(s => s.SortCode))
+                    {
+                        if (sItem.FacadeStyle == NNCQ.UI.Models.FacadeStyle.Divider)
+                        {
+                            <li class="divider"></li>
+                        }
+                        else
+                        {
+                            <li><a href="~/@sItem.OperateName ">@sItem.ItemName</a></li>
+                        }
+                    }
+                </ul>
+            </div>
+        }
+
+    </div>
+</div>

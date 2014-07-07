@@ -77,8 +77,11 @@
     <Compile Include="Application\AccreditRoleGroup.cs" />
     <Compile Include="Application\ApplicationBusinessType.cs" />
     <Compile Include="Application\ApplicationInformation.cs" />
+    <Compile Include="Application\ApplicationRoleManager.cs" />
     <Compile Include="Application\ApplicationUser.cs" />
     <Compile Include="Application\ApplicaitionUserInApplication.cs" />
+    <Compile Include="Application\ApplicationRole.cs" />
+    <Compile Include="Application\ApplicationUserManager.cs" />
     <Compile Include="Application\IdentityManager.cs" />
     <Compile Include="Application\SystemWorkPlace.cs" />
     <Compile Include="Application\SystemWorkSection.cs" />
@@ -93,7 +96,7 @@
     <Compile Include="Core\IEntityRepository.cs" />
     <Compile Include="Core\IQueryableExtensions.cs" />
     <Compile Include="Core\PaginatedList.cs" />
-    <Compile Include="Migrations\AppSeed.cs" />
+    <Compile Include="Migrations\UserAndRoleSeed.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Organization\CredentialsType.cs" />
     <Compile Include="Organization\Department.cs" />
@@ -108,6 +111,7 @@
     <Compile Include="Organization\Person.cs" />
     <Compile Include="Organization\PersonsInDepartment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\AdministratorMenu.cs" />
     <Compile Include="Utilities\BusinessEntityComponentsFactory.cs" />
     <Compile Include="Utilities\ValidateCode.cs" />
   </ItemGroup>
@@ -115,7 +119,12 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\NNCQ.UI\NNCQ.UI.csproj">
+      <Project>{fc926e5e-c4b6-4af3-b2e6-5df6fb3401b2}</Project>
+      <Name>NNCQ.UI</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

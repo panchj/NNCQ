@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using NNCQ.Domain.Core;
 using NNCQ.Domain.Organization;
+using NNCQ.Domain.Application;
 
 namespace NNCQ.Web.App_Start
 {
@@ -14,6 +15,8 @@ namespace NNCQ.Web.App_Start
 		public static void RegisterComponents()
 		{
 			var container = new UnityContainer();
+			container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>();
+			container.RegisterType<IRoleStore<ApplicationRole,string>, RoleStore<ApplicationRole>>();
 
 			container.RegisterType<DbContext, EntityDbContext>();
 

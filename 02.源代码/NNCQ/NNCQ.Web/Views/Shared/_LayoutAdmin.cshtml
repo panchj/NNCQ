@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+@{
+    var topMenu = NNCQ.Domain.Utilities.AdministratorMenu.CommonTopMenu();
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8" />
+    <title>NNCQ管理信息系统-系统后台数据管理</title>
+
+    @Styles.Render("~/metroCss")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body class="metro" style="font-family:'Microsoft YaHei UI'">
+    <header class="bg-dark">
+        @Html.Partial("_HeaderForAdmin", topMenu)
+    </header>
+
+
+    <div style="margin-top:55px;margin-left:10px">
+        @RenderBody()
+    </div>
+
+    <footer style="margin-top:30px;margin-left:15px">
+        <div class="bottom-menu-wrapper">
+            <ul class="horizontal-menu compact">
+                <li>&copy; @DateTime.Now.Year - 版权所有：NNCQ责任有限公司</li>
+            </ul>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/metroScript")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

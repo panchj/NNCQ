@@ -20,8 +20,6 @@ namespace NNCQ.Domain.Organization
         public string SortCode { get; set; }
         public bool IsActiveDepartment { get; set; }                      // 活动中的部门
 
-
-
         public virtual Department ParentDapartment { get; set; }
 
         public Department() 
