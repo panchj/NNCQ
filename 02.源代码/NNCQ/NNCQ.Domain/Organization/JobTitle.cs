@@ -8,7 +8,10 @@ using System.Threading.Tasks;
 
 namespace NNCQ.Domain.Organization
 {
-    public class Department : IEntity
+    /// <summary>
+    /// 工作职位
+    /// </summary>
+    public class JobTitle:IEntity
     {
         [Key]
         public Guid ID { get; set; }
@@ -18,13 +21,8 @@ namespace NNCQ.Domain.Organization
         public string Description { get; set; }
         [StringLength(50)]
         public string SortCode { get; set; }
-        public bool IsActiveDepartment { get; set; }                      // 活动中的部门
 
-
-
-        public virtual Department ParentDapartment { get; set; }
-
-        public Department() 
+        public JobTitle() 
         {
             this.ID = Guid.NewGuid();
         }

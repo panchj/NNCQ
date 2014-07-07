@@ -74,9 +74,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application\ApplicationSystemBusinessType.cs" />
-    <Compile Include="Application\ApplicationSystemInformation.cs" />
+    <Compile Include="Application\AccreditRoleGroup.cs" />
+    <Compile Include="Application\ApplicationRole.cs" />
+    <Compile Include="Application\ApplicationBusinessType.cs" />
+    <Compile Include="Application\ApplicationInformation.cs" />
     <Compile Include="Application\ApplicationUser.cs" />
+    <Compile Include="Application\ApplicaitionUserInApplication.cs" />
+    <Compile Include="Application\ApplicationUserInApplicationRole.cs" />
+    <Compile Include="Application\SystemWorkPlace.cs" />
+    <Compile Include="Application\SystemWorkSection.cs" />
+    <Compile Include="Application\SystemWorkTask.cs" />
     <Compile Include="Common\BusinessFile.cs" />
     <Compile Include="Common\BusinessImage.cs" />
     <Compile Include="Core\DeleteStatus.cs" />
@@ -91,8 +98,13 @@
     <Compile Include="Organization\CredentialsType.cs" />
     <Compile Include="Organization\Department.cs" />
     <Compile Include="Organization\DepartmentExtensions.cs" />
+    <Compile Include="Organization\DepartmentLeader.cs" />
     <Compile Include="Organization\DepartmentType.cs" />
     <Compile Include="Organization\DepartmentTypeInDepartment.cs" />
+    <Compile Include="Organization\JobLevel.cs" />
+    <Compile Include="Organization\JobLevelInDepartment.cs" />
+    <Compile Include="Organization\JobTitle.cs" />
+    <Compile Include="Organization\JobTitleInDepartment.cs" />
     <Compile Include="Organization\Person.cs" />
     <Compile Include="Organization\PersonsInDepartment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

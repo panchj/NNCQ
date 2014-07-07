@@ -6,28 +6,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NNCQ.Domain.Organization
+namespace NNCQ.Domain.Application
 {
-    public class Department : IEntity
+    public class ApplicationUserInApplicationRole:IEntity
     {
         [Key]
         public Guid ID { get; set; }
-        [StringLength(50)]
-        public string Name { get; set; }
-        [StringLength(1000)]
+        [StringLength(100)]
+        public string Name { get; set; }         
+        [StringLength(100)]
         public string Description { get; set; }
-        [StringLength(50)]
+        [StringLength(100)]
         public string SortCode { get; set; }
-        public bool IsActiveDepartment { get; set; }                      // 活动中的部门
 
+        public virtual ApplicationUser User { get; set; }
+        public virtual ApplicationRole RoleGroup { get; set; }
 
-
-        public virtual Department ParentDapartment { get; set; }
-
-        public Department() 
+        public ApplicationUserInApplicationRole() 
         {
             this.ID = Guid.NewGuid();
         }
-
     }
 }

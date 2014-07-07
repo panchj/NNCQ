@@ -41,8 +41,9 @@ namespace NNCQ.Domain.Organization
         public string InquiryPassword { get; set; }         // 查询密码，仅仅用于查询是否已经已经建立数据
         public bool IsActivePerson { get; set; }
 
-        //public virtual PersonsInDepartment PersonDeaprtment { get; set; }              // 人员归属部门
-        public virtual CredentialsType CredentialsType { get; set; }                   // 身份证件类型
+        public virtual CredentialsType CredentialsType { get; set; }   // 身份证件类型
+        public virtual JobTitle JobTitle { get; set; }                 // 工作岗位（头衔）
+        public virtual JobLevel JobLevel { get; set; }                 // 工作职级
 
         public Person() 
         {
