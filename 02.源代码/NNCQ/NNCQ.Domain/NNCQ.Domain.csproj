@@ -75,15 +75,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application\AccreditRoleGroup.cs" />
-    <Compile Include="Application\ApplicationRole.cs" />
     <Compile Include="Application\ApplicationBusinessType.cs" />
     <Compile Include="Application\ApplicationInformation.cs" />
     <Compile Include="Application\ApplicationUser.cs" />
     <Compile Include="Application\ApplicaitionUserInApplication.cs" />
-    <Compile Include="Application\ApplicationUserInApplicationRole.cs" />
+    <Compile Include="Application\IdentityManager.cs" />
     <Compile Include="Application\SystemWorkPlace.cs" />
     <Compile Include="Application\SystemWorkSection.cs" />
     <Compile Include="Application\SystemWorkTask.cs" />
+    <Compile Include="Application\SystemWorkTaskInRole.cs" />
     <Compile Include="Common\BusinessFile.cs" />
     <Compile Include="Common\BusinessImage.cs" />
     <Compile Include="Core\DeleteStatus.cs" />
