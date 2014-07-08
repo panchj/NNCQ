@@ -123,6 +123,7 @@
     <Compile Include="ViewModelAttribute\EditorItemType.cs" />
     <Compile Include="ViewModelAttribute\EditorSpecification.cs" />
     <Compile Include="Models\FacadeStyle.cs" />
+    <Compile Include="ViewModelAttribute\ExtensionJavaScriptFile.cs" />
     <Compile Include="ViewModelAttribute\ISpecificationValue.cs" />
     <Compile Include="ViewModelAttribute\ListDataGridViewSpecification.cs" />
     <Compile Include="ViewModelAttribute\ListHeaderAdditionalButton.cs" />
