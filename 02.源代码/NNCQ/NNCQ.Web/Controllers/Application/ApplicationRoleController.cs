@@ -15,7 +15,7 @@ namespace NNCQ.Web.Controllers.Application
 {
     public class ApplicationRoleController : Controller
     {
-        private ApplicationRoleManager _RoleManager;
+        private readonly ApplicationRoleManager _RoleManager;
 
         public ApplicationRoleController(IRoleStore<ApplicationRole,string> store) 
         {
@@ -88,24 +88,33 @@ namespace NNCQ.Web.Controllers.Application
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Delete(Guid id)
-        {
-            var relevance = new List<object>()
-            {
-            };
-
-            var deleteStatus = new DeleteStatus();
-            BusinessEntityComponentsFactory.SetDeleteStatus<ApplicationRole>(id, deleteStatus, relevance);
-            return Json(deleteStatus.SDSM);
-        }
-
-        [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Detail(string id)
         {
             var bo = _RoleManager.FindById(id);
             var boVM = new ApplicationRoleVM(bo);
             var detail = PageComponentRepository<ApplicationRoleVM>.DetailDialog(boVM);
             return Json(detail);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Delete(Guid id)
+        {
+            var deleteStatusModelItems = new List<DeleteStatusModel>();
+
+            var role = _RoleManager.FindById(id.ToString());
+            var deleteResult=_RoleManager.Delete(role);
+            if (deleteResult.Succeeded)
+            {
+                deleteStatusModelItems.Add(new DeleteStatusModel() { OperationMessage = "", OperationStatus = true });
+            }
+            else 
+            {
+                foreach(var errorItem in deleteResult.Errors)
+                {
+                    deleteStatusModelItems.Add(new DeleteStatusModel() { OperationMessage = errorItem, OperationStatus = false });
+                }
+            }
+            return Json(deleteStatusModelItems);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]

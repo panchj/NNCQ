@@ -1,4 +1,92 @@
 ﻿@{
-    Layout = "~/Views/Shared/_LayoutNncq.cshtml";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
 }
+<table style="width:100%">
+    <tr>
+        <td>
+            <div id="homeMainDiv" style="background: url(../../images/CodeOnScreen.gif) top left no-repeat; background-size:cover;">
+            </div>
+        </td>
+        <td style="width:500px;vertical-align:top">
+            <div style="margin-left: 60px; margin-right: 50px">
+                <div style="margin-top: 25px">
+                    <h1 style="font-family: 'Microsoft YaHei'">系统用户登录 </h1>
+                </div>
 
+                <div class="input-control checkbox" data-role="input-control">
+                    <label>
+                        <input id="isDefaultLogon" type="checkbox" checked />
+                        <span class="check"></span>
+                        使用管理员账号登录（开发时使用）
+                    </label>
+                </div>
+
+
+                <input id="operationPath" type="hidden" value="@ViewBag.OperationPath " />
+
+                <div class="input-control text size4" data-role="input-control">
+                    <input id="userName" type="text" placeholder="请输入用户名" value="">
+                    <button class="btn-clear" tabindex="-1"></button>
+                </div>
+
+                <div class="input-control password size4" data-role="input-control">
+                    <input id="password" type="password" placeholder="请输入密码" value="">
+                    <button class="btn-reveal" tabindex="-1"></button>
+                </div>
+
+                <br /><br />
+
+                <button class="button large primary" type="button" onclick="javascript:logon()"><i class="icon-enter fg-white" style="font-size:16px"></i>&nbsp; 登 录 </button>
+                <div id="logonStatusPrompt" style="margin-top: 20px"></div>
+            </div>
+
+
+        </td>
+    </tr>
+</table>
+
+@section Scripts {
+
+    <script>
+        self.moveTo(0, 0)
+        self.resizeTo(screen.availWidth, screen.availHeight)
+        var el = document.getElementById("homeMainDiv");
+        el.style.height = screen.availHeight + "px";
+
+        function logon() {
+            var userName = document.getElementById('userName').value;
+            var password = document.getElementById('password').value;
+
+            var isForTestAdmin = document.getElementById('isDefaultLogon').checked;
+            if (isForTestAdmin) {
+                userName = 'tiger';
+                password = '123@Abc';
+            }
+
+            if (userName == '' || password == '') {
+                document.getElementById('logonStatusPrompt').innerHTML = "<span style='color:red'>用户名或者密码不能为空值</span>"; //。
+            }
+            else
+            {
+                document.getElementById('logonStatusPrompt').innerHTML = "<img src='../images/ProgressIcon.gif' style='width:22px' /> 系统登录处理中，请稍侯。";
+                $.ajax({
+                    cache: true,
+                    type: 'POST',
+                    async: true,
+                    url: '../../Home/Logon?userName=' + userName + '&password=' + password,
+                    dataType: 'json',
+                    success: function (logonStatus) {
+                        var isLogon = logonStatus.IsLogon;
+                        if (isLogon) {
+                            window.location.href = logonStatus.Message;
+                        }
+                        else {
+                            document.getElementById('logonStatusPrompt').innerHTML = "<span style='color:red'>" + logonStatus.Message + "</span>";
+                        }
+                    }
+                });
+            }
+        }
+    </script>
+
+}

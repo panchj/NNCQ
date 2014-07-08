@@ -3,11 +3,17 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
+    <meta charset="utf-8" />
+    <title>NNCQ管理信息系统</title>
+    @Styles.Render("~/metroCss")
+    @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
+<body class="metro" style="font-family:'Microsoft YaHei UI'">
     <div>
         @RenderBody()
     </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/metroScript")
+    @RenderSection("scripts", required: false)
 </body>
 </html>

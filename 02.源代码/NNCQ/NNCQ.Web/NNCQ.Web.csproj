@@ -139,6 +139,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\ProgressIcon.gif" />
     <Content Include="Scripts\NNCQ\nncq-ApplicaitonRole.js" />
     <Content Include="css\iconFont.min.css" />
     <Content Include="css\metro-bootstrap-responsive.css" />
@@ -281,11 +282,11 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Application\ApplicationRoleVM.cs" />
+    <Compile Include="ViewModels\Application\ApplicationUserVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
-    <Content Include="Views\Shared\_LayoutNncq.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
     <Content Include="Views\Shared\_LayoutHome.cshtml" />

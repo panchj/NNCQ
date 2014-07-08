@@ -29,7 +29,6 @@ namespace NNCQ.Domain.Application
         [Required]
         [StringLength(50)]
         public string MobileNumber { get; set; }
-
         public virtual Person Person { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
