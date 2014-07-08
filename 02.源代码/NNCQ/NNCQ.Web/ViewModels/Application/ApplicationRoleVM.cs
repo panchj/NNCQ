@@ -15,7 +15,7 @@ namespace NNCQ.Web.ViewModels.Application
     [ListNavigator("系统角色数据", "List", ListNavigatorType.SideBar)]
     [ListHeaderAdditionalButton("Test1", "javascript:function1()",60)]
     [ListHeaderAdditionalButton("Test2", "javascript:function2()",60)]
-
+    [ExtensionJavaScriptFile("../../Contents/NNCQ/nncq-Application.js")]
     public class ApplicationRoleVM
     {
         [Key]
