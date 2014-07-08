@@ -9,7 +9,6 @@ using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<NNCQ.Domain.Core.EntityDbContext>
     {
-
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;

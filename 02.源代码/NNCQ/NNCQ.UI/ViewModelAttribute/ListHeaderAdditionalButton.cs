@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace NNCQ.UI.ViewModelAttribute
 {
+    /// <summary>
+    /// 用于处理数据列表表头中扩展的按钮定义
+    /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class ListHeaderAdditionalButton:Attribute
     {
