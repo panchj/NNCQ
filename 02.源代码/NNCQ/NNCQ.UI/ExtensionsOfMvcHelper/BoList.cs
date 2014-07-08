@@ -10,7 +10,7 @@ namespace NNCQ.UI.ExtensionsOfMvcHelper
 {
     public static class MucBoList
     {
-        public static System.Web.Mvc.MvcHtmlString ForCommonPageView(this HtmlHelper html, MucPage_List pageModel) 
+        public static MvcHtmlString ForCommonPageView(this HtmlHelper html, MucPage_List pageModel) 
         {
 
             var htmlContentBuilder = new StringBuilder();
@@ -42,15 +42,12 @@ namespace NNCQ.UI.ExtensionsOfMvcHelper
             htmlContentBuilder.Append(pageModel.AdditionHtmlContent);
             #endregion
 
-            #region 创建附件的脚本组件
-            htmlContentBuilder.Append("");
-            htmlContentBuilder.Append(pageModel.AdditionScriptContent);
-            htmlContentBuilder.Append("");
-            #endregion
-
-            return System.Web.Mvc.MvcHtmlString.Create(htmlContentBuilder.ToString());
+            return MvcHtmlString.Create(htmlContentBuilder.ToString());
         }
 
-
+        public static MvcHtmlString ForCommonPageJavaScript(this HtmlHelper html, MucPage_List pageModel) 
+        {
+            return MvcHtmlString.Create(pageModel.AdditionScriptContent);
+        }
     }
 }

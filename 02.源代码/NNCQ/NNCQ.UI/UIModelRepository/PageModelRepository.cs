@@ -61,9 +61,16 @@ namespace NNCQ.UI.UIModelRepository
             // 主工作区
             pageModel.MainWorkPlace = MainWorkPlaceInitializer.GetMainWorkPlace(boVMCollection, paginate);
 
+            var extensionJavaScript = boVMAttributes.Where(n => n.GetType().Name == "ExtensionJavaScriptFile");
+            var extensionJavaScriptString = "";
+            foreach (var jItem in extensionJavaScript) 
+            {
+                var jfile = "<script type=\"text/javascript\" src=\"" + (jItem as ExtensionJavaScriptFile).FileSource + "\"></script>";
+                extensionJavaScriptString = extensionJavaScriptString + jfile;
+            }
 
             // 封装的Jscript脚本库
-            pageModel.AdditionScriptContent = AdditionScriptContent.Get();
+            pageModel.AdditionScriptContent =extensionJavaScriptString + AdditionScriptContent.Get();
 
             return pageModel;
         }
@@ -657,7 +664,7 @@ namespace NNCQ.UI.UIModelRepository
 
                 }
                 if (properties.Where(x => x.Name.ToLower() == "id").FirstOrDefault()!=null)
-                listColumnHeaderItems.Add(_GetDefaultOperationCol());
+                    listColumnHeaderItems.Add(_GetDefaultOperationCol());
 
                 #endregion
 
@@ -719,7 +726,7 @@ namespace NNCQ.UI.UIModelRepository
                                     displayString = displayString + itemUrl + " ";
                                 }
                             }
-                            htmlString.Append("<td class='text-center'>");
+                            htmlString.Append("<td class='text-left'>");
                             htmlString.Append(displayString);
                             htmlString.Append("</td>");
                         }

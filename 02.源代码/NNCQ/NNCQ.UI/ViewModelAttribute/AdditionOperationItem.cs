@@ -20,7 +20,7 @@ namespace NNCQ.UI.ViewModelAttribute
         {
             this.Title = title;
             this.Width = width;
-            this.SortCode = SortCode;
+            this.SortCode = sortCode;
         }
     }
 }

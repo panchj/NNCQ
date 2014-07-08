@@ -13,9 +13,9 @@ namespace NNCQ.Web.ViewModels.Application
     [ListHeadSpecification("系统角色数据定义管理",ControllerName = "ApplicationRole",SearchActionPath = "",CreateActionPath = "CreateOrEdit")]
     [ListDataGridViewSpecification("ApplicationRole", 18, ListActionPath = "List", EditActionPath = "CreateOrEdit", DetailActionPath = "Detail", DeleteActionPath = "Delete")]
     [ListNavigator("系统角色数据", "List", ListNavigatorType.SideBar)]
-    [ListHeaderAdditionalButton("Test1", "javascript:function1()",60)]
-    [ListHeaderAdditionalButton("Test2", "javascript:function2()",60)]
-    [ExtensionJavaScriptFile("../../Contents/NNCQ/nncq-Application.js")]
+    //[ListHeaderAdditionalButton("Test1", "javascript:function1()",60)]
+    //[ListHeaderAdditionalButton("Test2", "javascript:function2()",60)]
+    [ExtensionJavaScriptFile("../../Scripts/NNCQ/nncq-ApplicaitonRole.js")]
     public class ApplicationRoleVM
     {
         [Key]
@@ -54,7 +54,7 @@ namespace NNCQ.Web.ViewModels.Application
         [StringLength(50, ErrorMessage = "你输入的数据超出限制50个字符的长度。")]
         public string SortCode { get; set; }
 
-        [AdditionOperationItem("配置管理",150,"80")]
+        [AdditionOperationItem("配置管理",130,"80")]
         public List<CommonAlinkItem> AdditionOperateUrlItems { get; set; }
 
         public ApplicationRoleVM() { }
