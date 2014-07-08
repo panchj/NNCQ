@@ -18,7 +18,7 @@ namespace NNCQ.UI.UIModelRepository
     public class PageModelRepository<T> where T:class
     {
         /// <summary>
-        /// 根据前端提供的实体视图类的集合直接生成全部的列表页面的组件
+        /// 根据前端提供的实体视图类的集合直接生成全部的列表页面的方法
         /// </summary>
         /// <param name="boVMCollection">前端的业务对象视图模型集合</param>
         /// <param name="treeNodes">左侧导航树的自引用模式的节点集合，如果为空值，则不适用左侧导航节点空间</param>
@@ -32,7 +32,7 @@ namespace NNCQ.UI.UIModelRepository
             var boType = typeof(T);
             Attribute[] boVMAttributes = Attribute.GetCustomAttributes(boType);
 
-            #region 创建左侧导航页面数据
+            #region 创建左侧导航页面数据，导航树的方式，根据 ListNavigatorType 来确定。
             if (treeNodes != null)
             {
                 var leftNavigatorTitle = "分类导航";
@@ -58,13 +58,24 @@ namespace NNCQ.UI.UIModelRepository
             } 
             #endregion
 
+            // 主工作区
             pageModel.MainWorkPlace = MainWorkPlaceInitializer.GetMainWorkPlace(boVMCollection, paginate);
 
+
+            // 封装的Jscript脚本库
             pageModel.AdditionScriptContent = AdditionScriptContent.Get();
 
             return pageModel;
         }
 
+        /// <summary>
+        /// 重载的根据前端提供的业务对象集合与视图模型直接生成全部页面的方法
+        /// </summary>
+        /// <param name="boVMCollection">前端的业务对象视图模型集合</param>
+        /// <param name="leftStatusString">直接在前端定义好的链接 Html 代码字符串</param>
+        /// <param name="paginate">分页器</param>
+        /// <param name="typeID">用于关联导航树指向节点的链接</param>
+        /// <returns></returns>
         public static MucPage_List GetPageModel(List<T> boVMCollection, string leftStatusString, MucPaginate paginate = null, string typeID = null) 
         {
             var boType = typeof(T);
@@ -83,6 +94,13 @@ namespace NNCQ.UI.UIModelRepository
             return pageModel;
         }
 
+        /// <summary>
+        /// 用于更新列表数据内容页面局部内容的方法
+        /// </summary>
+        /// <param name="boVMCollection">前端的业务对象视图模型集合，一般是根据某些条件处理之后的对象集合</param>
+        /// <param name="keyword">关键词</param>
+        /// <param name="paginate">分页器</param>
+        /// <returns></returns>
         public static ListPartialPageUpdateInfo PageUpdate(List<T> boVMCollection, string keyword = null, MucPaginate paginate = null) 
         {
             var boType = typeof(T);
@@ -97,11 +115,21 @@ namespace NNCQ.UI.UIModelRepository
             return updatePage;
         }
 
-        public static Muc_LeftNavigator GetSideBarNavigator(List<SelfReferentialItem> treeNodes, string title,string typeID = null) 
+        /// <summary>
+        /// 根据 SelfReferentialItem 节点集合创建导航树的 Html 代码
+        /// </summary>
+        /// <param name="treeNodes">SelfReferentialItem 节点集合</param>
+        /// <param name="title">标题</param>
+        /// <param name="typeID">指定的类型ID名称</param>
+        /// <returns></returns>
+        public static Muc_LeftNavigator GetSideBarNavigator(List<SelfReferentialItem> treeNodes, string title, string typeID = null) 
         {
             return LeftNavigatorWithSideBarInitializer.GetLeftNavigator(treeNodes, title, typeID);
         }
 
+        /// <summary>
+        /// 层次导航树生成器
+        /// </summary>
         class LeftNavigatorWithTreeViewInitializer
         {
             public static Muc_LeftNavigator GetLeftNavigator(List<SelfReferentialItem> treeNodes, string title)
@@ -255,6 +283,9 @@ namespace NNCQ.UI.UIModelRepository
 
         }
 
+        /// <summary>
+        /// 基于 Metro UI CSS 的 SideBar 样式的导航清单生成器
+        /// </summary>
         class LeftNavigatorWithSideBarInitializer 
         {
             public static Muc_LeftNavigator GetLeftNavigator(List<SelfReferentialItem> treeNodes, string title,string typeID)
@@ -396,6 +427,9 @@ namespace NNCQ.UI.UIModelRepository
 
         }
 
+        /// <summary>
+        /// 主工作区生成器
+        /// </summary>
         public class MainWorkPlaceInitializer
         {
             public static Muc_MainWorkPlace GetMainWorkPlace(List<T> boVMCollection, MucPaginate paginate) 
@@ -404,30 +438,28 @@ namespace NNCQ.UI.UIModelRepository
                 var mainWorkPLace = new Muc_MainWorkPlace();
                 var boType = typeof(T);
 
-                var a =boType.FullName;
-                
+                var headerDivID = "Header_" + boType.Name;     // 顶部 div 
+                var dgvDivID = "DataGridView_" + boType.Name;  // 中间类似 DataGrid 用途的 div
+                var bottomDivID = "Bottom_" + boType.Name;     // 底部 div
 
-                var headerDivID = "Header_" + boType.Name;
-                var dgvDivID = "DataGridView_" + boType.Name;
-                var bottomDivID = "Bottom_" + boType.Name;
-
+                #region 提取对应列表数据的的特性
                 Attribute[] boVMAttributes = Attribute.GetCustomAttributes(boType);
                 var sAttribute = boVMAttributes.Where(n => n.GetType().Name == "ListDataGridViewSpecification").FirstOrDefault() as ListDataGridViewSpecification;
-                if (boType.FullName.Contains("CustomerDescribleProbleForQuestionnaireVM"))
-                {
-                    mainWorkPLace.MainWorkPlaceHeadBar = _GetHeadbarForAnalysis();
-                }else
+                #endregion 
+               
+                // 生成列表的表头
                 mainWorkPLace.MainWorkPlaceHeadBar = _GetHeadbar();
-                
+                // 生成列表的表体
                 mainWorkPLace.MainWorkPlaceDataGridView = _GetDataGridView(boVMCollection);
+                // 根据分页器的状态生成列表底部
                 if (paginate != null)
                     mainWorkPLace.MainWorkPlaceBottomBar = _GetBottomBar(sAttribute.ControllerName, sAttribute.ListActionPath, paginate);
                 else
                 {
                     mainWorkPLace.MainWorkPlaceBottomBar = new Muc_MainWorkPlaceBottomBar();
                     mainWorkPLace.MainWorkPlaceBottomBar.InnerHtmlContent = "";
- 
                 }
+                //! 合成主工作区局部页 Html 字符串代码
                 mainWorkPLace.InnerHtmlContent =
                     "<div id='" + headerDivID + "'name='" + headerDivID + "'>" + mainWorkPLace.MainWorkPlaceHeadBar.InnerHtmlContent + "</div>" +
                     "<div id='" + dgvDivID + "'name='" + dgvDivID + "'>" + mainWorkPLace.MainWorkPlaceDataGridView.InnerHtmlContent + "</div>" +
@@ -436,21 +468,44 @@ namespace NNCQ.UI.UIModelRepository
                 return mainWorkPLace;
             }
 
+            /// <summary>
+            /// 公开的，直接供前端控制器调用的列表页面表头方法
+            /// </summary>
+            /// <param name="keyword"></param>
+            /// <returns></returns>
             public static string GetHeader(string keyword = null) 
             {
                 return _GetHeadbar(keyword).InnerHtmlContent;
             }
 
+            /// <summary>
+            /// 公开的公开的，直接供前端控制器调用的列表页面表体的方法
+            /// </summary>
+            /// <param name="boVMCollection"></param>
+            /// <returns></returns>
             public static string GetDataGridViewContent(List<T> boVMCollection) 
             {
                 return _GetDataGridView(boVMCollection).InnerHtmlContent;
             }
 
+            /// <summary>
+            /// 公开的公开的，直接供前端控制器调用的列表页面底部的方法
+            /// </summary>
+            /// <param name="controller"></param>
+            /// <param name="listAction"></param>
+            /// <param name="paginate"></param>
+            /// <param name="typeID"></param>
+            /// <returns></returns>
             public static string GetBottom(string controller, string listAction, MucPaginate paginate,string typeID = null) 
             {
                 return _GetBottomBar(controller,listAction,paginate,typeID).InnerHtmlContent;
             }
 
+            /// <summary>
+            /// 创建表头部件
+            /// </summary>
+            /// <param name="keyword"></param>
+            /// <returns></returns>
             private static Muc_MainWorkPlaceHeadBar _GetHeadbar(string keyword = null) 
             {
                 var headBar = new Muc_MainWorkPlaceHeadBar();
@@ -460,6 +515,7 @@ namespace NNCQ.UI.UIModelRepository
                 var boType = typeof(T);
                 Attribute[] boVMAttributes = Attribute.GetCustomAttributes(boType);
                 var headAttribute = boVMAttributes.Where(n => n.GetType().Name == "ListHeadSpecification").FirstOrDefault();
+                var additonButtonAttribute = boVMAttributes.Where(n => n.GetType().Name == "ListHeaderAdditionalButton");
                 if (headAttribute != null) 
                 {
                     var hSpecification = headAttribute as ListHeadSpecification;
@@ -468,6 +524,18 @@ namespace NNCQ.UI.UIModelRepository
                     headBar.HeadBarOperation.ControllerName = hSpecification.ControllerName;
                     headBar.HeadBarOperation.CreateActionPath = hSpecification.CreateActionPath;
                     headBar.HeadBarOperation.SearchActionPath = hSpecification.SearchActionPath;
+
+                    if (additonButtonAttribute.Count()>0)
+                    {
+                        headBar.HeadBarOperation.ButtonItems = new List<CommonButtonItem>();
+                        foreach (var item in additonButtonAttribute)
+                        {
+                            var tItem = item as ListHeaderAdditionalButton;
+                            var bItem = new CommonButtonItem() { DisplayName = tItem.DisplayName, OnClickFunction = tItem.OnClickFunction, Width=tItem.Width };
+                            headBar.HeadBarOperation.ButtonItems.Add(bItem);
+                        }
+                    }
+
                 }
 
                 headBar.ID = "Header_"+boType.Name;
@@ -484,64 +552,17 @@ namespace NNCQ.UI.UIModelRepository
                 htmlString.Append("<table style='width:100%'>");
                 htmlString.Append("<tr>"); 
                 htmlString.Append("<td><p class='subheader'>" + headBar.HeadBarTitle.Title + "</p></td>");
-                htmlString.Append("<td style='width:250px'>");
-                htmlString.Append("<div class='input-control text'><input id='serchKeyword' type='text' " + seachValueString+ " /><button onclick='" + serchFunction + "' class='btn-search'></button></div>");
-                htmlString.Append("</td>");
-                if (headBar.HeadBarOperation.CreateActionPath != "") { 
-                htmlString.Append("<td style='width:110px;vertical-align:top; text-align:right'>");
-                htmlString.Append("<button class='button info' type='button' onclick='"+createFunction+"' style='height:33px'>");
-                htmlString.Append("<i class='icon-new icon-white'></i> 新建数据");
-                htmlString.Append("</button>");
-                htmlString.Append("</td>");}
-                htmlString.Append("</tr>");
-                htmlString.Append("</table>");
-                headBar.InnerHtmlContent = htmlString.ToString();
-                return headBar;
-            }
 
-            private static Muc_MainWorkPlaceHeadBar _GetHeadbarForAnalysis(string keyword = null)
-            {
-                var headBar = new Muc_MainWorkPlaceHeadBar();
-                headBar.HeadBarTitle = new HeadBarTitle();
-                headBar.HeadBarOperation = new HeadBarOperation();
-
-                var boType = typeof(T);
-                Attribute[] boVMAttributes = Attribute.GetCustomAttributes(boType);
-                var headAttribute = boVMAttributes.Where(n => n.GetType().Name == "ListHeadSpecification").FirstOrDefault();
-                if (headAttribute != null)
+                //! 根据特性定义，判断是否创建检索组件
+                if (!String.IsNullOrEmpty(headBar.HeadBarOperation.SearchActionPath))
                 {
-                    var hSpecification = headAttribute as ListHeadSpecification;
-
-                    headBar.HeadBarTitle.Title = hSpecification.Title;
-                    headBar.HeadBarOperation.ControllerName = hSpecification.ControllerName;
-                    headBar.HeadBarOperation.CreateActionPath = hSpecification.CreateActionPath;
-                    headBar.HeadBarOperation.SearchActionPath = hSpecification.SearchActionPath;
+                    htmlString.Append("<td style='width:250px'>");
+                    htmlString.Append("<div class='input-control text'><input id='serchKeyword' type='text' " + seachValueString + " /><button onclick='" + serchFunction + "' class='btn-search'></button></div>");
+                    htmlString.Append("</td>");
                 }
-
-                headBar.ID = "Header_" + boType.Name;
-                headBar.Name = "Header_" + boType.Name;
-
-                var serchFunction = "javascript:boSearch(\"" + headBar.HeadBarOperation.ControllerName + "\",\"" + headBar.HeadBarOperation.SearchActionPath + "\")";
-                var createFunction = "javascript:boCreateOrEdit(\"" + Guid.NewGuid().ToString() + "\",\"" + headBar.HeadBarOperation.ControllerName + "\",\"" + headBar.HeadBarOperation.CreateActionPath + "\")";
-
-                var seachValueString = "";
-                if (!String.IsNullOrEmpty(keyword))
-                    seachValueString = "value='" + keyword + "'";
-
-                var htmlString = new StringBuilder();
-                htmlString.Append("<table style='width:100%'>");
-                htmlString.Append("<tr>");
                 
-                htmlString.Append("<td><p class='subheader'>" + headBar.HeadBarTitle.Title + "</p></td>");
-                htmlString.Append("<td style='width:110px;vertical-align:top; text-align:right'>");
-                htmlString.Append("<button class='button info' type='button' onclick='javascript:GotoPage(\"../../StatisticAnalysis/Export01\")' style='height:33px'>");
-                htmlString.Append("<i class='icon-new icon-white'></i> 导出Excle");
-                htmlString.Append("</button>");
-                htmlString.Append("</td>");
-                htmlString.Append("<td style='width:250px'>");
-                htmlString.Append("<div class='input-control text'><input id='serchKeyword' type='text' " + seachValueString + " /><button onclick='" + serchFunction + "' class='btn-search'></button></div>");
-                htmlString.Append("</td>");
-                if (headBar.HeadBarOperation.CreateActionPath != "")
+                //! 根据特性定义，判断是否创建“新建数据”按钮
+                if (!String.IsNullOrEmpty(headBar.HeadBarOperation.CreateActionPath))
                 {
                     htmlString.Append("<td style='width:110px;vertical-align:top; text-align:right'>");
                     htmlString.Append("<button class='button info' type='button' onclick='" + createFunction + "' style='height:33px'>");
@@ -549,11 +570,33 @@ namespace NNCQ.UI.UIModelRepository
                     htmlString.Append("</button>");
                     htmlString.Append("</td>");
                 }
+
+                //! 判断是否有附加按钮
+                if (headBar.HeadBarOperation.ButtonItems != null) 
+                {
+                    if (headBar.HeadBarOperation.ButtonItems.Count > 0)
+                    {
+                        foreach (var bItem in headBar.HeadBarOperation.ButtonItems)
+                        {
+                            htmlString.Append("<td style='width:"+bItem.Width+"px; vertical-align:top;text-align:center'>");
+                            htmlString.Append("<button class='button info' type='button' onclick='" + bItem.OnClickFunction + "' style='height:33px'>");
+                            htmlString.Append(bItem.DisplayName);
+                            htmlString.Append("</button>");
+                            htmlString.Append("</td>");
+                        }
+                    }
+                }
                 htmlString.Append("</tr>");
                 htmlString.Append("</table>");
                 headBar.InnerHtmlContent = htmlString.ToString();
                 return headBar;
             }
+
+            /// <summary>
+            /// 创建列表数据处理模型
+            /// </summary>
+            /// <param name="boVMCollection"></param>
+            /// <returns></returns>
             private static Muc_MainWorkPlaceDataGridView _GetDataGridView(List<T> boVMCollection) 
             {
                 var dgv=new Muc_MainWorkPlaceDataGridView();
@@ -580,6 +623,7 @@ namespace NNCQ.UI.UIModelRepository
                 PropertyInfo[] properties = boType.GetProperties();
                 foreach (PropertyInfo property in properties)
                 {
+                    #region ViewModel定义的的列表项
                     var propertyAttribute = property.GetCustomAttribute(typeof(ListItemSpecification), false) as ListItemSpecification;
                     if (propertyAttribute != null)
                     {
@@ -592,22 +636,24 @@ namespace NNCQ.UI.UIModelRepository
                             PropertyName = property.Name
                         };
                         listColumnHeaderItems.Add(ct);
-                    }
+                    } 
+                    #endregion
 
+                    #region 附加列
                     var addColAttribute = property.GetCustomAttribute(typeof(AdditionOperationItem), false) as AdditionOperationItem;
                     if (addColAttribute != null)
                     {
-                        // int c = 80;
                         var ct = new ListColumnHeader()
                         {
                             Title = addColAttribute.Title,
-                            Width = "80",
-                            OrderSort = "80",
+                            Width = addColAttribute.Width.ToString(),
+                            OrderSort = addColAttribute.SortCode,
                             UseSortIndicator = false,
                             PropertyName = ""
                         };
                         listColumnHeaderItems.Add(ct);
-                    }
+                    } 
+                    #endregion
 
                 }
                 if (properties.Where(x => x.Name.ToLower() == "id").FirstOrDefault()!=null)
@@ -616,8 +662,6 @@ namespace NNCQ.UI.UIModelRepository
                 #endregion
 
                 var htmlString = new StringBuilder();
-
-                // htmlString.Append("<div id='" + dgv.ID + "'>");
 
                 htmlString.Append("<table class='table bordered hovered' style='word-break:break-all'>");
 
@@ -640,6 +684,8 @@ namespace NNCQ.UI.UIModelRepository
                 foreach (var boVMItem in boVMCollection)
                 {
                     htmlString.Append("<tr>");
+
+                    #region 业务实体视图模型对象数据
                     foreach (var colItem in listColumnHeaderItems.OrderBy(x => x.OrderSort))
                     {
                         if (!String.IsNullOrEmpty(colItem.PropertyName))
@@ -650,29 +696,26 @@ namespace NNCQ.UI.UIModelRepository
                             var propertyValue = property.GetValue(boVMItem);
                             htmlString.Append(propertyValue);
                             htmlString.Append("</td>");
-
-                            if (colItem.PropertyName=="Name")
+                            if (colItem.PropertyName == "Name")
                                 boValueString = propertyValue.ToString();
                         }
-                    }
+                    } 
+                    #endregion
 
-                    foreach (var addItemPrperty in properties) 
+                    #region 附加操作导航定义
+                    foreach (var addItemPrperty in properties)
                     {
                         var displayString = "";
                         var addColAttribute = addItemPrperty.GetCustomAttribute(typeof(AdditionOperationItem), false) as AdditionOperationItem;
                         if (addColAttribute != null)
                         {
-                            var propertyValue = addItemPrperty.GetValue(boVMItem) as List<PlainFacadeItem>;
+                            var propertyValue = addItemPrperty.GetValue(boVMItem) as List<CommonAlinkItem>;
                             if (propertyValue != null)
                             {
                                 foreach (var item in propertyValue)
                                 {
                                     var itemUrl = "";
-                                    if (item.TargetType == "new")
-                                        itemUrl = "<a href='../../" + dgv.ControllerName + "/" + item.OperateName + "/" + item.ID + "'>" + item.DisplayName + "</a>";
-                                    else
-                                        itemUrl = "<a href='javascript:gotoAddtionColPage(\"" + item.ID + "\",\"" + dgv.ControllerName + "\",\""+item.OperateName+"\")'>" + item.DisplayName + "</a>";
-                                    
+                                    itemUrl = "<a href='" + item.OnClickFunction + "'>" + item.DisplayName + "</a>";
                                     displayString = displayString + itemUrl + " ";
                                 }
                             }
@@ -680,18 +723,22 @@ namespace NNCQ.UI.UIModelRepository
                             htmlString.Append(displayString);
                             htmlString.Append("</td>");
                         }
+                    } 
+                    #endregion
 
-                    }
-
+                    #region 编辑、明细、删除操作导航
                     var keyProperty = properties.Where(x => x.Name.ToLower() == "id").FirstOrDefault();
-                    if (keyProperty != null) { 
-                    var KeyPropertyValue = keyProperty.GetValue(boVMItem);
-                    var objID = KeyPropertyValue.ToString();
-                    
-                    htmlString.Append(_GetDefaultOperationColValue(objID, dgv.ControllerName, dgv.EditActionPath, dgv.DetailActionPath, dgv.DeleteActionPath, boValueString));
-                    }
+                    if (keyProperty != null)
+                    {
+                        var KeyPropertyValue = keyProperty.GetValue(boVMItem);
+                        var objID = KeyPropertyValue.ToString();
+                        htmlString.Append(_GetDefaultOperationColValue(objID, dgv.ControllerName, dgv.EditActionPath, dgv.DetailActionPath, dgv.DeleteActionPath, boValueString));
+                    } 
+                    #endregion
+
                     htmlString.Append("</tr>");
                 }
+
                 if (dgv.rows != 0)
                 {
                     for (int i = 0; i < dgv.rows - boVMCollection.Count(); i++)
@@ -737,7 +784,6 @@ namespace NNCQ.UI.UIModelRepository
             private static ListColumnHeader _GetDefaultOperationCol() 
             {
                 return new ListColumnHeader() { Title = "数据操作", Width = "80", OrderSort = "99", PropertyName = "", UseSortIndicator = false };
-
             }
 
             private static string _GetDefaultOperationColValue(string id, string controller,string edit,string detail,string delete,string bovalue)
@@ -856,6 +902,9 @@ namespace NNCQ.UI.UIModelRepository
 
         }
 
+        /// <summary>
+        /// 定义缺省模型下的 javascript 脚本
+        /// </summary>
         class AdditionScriptContent
         {
             public static string Get() //string id = null, string boName = null, string controllername = null, string deleteName = null

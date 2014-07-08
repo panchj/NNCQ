@@ -139,6 +139,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Contents\NNCQ\nncq-ApplicaitonRole.js" />
     <Content Include="css\iconFont.min.css" />
     <Content Include="css\metro-bootstrap-responsive.css" />
     <Content Include="css\metro-bootstrap-responsive.min.css" />
@@ -300,7 +301,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Contents\NNCQ\" />
     <Folder Include="Scripts\NNCQ\" />
     <Folder Include="UploadFiles\" />
   </ItemGroup>

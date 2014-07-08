@@ -87,6 +87,8 @@
     <Compile Include="ExtensionsOfMvcHelper\BoDetail.cs" />
     <Compile Include="ExtensionsOfMvcHelper\BoList.cs" />
     <Compile Include="ExtensionsOfMvcHelper\Delete.cs" />
+    <Compile Include="Models\CommonAlinkItem.cs" />
+    <Compile Include="Models\CommonButtonItem.cs" />
     <Compile Include="Models\PlainFacadeItem.cs" />
     <Compile Include="Models\SelfReferentialItem.cs" />
     <Compile Include="Models\ValidatorResult.cs" />
@@ -123,6 +125,7 @@
     <Compile Include="Models\FacadeStyle.cs" />
     <Compile Include="ViewModelAttribute\ISpecificationValue.cs" />
     <Compile Include="ViewModelAttribute\ListDataGridViewSpecification.cs" />
+    <Compile Include="ViewModelAttribute\ListHeaderAdditionalButton.cs" />
     <Compile Include="ViewModelAttribute\ListHeadSpecification.cs" />
     <Compile Include="ViewModelAttribute\ListItemSpecification.cs" />
     <Compile Include="ViewModelAttribute\ListNavigator.cs" />

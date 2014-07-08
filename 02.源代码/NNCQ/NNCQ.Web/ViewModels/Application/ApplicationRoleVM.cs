@@ -1,4 +1,5 @@
 ﻿using NNCQ.Domain.Application;
+using NNCQ.UI.Models;
 using NNCQ.UI.ViewModelAttribute;
 using System;
 using System.Collections.Generic;
@@ -9,14 +10,17 @@ using System.Web;
 namespace NNCQ.Web.ViewModels.Application
 {
     [EditorSpecification("ApplicationRole", "系统角色数据", true, SaveAction = "Save", ListString = "List")]
-    [ListHeadSpecification("系统角色数据定义管理", ControllerName = "ApplicationRole", SearchActionPath = "List", CreateActionPath = "CreateOrEdit")]
+    [ListHeadSpecification("系统角色数据定义管理",ControllerName = "ApplicationRole",SearchActionPath = "",CreateActionPath = "CreateOrEdit")]
     [ListDataGridViewSpecification("ApplicationRole", 18, ListActionPath = "List", EditActionPath = "CreateOrEdit", DetailActionPath = "Detail", DeleteActionPath = "Delete")]
     [ListNavigator("系统角色数据", "List", ListNavigatorType.SideBar)]
+    [ListHeaderAdditionalButton("Test1", "javascript:function1()",60)]
+    [ListHeaderAdditionalButton("Test2", "javascript:function2()",60)]
+
     public class ApplicationRoleVM
     {
         [Key]
         public Guid ID { get; set; }
-        
+
         [ListItemSpecification("序号", "01", 50, false)]
         public string OrderNumber { get; set; }
 
@@ -25,7 +29,7 @@ namespace NNCQ.Web.ViewModels.Application
         [DetailItemSpecification(EditorItemType.TextBox, Width = 300)]
         [Required(ErrorMessage = "角色名称不能为空值。")]
         [Display(Name = "角色名称")]
-        [StringLength(50,ErrorMessage="你输入的数据超出限制50个字符的长度。")]
+        [StringLength(50, ErrorMessage = "你输入的数据超出限制50个字符的长度。")]
         public string Name { get; set; }
 
         [ListItemSpecification("显示名称", "03", 200, false)]
@@ -50,8 +54,12 @@ namespace NNCQ.Web.ViewModels.Application
         [StringLength(50, ErrorMessage = "你输入的数据超出限制50个字符的长度。")]
         public string SortCode { get; set; }
 
+        [AdditionOperationItem("配置管理",150,"80")]
+        public List<CommonAlinkItem> AdditionOperateUrlItems { get; set; }
+
         public ApplicationRoleVM() { }
-        public ApplicationRoleVM(ApplicationRole bo) 
+
+        public ApplicationRoleVM(ApplicationRole bo)
         {
             this.ID = Guid.Parse(bo.Id);
             this.Name = bo.Name;
@@ -60,7 +68,7 @@ namespace NNCQ.Web.ViewModels.Application
             this.SortCode = bo.SortCode;
         }
 
-        public void MapToBo(ApplicationRole bo) 
+        public void MapToBo(ApplicationRole bo)
         {
             bo.Name = this.Name;
             bo.DisplayName = this.DisplayName;
@@ -68,5 +76,7 @@ namespace NNCQ.Web.ViewModels.Application
             bo.SortCode = this.SortCode;
 
         }
+
     }
+
 }

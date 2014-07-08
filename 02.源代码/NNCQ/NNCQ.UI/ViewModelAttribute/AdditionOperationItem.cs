@@ -13,10 +13,14 @@ namespace NNCQ.UI.ViewModelAttribute
     public class AdditionOperationItem : Attribute
     {
         public string Title { get; set; }
+        public int Width { get; set; }
+        public string SortCode { get; set; }
 
-        public AdditionOperationItem(string title) 
+        public AdditionOperationItem(string title,int width,string sortCode) 
         {
             this.Title = title;
+            this.Width = width;
+            this.SortCode = SortCode;
         }
     }
 }

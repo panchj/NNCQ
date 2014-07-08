@@ -31,6 +31,21 @@ namespace NNCQ.Web.Controllers.Application
             {
                 var boVM = new ApplicationRoleVM(bo);
                 boVM.OrderNumber = (++count).ToString();
+                var addColItems = new List<CommonAlinkItem>() 
+                    {
+                        new CommonAlinkItem() 
+                        { 
+                            DisplayName = "<span class=\"icon-user-3\"></span> 用户", 
+                            OnClickFunction="javascript:userManager(\"" + bo.Id + "\")"
+                        },
+                        new CommonAlinkItem() 
+                        { 
+                            DisplayName = "<span class=\"icon-key\"></span> 权限", 
+                            OnClickFunction="javascript:authorityManager(\"" + bo.Id + "\")" 
+                        }
+                    };
+                boVM.AdditionOperateUrlItems = addColItems;
+
                 boVMCollection.Add(boVM);
             }
 
