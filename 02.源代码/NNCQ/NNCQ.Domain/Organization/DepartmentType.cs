@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace NNCQ.Domain.Organization
 {
+    /// <summary>
+    /// 部门类型
+    /// </summary>
     public class DepartmentType:IEntity
     {
         [Key]

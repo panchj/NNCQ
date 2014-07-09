@@ -274,17 +274,36 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="Controllers\Application\ApplicationBusinessTypeController.cs" />
     <Compile Include="Controllers\Application\ApplicationRoleController.cs" />
+    <Compile Include="Controllers\Application\ApplicationUserController.cs" />
     <Compile Include="Controllers\Application\SystemWorkPlaceController.cs" />
+    <Compile Include="Controllers\Application\SystemWorkSectionController.cs" />
+    <Compile Include="Controllers\Application\SystemWorkTaskController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Organization\CredentialsTypeController.cs" />
+    <Compile Include="Controllers\Organization\DepartmentController.cs" />
+    <Compile Include="Controllers\Organization\DepartmentTypeController.cs" />
+    <Compile Include="Controllers\Organization\JobLevelController.cs" />
+    <Compile Include="Controllers\Organization\JobTitleController.cs" />
+    <Compile Include="Controllers\Organization\PersonController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Application\ApplicationBusinessTypeVM.cs" />
     <Compile Include="ViewModels\Application\ApplicationRoleVM.cs" />
     <Compile Include="ViewModels\Application\ApplicationUserVM.cs" />
     <Compile Include="ViewModels\Application\SystemWorkPlaceVM.cs" />
+    <Compile Include="ViewModels\Application\SystemWorkSectionVM.cs" />
+    <Compile Include="ViewModels\Application\SystemWorkTaskVM.cs" />
+    <Compile Include="ViewModels\Organization\CredentialsTypeVM.cs" />
+    <Compile Include="ViewModels\Organization\DepartmentTypeVM.cs" />
+    <Compile Include="ViewModels\Organization\DepartmentVM.cs" />
+    <Compile Include="ViewModels\Organization\JobLevelVM.cs" />
+    <Compile Include="ViewModels\Organization\JobTitleVM.cs" />
+    <Compile Include="ViewModels\Organization\PersonVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -306,7 +325,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Contents\NNCQ\" />
     <Folder Include="UploadFiles\" />
-    <Folder Include="Views\SystemWorkPlace\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NNCQ.Domain\NNCQ.Domain.csproj">

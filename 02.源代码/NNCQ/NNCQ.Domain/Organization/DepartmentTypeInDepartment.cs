@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace NNCQ.Domain.Organization
 {
+    /// <summary>
+    /// 部门关联的部门类型
+    /// </summary>
     public class DepartmentTypeInDepartment:IEntity
     {
         [Key]
@@ -18,6 +21,9 @@ namespace NNCQ.Domain.Organization
         public string Description { get; set; }
         [StringLength(50)]
         public string SortCode { get; set; }
+
+        public virtual Department Department { get; set; }
+        public virtual DepartmentType DepartmentType { get; set; }
 
         public DepartmentTypeInDepartment() 
         {

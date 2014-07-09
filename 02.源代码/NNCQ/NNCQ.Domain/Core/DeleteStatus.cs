@@ -58,6 +58,17 @@ namespace NNCQ.Domain.Core
             else
                 return true;
         }
+
+        public StatusMessageForDeleteOperation(string message, int itemCount)
+        {
+            OperationMessage = message;
+            if (itemCount > 0)
+                CanDelete = false;
+            else
+                CanDelete = true;
+        }
+
+
     }
 
 }

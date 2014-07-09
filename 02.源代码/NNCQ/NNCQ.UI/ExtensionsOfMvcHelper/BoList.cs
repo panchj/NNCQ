@@ -47,7 +47,10 @@ namespace NNCQ.UI.ExtensionsOfMvcHelper
 
         public static MvcHtmlString ForCommonPageJavaScript(this HtmlHelper html, MucPage_List pageModel) 
         {
-            return MvcHtmlString.Create(pageModel.AdditionScriptContent);
+            if (pageModel != null)
+                return MvcHtmlString.Create(pageModel.AdditionScriptContent);
+            else
+                return MvcHtmlString.Create("");
         }
     }
 }

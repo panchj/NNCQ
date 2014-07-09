@@ -22,11 +22,11 @@ namespace NNCQ.Domain.Utilities
             var m0110 = new SelfReferentialItem() { ID = "001010", ParentID = "001", FacadeStyle = FacadeStyle.Normal, SortCode = "001010", ItemName = "退出系统", OperateName = "SystemActior/Logout", IconString = "", IsActive = true };
 
             var m02 = new SelfReferentialItem() { ID = "002", ParentID = "002", FacadeStyle = FacadeStyle.Title, SortCode = "002", ItemName = "部门与人员管理", OperateName = "", IconString = "", IsActive = true };
-            var m0201 = new SelfReferentialItem() { ID = "002001", ParentID = "002", FacadeStyle = FacadeStyle.Normal, SortCode = "002001", ItemName = "部门类型", OperateName = "QuestionType", IconString = "", IsActive = true };
-            var m0202 = new SelfReferentialItem() { ID = "002002", ParentID = "002", FacadeStyle = FacadeStyle.Normal, SortCode = "002002", ItemName = "部门职位", OperateName = "QuestionPrototype", IconString = "", IsActive = true };
-            var m0203 = new SelfReferentialItem() { ID = "002003", ParentID = "002", FacadeStyle = FacadeStyle.Normal, SortCode = "002003", ItemName = "部门职级", OperateName = "Question", IconString = "", IsActive = true };
+            var m0201 = new SelfReferentialItem() { ID = "002001", ParentID = "002", FacadeStyle = FacadeStyle.Normal, SortCode = "002001", ItemName = "部门类型定义", OperateName = "DepartmentType", IconString = "", IsActive = true };
+            var m0202 = new SelfReferentialItem() { ID = "002002", ParentID = "002", FacadeStyle = FacadeStyle.Normal, SortCode = "002002", ItemName = "部门职位定义", OperateName = "JobTitle", IconString = "", IsActive = true };
+            var m0203 = new SelfReferentialItem() { ID = "002003", ParentID = "002", FacadeStyle = FacadeStyle.Normal, SortCode = "002003", ItemName = "部门职级定义", OperateName = "JobLevel", IconString = "", IsActive = true };
             var m0204 = new SelfReferentialItem() { ID = "002004", ParentID = "002", FacadeStyle = FacadeStyle.Divider, SortCode = "002004", ItemName = "", OperateName = "", IconString = "", IsActive = true };
-            var m0205 = new SelfReferentialItem() { ID = "002005", ParentID = "002", FacadeStyle = FacadeStyle.Normal, SortCode = "002005", ItemName = "证件类型", OperateName = "VehiclePrototype", IconString = "", IsActive = true };
+            var m0205 = new SelfReferentialItem() { ID = "002005", ParentID = "002", FacadeStyle = FacadeStyle.Normal, SortCode = "002005", ItemName = "证件类型", OperateName = "CredentialsType", IconString = "", IsActive = true };
             var m0208 = new SelfReferentialItem() { ID = "002008", ParentID = "002", FacadeStyle = FacadeStyle.Divider, SortCode = "002008", ItemName = "", OperateName = "", IconString = "", IsActive = true };
             var m0209 = new SelfReferentialItem() { ID = "002009", ParentID = "002", FacadeStyle = FacadeStyle.Normal, SortCode = "002009", ItemName = "部门管理", OperateName = "Department", IconString = "", IsActive = true };
             var m0210 = new SelfReferentialItem() { ID = "002010", ParentID = "002", FacadeStyle = FacadeStyle.Normal, SortCode = "002010", ItemName = "人员管理", OperateName = "Person", IconString = "", IsActive = true };
@@ -41,6 +41,5 @@ namespace NNCQ.Domain.Utilities
             });
             return topMenuItemCollection;
         }
-
     }
 }

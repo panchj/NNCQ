@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,18 @@ namespace NNCQ.Domain.Organization
         public bool IsActiveDepartment { get; set; }                      // 活动中的部门
 
         public virtual Department ParentDapartment { get; set; }
+
+        [NotMapped]
+        public virtual ICollection<DepartmentType> Types { get; set; }
+        [NotMapped]
+        public virtual ICollection<Person> Leaders { get; set; }
+        [NotMapped]
+        public virtual ICollection<Person> Perosns { get; set; }
+        [NotMapped]
+        public virtual ICollection<JobLevel> JobLevels { get; set; }
+        [NotMapped]
+        public virtual ICollection<JobTitle> JobTitles { get; set; }
+
 
         public Department() 
         {

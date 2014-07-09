@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,6 +45,9 @@ namespace NNCQ.Domain.Organization
         public virtual CredentialsType CredentialsType { get; set; }   // 身份证件类型
         public virtual JobTitle JobTitle { get; set; }                 // 工作岗位（头衔）
         public virtual JobLevel JobLevel { get; set; }                 // 工作职级
+
+        [NotMapped]
+        public virtual Department Department { get; set; }
 
         public Person() 
         {

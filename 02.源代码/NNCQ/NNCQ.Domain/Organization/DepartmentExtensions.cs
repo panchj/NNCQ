@@ -12,6 +12,69 @@ namespace NNCQ.Domain.Organization
     /// </summary>
     public static class DepartmentExtensions
     {
+        public static Department GetDepartment(this IEntityRepository<Department> departmentRepository, Guid id) 
+        {
+            var department = departmentRepository.GetSingleBy(x => x.ID == id);
+
+            var typeCollection = departmentRepository.GetAllRelevance<DepartmentTypeInDepartment>().Where(x => x.Department.ID == id).OrderBy(s => s.SortCode);
+            foreach (var item in typeCollection)
+                department.Types.Add(item.DepartmentType);
+
+            var leaderCollection = departmentRepository.GetAllRelevance<DepartmentLeader>().Where(x => x.Department.ID == id).OrderBy(s => s.SortCode);
+            foreach (var item in leaderCollection)
+                department.Leaders.Add(item.Person);
+
+            var personCollection = departmentRepository.GetAllRelevance<PersonsInDepartment>().Where(x => x.Department.ID == id).OrderBy(s => s.SortCode);
+            foreach (var item in personCollection)
+                department.Perosns.Add(item.Person);
+
+            var jobLeveClollection = departmentRepository.GetAllRelevance<JobLevelInDepartment>().Where(x => x.Department.ID == id).OrderBy(s => s.SortCode);
+            foreach (var item in jobLeveClollection)
+                department.JobLevels.Add(item.JobLevel);
+
+            var jobTitleCollection = departmentRepository.GetAllRelevance<JobTitleInDepartment>().Where(x => x.Department.ID == id).OrderBy(s => s.SortCode);
+            foreach (var item in jobTitleCollection)
+                department.JobTitles.Add(item.JobTitle);
+
+            return department;
+        }
+
+        public static void SaveDepartment(this IEntityRepository<Department> departmentRepository, Department dept)
+        {
+            departmentRepository.AddOrEdit(dept);
+
+            var typeCollection = departmentRepository.GetAllRelevance<DepartmentTypeInDepartment>().Where(x => x.Department.ID == dept.ID).OrderBy(s => s.SortCode);
+            foreach (var item in typeCollection)
+                departmentRepository.DeleteRelevance<DepartmentTypeInDepartment>(item);
+            
+            var jobLeveClollection = departmentRepository.GetAllRelevance<JobLevelInDepartment>().Where(x => x.Department.ID == dept.ID).OrderBy(s => s.SortCode);
+            foreach (var item in jobLeveClollection)
+                departmentRepository.DeleteRelevance<JobLevelInDepartment>(item);
+
+            var jobTitleCollection = departmentRepository.GetAllRelevance<JobTitleInDepartment>().Where(x => x.Department.ID == dept.ID).OrderBy(s => s.SortCode);
+            foreach (var item in jobTitleCollection)
+                departmentRepository.DeleteRelevance<JobTitleInDepartment>(item);
+
+            foreach(var item in dept.Types)
+            {
+                var tItem = new DepartmentTypeInDepartment() { Name = "", Department = dept, DepartmentType = item };
+                departmentRepository.AddRelevance<DepartmentTypeInDepartment>(tItem);
+            }
+            foreach (var item in dept.JobLevels)
+            {
+                var tItem = new JobLevelInDepartment() { Name = "", Department = dept, JobLevel=item };
+                departmentRepository.AddRelevance<JobLevelInDepartment>(tItem);
+            }
+            foreach (var item in dept.JobTitles)
+            {
+                var tItem = new JobTitleInDepartment() { Name = "", Department = dept, JobTitle=item};
+                departmentRepository.AddRelevance<JobTitleInDepartment>(tItem);
+            }
+
+            departmentRepository.Save();
+
+        }
+
         /// <summary>
         /// 根据部门的ID，直接提取部门内部的人员对象集合。
         /// </summary>

@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace NNCQ.Domain.Core
 {
+    /// <summary>
+    /// 针对 IEntityRepository 的具体实现
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class EntityRepository<T> : IEntityRepository<T> where T : class, IEntity, new() 
     {
         readonly DbContext _entitiesContext;
@@ -137,7 +141,6 @@ namespace NNCQ.Domain.Core
             Save();
         }
 
-
         public virtual IQueryable<T1> GetAllIncludingRelevance<T1>(params Expression<Func<T1, object>>[] includeProperties)
         {
             var dbSet = _entitiesContext.Set(typeof(T1));
@@ -204,7 +207,6 @@ namespace NNCQ.Domain.Core
             Save();
         }
 
-
         public virtual void DeleteRelevance<T1>(T1 entity) 
         {
             var tempBo = Activator.CreateInstance(typeof(T1));
@@ -220,8 +222,6 @@ namespace NNCQ.Domain.Core
             DeleteRelevance<T1>(entity);
             Save();
         }
-
-
 
     }
 }
