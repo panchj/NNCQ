@@ -46,6 +46,5 @@ namespace NNCQ.Web.Controllers
             public bool IsLogon { get; set; }
             public string Message { get; set; }
         }
-
     }
 }

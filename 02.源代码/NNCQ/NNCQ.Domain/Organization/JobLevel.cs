@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace NNCQ.Domain.Organization
 {
+    /// <summary>
+    /// 工作职级
+    /// </summary>
     public class JobLevel:IEntity
     {
         [Key]

@@ -47,10 +47,10 @@ namespace NNCQ.Web.ViewModels.Application
         [StringLength(1000, ErrorMessage = "你输入的数据超出限制1000个字符的长度。")]
         public string Description { get; set; }
 
-        [Required(ErrorMessage = "类型业务编码不能为空值。")]
         [EditorItemSpecification(EditorItemType.TextBox, Width = 300)]
         [DetailItemSpecification(EditorItemType.TextBox, Width = 300)]
         [Display(Name = "角色编码")]
+        [Required(ErrorMessage = "类型业务编码不能为空值。")]
         [StringLength(50, ErrorMessage = "你输入的数据超出限制50个字符的长度。")]
         public string SortCode { get; set; }
 
@@ -74,7 +74,6 @@ namespace NNCQ.Web.ViewModels.Application
             bo.DisplayName = this.DisplayName;
             bo.Description = this.Description;
             bo.SortCode = this.SortCode;
-
         }
 
     }

@@ -14,11 +14,11 @@ namespace NNCQ.Domain.Application
         [Key]
         public Guid ID { get; set; }
         [StringLength(100)]
-        public string Name { get; set; }                       // 任务显示名称
+        public string Name { get; set; }                    
         [StringLength(500)]
-        public string Description { get; set; }                // 任务说明
+        public string Description { get; set; }             
         [StringLength(100)]
-        public string SortCode { get; set; }                   // 任务业务编码
+        public string SortCode { get; set; }                
 
         public virtual SystemWorkTask SystemWorkTask { get; set; }
         public virtual ApplicationRole SystemRole { get; set; }
