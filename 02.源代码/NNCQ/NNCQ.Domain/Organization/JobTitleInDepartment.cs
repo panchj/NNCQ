@@ -1,4 +1,5 @@
-﻿using NNCQ.Domain.Core;
+﻿using LNNCQ.Domain.Utilities;
+using NNCQ.Domain.Core;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace NNCQ.Domain.Organization
 {
+    /// <summary>
+    /// 部门内包含的工作职位
+    /// </summary>
     public class JobTitleInDepartment:IEntity
     {
         [Key]
@@ -16,8 +20,8 @@ namespace NNCQ.Domain.Organization
         public string Name { get; set; }
         [StringLength(10)]
         public string Description { get; set; }
-        [StringLength(10)]
-        public string SortCode { get; set; }
+        [StringLength(50)]
+        public string SortCode { get; set; } // 在实际处理的时候，这项数据与 JobTitle 的 SortCode 一致。
 
         public virtual JobTitle JobTitle { get; set; }
         public virtual Department Department { get; set; }
@@ -25,6 +29,7 @@ namespace NNCQ.Domain.Organization
         public JobTitleInDepartment() 
         {
             this.ID = Guid.NewGuid();
+            this.SortCode = BusinessEntityComponentsFactory.SortCodeByDefaultDateTime<JobTitleInDepartment>();
         }
 
     }

@@ -49,7 +49,7 @@ namespace NNCQ.Domain.Core
 
         public virtual T GetSingleBy(Expression<Func<T, bool>> predicate)
         {
-            return _entitiesContext.Set<T>().Where(predicate).FirstOrDefault();
+            return _entitiesContext.Set<T>().Where(predicate).OrderBy(s=>s.SortCode).FirstOrDefault();
         }
 
         public virtual IQueryable<T> FindBy(Expression<Func<T, bool>> predicate)

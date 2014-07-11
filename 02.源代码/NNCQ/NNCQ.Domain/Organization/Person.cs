@@ -1,4 +1,5 @@
-﻿using NNCQ.Domain.Core;
+﻿using LNNCQ.Domain.Utilities;
+using NNCQ.Domain.Core;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -45,8 +46,6 @@ namespace NNCQ.Domain.Organization
         public virtual CredentialsType CredentialsType { get; set; }   // 身份证件类型
         public virtual JobTitle JobTitle { get; set; }                 // 工作岗位（头衔）
         public virtual JobLevel JobLevel { get; set; }                 // 工作职级
-
-        [NotMapped]
         public virtual Department Department { get; set; }
 
         public Person() 
@@ -54,6 +53,7 @@ namespace NNCQ.Domain.Organization
             this.ID = Guid.NewGuid();
             this.UpdateTime = DateTime.Now;
             this.CreateDateTime = DateTime.Now;
+            this.SortCode = BusinessEntityComponentsFactory.SortCodeByDefaultDateTime<Person>();
         }
     }
 }

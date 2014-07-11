@@ -7,13 +7,15 @@
     <title>NNCQ管理信息系统</title>
     @Styles.Render("~/metroCss")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/metroScript")
 </head>
 <body class="metro" style="font-family:'Microsoft YaHei UI'">
     <div>
         @RenderBody()
     </div>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/metroScript")
     @RenderSection("scripts", required: false)
+
+
 </body>
 </html>

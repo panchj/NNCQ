@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Hosting;
@@ -37,8 +38,19 @@ namespace NNCQ.Web.Controllers
                 logonStatus.IsLogon = true;
                 logonStatus.Message = "../../Home";
             }
-            
+            logonStatus.Message=getTestString();
             return Json(logonStatus);
+        }
+
+        public string getTestString()
+        {
+            var htmlString = new StringBuilder();
+            htmlString.Append("<div id='datepicker' class='input-control text' data-role='datepicker' data-format='yyyy-mm-dd' data-position='bottom' data-effect='fade'>");
+            htmlString.Append("<input type='text'>");
+            //htmlString.Append("<button class='btn btn-date'></button>");
+            htmlString.Append("</div>");
+            return htmlString.ToString();
+
         }
 
         public class LogonUserStatus

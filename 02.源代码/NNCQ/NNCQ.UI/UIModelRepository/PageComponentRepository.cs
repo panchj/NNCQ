@@ -13,7 +13,13 @@ namespace NNCQ.UI.UIModelRepository
 {
     public class PageComponentRepository<T> where T : class
     {
-
+        /// <summary>
+        /// 以对话框方式曾宪业务对象编辑场景
+        /// </summary>
+        /// <param name="boVM"></param>
+        /// <param name="isNew"></param>
+        /// <param name="typeID"></param>
+        /// <returns></returns>
         public static MucDialogue_CreateOrEdit CreateOrEditDialog(T boVM, bool isNew) 
         {
             var preString = "编辑：";
@@ -43,13 +49,20 @@ namespace NNCQ.UI.UIModelRepository
             htmlString.Append("var options" + boType.Name + " = {");
             htmlString.Append("dataType: 'json',");
             htmlString.Append("success: function (data) {");
-            htmlString.Append("if(data=='ok'){");
+
+            htmlString.Append("if(data.IsOK){");
             htmlString.Append("$.Dialog.close();");
-            htmlString.Append("boGotoPage(1,'" + editorSpecification.ControllerName + "','" + editorSpecification.ListString + "');");
+            
+            htmlString.Append("if(data.ExtenssionFunctionString!=''){");
+            htmlString.Append("refreshDepartmentTreeView('" + editorSpecification.ControllerName + "',data.ExtenssionFunctionString);");
+            htmlString.Append("};");
+
+            htmlString.Append("boGotoPage(data.PageIndex,'" + editorSpecification.ControllerName + "','" + editorSpecification.ListString + "',data.TypeID);");
             htmlString.Append("}else{");
             htmlString.Append("document.getElementById('Editor_" + divName + "').innerHTML = data;");
             htmlString.Append("}}");
             htmlString.Append("};");
+
             htmlString.Append("$('#EditorForm_" + divName + "').ajaxForm(options" + boType.Name + ");");
             htmlString.Append("</script>");
 
@@ -72,6 +85,13 @@ namespace NNCQ.UI.UIModelRepository
             return dialog;
         }
 
+        /// <summary>
+        /// 以页面方式呈现业务对象编辑场景
+        /// </summary>
+        /// <param name="boVM"></param>
+        /// <param name="isNew"></param>
+        /// <param name="typeID"></param>
+        /// <returns></returns>
         public static MucDialogue_CreateOrEdit CreateOrEditPage(T boVM, bool isNew)
         {
             var preString = "编辑：";
@@ -84,7 +104,6 @@ namespace NNCQ.UI.UIModelRepository
             }
 
             var boType = typeof(T);
-
             var boName = typeof(T).Name;
 
             Attribute[] boVMAttributes = Attribute.GetCustomAttributes(boType);
@@ -103,9 +122,13 @@ namespace NNCQ.UI.UIModelRepository
             htmlString.Append("var options = {");
             htmlString.Append("dataType: 'json',");
             htmlString.Append("success: function (data) {");
-            htmlString.Append("if(data=='ok'){");
+            htmlString.Append("if(data.IsOK){");
             //htmlString.Append("$.Dialog.close();");
-            htmlString.Append("boGotoPage(1,'" + editorSpecification.ControllerName + "','" + editorSpecification.ListString + "');");
+            htmlString.Append("if(data.ExtenssionFunctionString!=''){");
+            htmlString.Append("refreshDepartmentTreeView('" + editorSpecification.ControllerName + "',data.ExtenssionFunctionString);");
+            htmlString.Append("}");
+
+            htmlString.Append("boGotoPage(data.PageIndex,'" + editorSpecification.ControllerName + "','" + editorSpecification.ListString + "','\"+data.TypeID+\"');");
             htmlString.Append("}else{");
             htmlString.Append("document.getElementById('Editor_" + editorSpecification.ControllerName + "').innerHTML = data;");
             htmlString.Append("}}");
@@ -124,8 +147,6 @@ namespace NNCQ.UI.UIModelRepository
             //htmlString.Append("<button class='button' type='button' onclick='$.Dialog.close()'  style='height:30px'>取消</button>");
             htmlString.Append("</div>");
             htmlString.Append("</form>");
-
-
 
             dialog.InnerHtmlContent = htmlString.ToString();
 
@@ -208,10 +229,13 @@ namespace NNCQ.UI.UIModelRepository
 
         }
 
-        public static string SaveOK() 
+        public static SaveOKStatus SaveOK(bool isOK, string pageIndex, string typeID,string extenssionFunction = null) 
         {
-            return "ok";
+            var ok= new SaveOKStatus() { IsOK=isOK, PageIndex=pageIndex, TypeID=typeID };
+            if (!String.IsNullOrEmpty(extenssionFunction))
+                ok.ExtenssionFunctionString = extenssionFunction;
 
+            return ok;
         }
 
         private static string _GetEditor(T boVM, List<ValidatorResult> vItems = null) 
@@ -273,7 +297,7 @@ namespace NNCQ.UI.UIModelRepository
                 htmlString.Append("<tr>");
                 htmlString.Append("<td style='width:"+maxLength+"px;text-align:right;vertical-align:top'>" + item.FieldDisplayName + "：</td><td>" + item.FieldEditContent + "</td>");
                 var statusString = "<i class='icon-pencil'></>";
-                var errStyle = "";
+                //var errStyle = "";
                 var errMessage = "";
                 if (vItems != null) 
                 {
@@ -282,7 +306,7 @@ namespace NNCQ.UI.UIModelRepository
                     {
                         foreach (var eItem in eItems)
                         {
-                            errStyle = "error-state";
+                            //errStyle = "error-state";
                             errMessage = errMessage + eItem.ErrorMessage + "\n";
                         }
                     }
@@ -420,39 +444,47 @@ namespace NNCQ.UI.UIModelRepository
 
         private static string _GetDetailFieldContent(EditorItemType itemType, object itemValue) 
         {
+
             var htmlString = new StringBuilder();
-            switch (itemType)
+            if (itemValue == null)
             {
-                case EditorItemType.TextBox:
-                    htmlString.Append(itemValue.ToString());
-                    break;
-                case EditorItemType.TextArea:
-                    htmlString.Append(itemValue.ToString());
-                   break;
-                case EditorItemType.DorpdownOptionWithSelfReferentialItem:
-                    break;
-                case EditorItemType.ComboBox:
-                    break;
-                case EditorItemType.YesNo:
-                    break;
-                case EditorItemType.Sex:
-                    break;
-                case EditorItemType.Date:
-                    break;
-                case EditorItemType.DateTime:
-                    break;
-                case EditorItemType.Time:
-                    break;
-                case EditorItemType.SelfReferentialItem:
-                    var sItem = itemValue as SelfReferentialItem;
-                    htmlString.Append(sItem.ItemName);
-                    break;
-                case EditorItemType.PlainFacadeItem:
-                    break;
-                case EditorItemType.Hidden:
-                    break;
-                default:
-                    break;
+                htmlString.Append("");
+            }
+            else
+            {
+                switch (itemType)
+                {
+                    case EditorItemType.TextBox:
+                        htmlString.Append(itemValue.ToString());
+                        break;
+                    case EditorItemType.TextArea:
+                        htmlString.Append(itemValue.ToString());
+                        break;
+                    case EditorItemType.DorpdownOptionWithSelfReferentialItem:
+                        break;
+                    case EditorItemType.ComboBox:
+                        break;
+                    case EditorItemType.YesNo:
+                        break;
+                    case EditorItemType.Sex:
+                        break;
+                    case EditorItemType.Date:
+                        break;
+                    case EditorItemType.DateTime:
+                        break;
+                    case EditorItemType.Time:
+                        break;
+                    case EditorItemType.SelfReferentialItem:
+                        var sItem = itemValue as SelfReferentialItem;
+                        htmlString.Append(sItem.ItemName);
+                        break;
+                    case EditorItemType.PlainFacadeItem:
+                        break;
+                    case EditorItemType.Hidden:
+                        break;
+                    default:
+                        break;
+                }
             }
 
             return htmlString.ToString();
@@ -564,7 +596,10 @@ namespace NNCQ.UI.UIModelRepository
             {
                 var htmlString = new StringBuilder();
                 //htmlString.Append("<div id='css_" + name + "' class='input-control text " + errStyle + "' ");// 
-                //htmlString.Append(" data-role='datepicker' ");
+                htmlString.Append("<div class='input-control text' data-role='datepicker' data-format='yyyy-mm-dd' data-position='bottom' data-effect='fade'>");
+                htmlString.Append("<input type='text'>");
+                htmlString.Append("</div>");
+
                 //htmlString.Append(" data-date='2014-01-01' ");
                 //htmlString.Append(" data-format='yyyy年yy月dd日' ");
                 //htmlString.Append(" data-effect='slide' ");
@@ -609,9 +644,6 @@ namespace NNCQ.UI.UIModelRepository
                     htmlString.Append("<label><input type='radio' value='"+item.ID+"' name='"+name+"' "+selected+" /><span class='check'></span>"+item.Name+"</label></div>");
                 }
                 htmlString.Append("<div id='errorMeessage_" + name + "'><small class='fg-red'>" + errMessage + "</small></div>");
-                //htmlString.Append("<div class='input-control checkbox margin10' data-role='input-control'><label>Check me out<input type='checkbox' disabled checked /><span class='check'></span></label></div>");
-                //htmlString.Append("<div class='input-control radio margin10' data-role='input-control'><label><input type='radio' name='r1' checked /><span class='check'></span>Check me out</label></div>");
-                //htmlString.Append("<div class='input-control text' data-role='datepicker' data-date='2013-11-13' data-effect='slide' data-other-days='1'><input type='text'><button class='btn-date'></button></div>");
                 return htmlString.ToString();
 
             }
@@ -645,11 +677,7 @@ namespace NNCQ.UI.UIModelRepository
                     htmlString.Append("<label><input type='checkbox' value='" + item.ID + "' name='" + name + "' " + selected + " /><span class='check'></span>" + item.Name + "</label></div>");
                 }
                 htmlString.Append("<div id='errorMeessage_" + name + "'><small class='fg-red'>" + errMessage + "</small></div>");
-                //htmlString.Append("<div class='input-control checkbox margin10' data-role='input-control'><label>Check me out<input type='checkbox' disabled checked /><span class='check'></span></label></div>");
-                //htmlString.Append("<div class='input-control radio margin10' data-role='input-control'><label><input type='radio' name='r1' checked /><span class='check'></span>Check me out</label></div>");
-                //htmlString.Append("<div class='input-control text' data-role='datepicker' data-date='2013-11-13' data-effect='slide' data-other-days='1'><input type='text'><button class='btn-date'></button></div>");
                 return htmlString.ToString();
-
             }
 
             //public static string A08_YesNo(T boVM, string name, string errStyle, string valueString, string initialStattus, string errMessage, string errMessageStyle)
@@ -696,4 +724,38 @@ namespace NNCQ.UI.UIModelRepository
             }
         }
     }
+
+    /// <summary>
+    /// 用于加载数据保存成功之后从后台返回前端的信息
+    /// </summary>
+    public class SaveOKStatus
+    {
+        public bool IsOK { get; set; }
+        public string PageIndex { get; set; }
+        public string TypeID { get; set; }
+        public string ExtenssionFunctionString { get; set; }
+
+        public SaveOKStatus() 
+        {
+            ExtenssionFunctionString = "";
+        }
+    }
+
+    /// <summary>
+    /// 用于加载数据删除操作完成之后返回前端的信息
+    /// </summary>
+    public class DeleteActionStatus
+    {
+        public bool IsOK { get; set; }
+        public string ErrorMassage { get; set; }
+        public string PageIndex { get; set; }
+        public string TypeID { get; set; }
+        public string ExtenssionFunctionString { get; set; }
+        
+        public DeleteActionStatus() 
+        {
+            ExtenssionFunctionString = "";
+        }
+    }
+
 }

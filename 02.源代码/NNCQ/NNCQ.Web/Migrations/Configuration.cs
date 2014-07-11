@@ -16,7 +16,8 @@ using System.Linq;
 
         protected override void Seed(NNCQ.Domain.Core.EntityDbContext context)
         {
-            UserAndRoleSeed.AddUserAndRoles();
+            //UserAndRoleSeed.AddUserAndRoles();
+            //DepartmentAndPersonSeed.AddDepartment();
         }
     }
 }

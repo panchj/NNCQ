@@ -114,6 +114,7 @@ namespace NNCQ.Web.Controllers.Application
                     deleteStatusModelItems.Add(new DeleteStatusModel() { OperationMessage = errorItem, OperationStatus = false });
                 }
             }
+
             return Json(deleteStatusModelItems);
         }
 
@@ -138,7 +139,7 @@ namespace NNCQ.Web.Controllers.Application
                 else
                     _RoleManager.Update(bo);
 
-                return Json(PageComponentRepository<ApplicationRoleVM>.SaveOK());
+                return Json(PageComponentRepository<ApplicationRoleVM>.SaveOK(true, "1", ""));
             }
             else
             {

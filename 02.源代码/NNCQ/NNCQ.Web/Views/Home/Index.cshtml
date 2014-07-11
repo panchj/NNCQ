@@ -38,12 +38,17 @@
 
                 <button class="button large primary" type="button" onclick="javascript:logon()"><i class="icon-enter fg-white" style="font-size:16px"></i>&nbsp; 登 录 </button>
                 <div id="logonStatusPrompt" style="margin-top: 20px"></div>
-            </div>
+            @*</div>
+            <div class='input-control text' data-role='datepicker' data-format='yyyy-mm-dd' data-position='bottom' data-effect='fade' data-locale='zhCN'>
+                <input type='text'><button class='btn btn-date'></button>
+            </div>*@
 
 
         </td>
     </tr>
 </table>
+
+
 
 @section Scripts {
 
@@ -52,6 +57,8 @@
         self.resizeTo(screen.availWidth, screen.availHeight)
         var el = document.getElementById("homeMainDiv");
         el.style.height = screen.availHeight + "px";
+
+        $(".datepicker").datepicker();
 
         function logon() {
             var userName = document.getElementById('userName').value;

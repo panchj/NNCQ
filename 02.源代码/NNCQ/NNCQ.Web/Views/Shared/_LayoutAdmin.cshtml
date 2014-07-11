@@ -10,6 +10,12 @@
 
     @Styles.Render("~/metroCss")
     @Scripts.Render("~/bundles/modernizr")
+    <script>
+        METRO_LOCALE = 'zhCN';
+    </script>
+
+
+
 
 </head>
 <body class="metro" style="font-family:'Microsoft YaHei UI'">
@@ -32,7 +38,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/metroScript")
-    @RenderSection("scripts", required: false)
 
+    @RenderSection("scripts", required: false)
 </body>
 </html>

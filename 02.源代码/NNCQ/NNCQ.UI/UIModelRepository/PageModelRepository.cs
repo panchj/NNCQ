@@ -70,7 +70,7 @@ namespace NNCQ.UI.UIModelRepository
             }
 
             // 封装的Jscript脚本库
-            pageModel.AdditionScriptContent =extensionJavaScriptString + AdditionScriptContent.Get();
+            pageModel.AdditionScriptContent =AdditionScriptContent.Get()+ extensionJavaScriptString;
 
             return pageModel;
         }
@@ -132,6 +132,11 @@ namespace NNCQ.UI.UIModelRepository
         public static Muc_LeftNavigator GetSideBarNavigator(List<SelfReferentialItem> treeNodes, string title, string typeID = null) 
         {
             return LeftNavigatorWithSideBarInitializer.GetLeftNavigator(treeNodes, title, typeID);
+        }
+
+        public static Muc_LeftNavigator GetTreeViewNavigator(List<SelfReferentialItem> treeNodes, string title, string typeID = null)
+        {
+            return LeftNavigatorWithTreeViewInitializer.GetLeftNavigator(treeNodes, title);
         }
 
         /// <summary>
@@ -435,11 +440,19 @@ namespace NNCQ.UI.UIModelRepository
         }
 
         /// <summary>
-        /// 主工作区生成器
+        /// 另外一组树结构视图的组件
+        /// </summary>
+        class JQueryTreeViewInitializer
+        {
+
+        }
+
+        /// <summary>
+        /// 主工作区生成器,用于创建呈现业务对象视图模型集合的列表
         /// </summary>
         public class MainWorkPlaceInitializer
         {
-            public static Muc_MainWorkPlace GetMainWorkPlace(List<T> boVMCollection, MucPaginate paginate) 
+            public static Muc_MainWorkPlace GetMainWorkPlace(List<T> boVMCollection, MucPaginate paginate, bool? userUDCollumn = null) 
             {
 
                 var mainWorkPLace = new Muc_MainWorkPlace();
@@ -457,7 +470,7 @@ namespace NNCQ.UI.UIModelRepository
                 // 生成列表的表头
                 mainWorkPLace.MainWorkPlaceHeadBar = _GetHeadbar();
                 // 生成列表的表体
-                mainWorkPLace.MainWorkPlaceDataGridView = _GetDataGridView(boVMCollection);
+                mainWorkPLace.MainWorkPlaceDataGridView = _GetDataGridView(boVMCollection, userUDCollumn);
                 // 根据分页器的状态生成列表底部
                 if (paginate != null)
                     mainWorkPLace.MainWorkPlaceBottomBar = _GetBottomBar(sAttribute.ControllerName, sAttribute.ListActionPath, paginate);
@@ -486,13 +499,13 @@ namespace NNCQ.UI.UIModelRepository
             }
 
             /// <summary>
-            /// 公开的公开的，直接供前端控制器调用的列表页面表体的方法
+            /// 公开的，直接供前端控制器调用的列表页面表体的方法
             /// </summary>
             /// <param name="boVMCollection"></param>
             /// <returns></returns>
-            public static string GetDataGridViewContent(List<T> boVMCollection) 
+            public static string GetDataGridViewContent(List<T> boVMCollection,bool ? userUDCollumn = null) 
             {
-                return _GetDataGridView(boVMCollection).InnerHtmlContent;
+                return _GetDataGridView(boVMCollection,userUDCollumn).InnerHtmlContent;
             }
 
             /// <summary>
@@ -604,8 +617,10 @@ namespace NNCQ.UI.UIModelRepository
             /// </summary>
             /// <param name="boVMCollection"></param>
             /// <returns></returns>
-            private static Muc_MainWorkPlaceDataGridView _GetDataGridView(List<T> boVMCollection) 
+            private static Muc_MainWorkPlaceDataGridView _GetDataGridView(List<T> boVMCollection ,bool ? userUDCollumn = null) 
             {
+                var useUD = userUDCollumn ?? true;
+
                 var dgv=new Muc_MainWorkPlaceDataGridView();
                 var boType = typeof(T);
 
@@ -701,7 +716,19 @@ namespace NNCQ.UI.UIModelRepository
                             htmlString.Append("<td class='" + tdCssClass + "'>");
                             var property = properties.Where(x => x.Name == colItem.PropertyName).FirstOrDefault();
                             var propertyValue = property.GetValue(boVMItem);
-                            htmlString.Append(propertyValue);
+                            var valueString = propertyValue.ToString();
+                            if (propertyValue.GetType().Name == "PlainFacadeItem") 
+                            {
+                                var tempValue = propertyValue as PlainFacadeItem;
+                                valueString=tempValue.Name;
+                            }
+                            if (propertyValue.GetType().Name == "SelfReferentialItem")
+                            {
+                                var tempValue = propertyValue as SelfReferentialItem;
+                                valueString = tempValue.ItemName;
+                            }
+
+                            htmlString.Append(valueString);
                             htmlString.Append("</td>");
                             if (colItem.PropertyName == "Name")
                                 boValueString = propertyValue.ToString();
@@ -734,13 +761,16 @@ namespace NNCQ.UI.UIModelRepository
                     #endregion
 
                     #region 编辑、明细、删除操作导航
-                    var keyProperty = properties.Where(x => x.Name.ToLower() == "id").FirstOrDefault();
-                    if (keyProperty != null)
+                    if (useUD)
                     {
-                        var KeyPropertyValue = keyProperty.GetValue(boVMItem);
-                        var objID = KeyPropertyValue.ToString();
-                        htmlString.Append(_GetDefaultOperationColValue(objID, dgv.ControllerName, dgv.EditActionPath, dgv.DetailActionPath, dgv.DeleteActionPath, boValueString));
-                    } 
+                        var keyProperty = properties.Where(x => x.Name.ToLower() == "id").FirstOrDefault();
+                        if (keyProperty != null)
+                        {
+                            var KeyPropertyValue = keyProperty.GetValue(boVMItem);
+                            var objID = KeyPropertyValue.ToString();
+                            htmlString.Append(_GetDefaultOperationColValue(objID, dgv.ControllerName, dgv.EditActionPath, dgv.DetailActionPath, dgv.DeleteActionPath, boValueString));
+                        }
+                    }
                     #endregion
 
                     htmlString.Append("</tr>");
@@ -914,7 +944,7 @@ namespace NNCQ.UI.UIModelRepository
         /// </summary>
         class AdditionScriptContent
         {
-            public static string Get() //string id = null, string boName = null, string controllername = null, string deleteName = null
+            public static string Get() 
             {
                 var htmlString = new StringBuilder();
 
@@ -932,6 +962,7 @@ namespace NNCQ.UI.UIModelRepository
                 htmlString.Append(_GetValidator());
                 htmlString.Append(_GetDelete());
                 htmlString.Append(_GetAdditionColOperationByPageFunction());
+                htmlString.Append(_GetLeftNavigatorRefreshFunction());
 
                 htmlString.Append("</script>");
 
@@ -1076,7 +1107,7 @@ namespace NNCQ.UI.UIModelRepository
                 htmlString.Append("cache: true,");
                 htmlString.Append("type: 'POST',");
                 htmlString.Append("async: true,");
-                htmlString.Append("url: '../../' + controllerName + '/' + listAction + '?page=' + page,");
+                htmlString.Append("url: '../../' + controllerName + '/' + listAction + '?page=' + page+'&typeID='+typeID,");
                 htmlString.Append("dataType: 'json',");
                 htmlString.Append("success: function (data) {");
                 htmlString.Append("$('#" + headerDivID + "').html(data.Header);");
@@ -1214,28 +1245,23 @@ namespace NNCQ.UI.UIModelRepository
                 htmlString.Append("url:'../../'+controllerName+'/'+deletePath+'/'+id,");
                 htmlString.Append("dataType:'json',");
 
-                htmlString.Append("success: function (deleteStatusModels) {");
+                htmlString.Append("success: function (DeleteActionStatus) {");
 
-                htmlString.Append("$.each(deleteStatusModels, function (i) {");
-                htmlString.Append("OperationStatus = deleteStatusModels[0].OperationStatus;");
-                htmlString.Append("OperationMessage = deleteStatusModels[0].OperationMessage;");
-
-                htmlString.Append("});");
-                htmlString.Append("if (!OperationStatus) {");
-                htmlString.Append("document.getElementById('delete_Status').innerHTML = '<p style=\"color:red\">删除错误信息：'+OperationMessage+'</p>';");
+                htmlString.Append("if (!DeleteActionStatus.IsOK) {");
+                htmlString.Append("document.getElementById('delete_Status').innerHTML = '<p style=\"color:red\">删除错误信息：'+DeleteActionStatus.ErrorMassage+'</p>';");
                 htmlString.Append("}else {");
                 htmlString.Append("$.Dialog.close();");
-                htmlString.Append("boGotoPage(1,controllerName,'List');");
+                htmlString.Append("boGotoPage(DeleteActionStatus.PageIndex,controllerName,'List',DeleteActionStatus.TypeID);");
+                htmlString.Append("if(DeleteActionStatus.ExtenssionFunctionString!=''){");
+                htmlString.Append("refreshDepartmentTreeView(controllerName,DeleteActionStatus.ExtenssionFunctionString);");
+                htmlString.Append("}");
+
                 htmlString.Append("}");
                 htmlString.Append("}");
 
                 htmlString.Append("});");
 
-                //htmlString.Append("}");
-                //htmlString.Append("});");
-
                 htmlString.Append("}");
-
 
                 return htmlString.ToString();
 
@@ -1301,7 +1327,23 @@ namespace NNCQ.UI.UIModelRepository
 
             }
 
+            private static string _GetLeftNavigatorRefreshFunction() 
+            {
+                var htmlString = new StringBuilder();
+                htmlString.Append("function refreshDepartmentTreeView(controllerName,refreshAction){");
+                htmlString.Append("$.ajax({");
+                htmlString.Append("cache: true,");
+                htmlString.Append("type: 'POST',");
+                htmlString.Append("async: true,");
+                htmlString.Append("url: '../../' + controllerName + '/' + refreshAction,");
+                htmlString.Append("dataType: 'json',");
+                htmlString.Append("success: function (data) {");
+                htmlString.Append("document.getElementById('divLeftNavigator').innerHTML = data;");
+                htmlString.Append("}});");
+                htmlString.Append("}");
+                return htmlString.ToString();
 
+            }
         }
 
         /// <summary>
@@ -1323,5 +1365,6 @@ namespace NNCQ.UI.UIModelRepository
         public string Header { get; set; }
         public string DataGridView { get; set; }
         public string Bottom { get; set; }
+
     }
 }

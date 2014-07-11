@@ -265,6 +265,8 @@
     <Content Include="Scripts\jquery.xdomainrequest.min.js" />
     <Content Include="Scripts\jquery.xdr-transport.js" />
     <Content Include="Scripts\modernizr-2.7.2.js" />
+    <Content Include="Scripts\NNCQ\nncq-Department.js" />
+    <Content Include="Scripts\NNCQ\nncq-Person.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -314,6 +316,8 @@
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Admin\Common\Index.cshtml" />
     <Content Include="Views\Shared\_HeaderForAdmin.cshtml" />
+    <Content Include="Views\Organization\Department\DepartmentConfig.cshtml" />
+    <Content Include="Views\Organization\Department\_DepartmentConfigDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

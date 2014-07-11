@@ -20,7 +20,7 @@ namespace NNCQ.UI.ExtensionsOfMvcHelper
             if (pageModel.LeftNavigator != null)
             { 
                 #region 创建左侧工作区内容（一般是导航内容）
-                htmlContentBuilder.Append("<div class='bs-docs-sidebar span3'>");
+                htmlContentBuilder.Append("<div class='span3'>");
                 htmlContentBuilder.Append("<div id='" + pageModel.LeftNavigator.ID + "'  style='" + pageModel.LeftNavigator.CssStyle + "'>");
                 htmlContentBuilder.Append(pageModel.LeftNavigator.InnerHtmlContent);
                 htmlContentBuilder.Append("</div></div>");

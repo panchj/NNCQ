@@ -1,4 +1,5 @@
-﻿using NNCQ.Domain.Core;
+﻿using LNNCQ.Domain.Utilities;
+using NNCQ.Domain.Core;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -17,7 +18,7 @@ namespace NNCQ.Domain.Organization
         [StringLength(50)]
         public string Description { get; set; }
         [StringLength(50)]
-        public string SortCode { get; set; }
+        public string SortCode { get; set; } // 在实际处理的时候，这项数据与Person的SortCode一致。
 
         public virtual Department Department { get; set; }
         public virtual Person Person { get; set; }
@@ -25,6 +26,7 @@ namespace NNCQ.Domain.Organization
         public PersonsInDepartment() 
         {
             this.ID = Guid.NewGuid();
+            this.SortCode = BusinessEntityComponentsFactory.SortCodeByDefaultDateTime<PersonsInDepartment>();
         }
 
     }

@@ -91,7 +91,14 @@ namespace NNCQ.Web.Controllers.Application
 
             var deleteStatus = new DeleteStatus();
             BusinessEntityComponentsFactory.SetDeleteStatus<SystemWorkPlace>(id, deleteStatus, relevance);
-            return Json(deleteStatus.SDSM);
+           
+            var actionDeleteStatus = new DeleteActionStatus();
+            actionDeleteStatus.IsOK = deleteStatus.SDSM[0].OperationStatus;
+            actionDeleteStatus.ErrorMassage = deleteStatus.SDSM[0].OperationMessage;
+            actionDeleteStatus.PageIndex = "1";
+            actionDeleteStatus.TypeID = "";
+
+            return Json(actionDeleteStatus);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -123,7 +130,7 @@ namespace NNCQ.Web.Controllers.Application
                 boVM.MapToBo(bo, appInfo);
                 _Service.AddOrEditAndSave(bo);
 
-                return Json(PageComponentRepository<SystemWorkPlaceVM>.SaveOK());
+                return Json(PageComponentRepository<SystemWorkPlaceVM>.SaveOK(true, "1", ""));
             }
             else
             {

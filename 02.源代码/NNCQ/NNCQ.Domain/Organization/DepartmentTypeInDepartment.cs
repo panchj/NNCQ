@@ -1,4 +1,5 @@
-﻿using NNCQ.Domain.Core;
+﻿using LNNCQ.Domain.Utilities;
+using NNCQ.Domain.Core;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -28,6 +29,7 @@ namespace NNCQ.Domain.Organization
         public DepartmentTypeInDepartment() 
         {
             this.ID = Guid.NewGuid();
+            this.SortCode = BusinessEntityComponentsFactory.SortCodeByDefaultDateTime<DepartmentTypeInDepartment>();
         }
     }
 }

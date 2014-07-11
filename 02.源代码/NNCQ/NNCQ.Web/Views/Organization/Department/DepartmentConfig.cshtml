@@ -1,0 +1,56 @@
+﻿@model NNCQ.Web.ViewModels.Organization.DepartmentVM
+
+@{
+    ViewBag.Title = "DepartmentConfig";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class='grid fluid'>
+    <div class='row'>
+
+        <div class='span2'>
+            <p class='subheader'>
+                <a href="~/Department/Index?typeID=@Model.ParentItemID"><i class="icon-arrow-left-3 fg-darker"></i></a>
+                @Model.Name
+            </p>
+
+            <div class="panel">
+                <div class="panel-header bg-lightBlue fg-white">
+                    部门类型配置
+                </div>
+                <div class="panel-content">
+                    <div id="dateUpdateStatus">
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header bg-lightBlue fg-white">
+                    部门岗位配置
+                </div>
+                <div class="panel-content">
+                    <div id="dateUpdateStatus">
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header bg-lightBlue fg-white">
+                    部门职级配置
+                </div>
+                <div class="panel-content">
+                    <div id="dateUpdateStatus">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class='span10'>
+            <div id='divBoMainArea' style='margin-right:10px'>
+                @Html.Partial("../../Views/Organization/Department/_DepartmentConfigDetail")
+            </div>
+        </div>
+    </div>
+</div>
+

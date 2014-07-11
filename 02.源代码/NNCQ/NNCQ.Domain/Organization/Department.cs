@@ -19,7 +19,7 @@ namespace NNCQ.Domain.Organization
         public string Description { get; set; }
         [StringLength(50)]
         public string SortCode { get; set; }
-        public bool IsActiveDepartment { get; set; }                      // 活动中的部门
+        public bool IsActiveDepartment { get; set; }
 
         public virtual Department ParentDapartment { get; set; }
 
@@ -34,10 +34,10 @@ namespace NNCQ.Domain.Organization
         [NotMapped]
         public virtual ICollection<JobTitle> JobTitles { get; set; }
 
-
         public Department() 
         {
             this.ID = Guid.NewGuid();
+            this.IsActiveDepartment = true;
         }
 
     }
