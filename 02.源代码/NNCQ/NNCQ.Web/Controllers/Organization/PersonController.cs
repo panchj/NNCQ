@@ -143,6 +143,15 @@ namespace NNCQ.Web.Controllers.Organization
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult CustomDetail(Guid id) 
+        {
+            var bo = _Service.GetSingle(id);
+            var boVM = new PersonVM(bo);
+            //return Json("");
+            return PartialView("../../Views/Organization/Person/_CustomDetail",boVM);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Delete(Guid id)
         {
             var typeID = _Service.GetSingle(id).Department.ID.ToString();

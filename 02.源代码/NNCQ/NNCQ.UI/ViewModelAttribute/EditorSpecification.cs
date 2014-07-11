@@ -18,6 +18,9 @@ namespace NNCQ.UI.ViewModelAttribute
         public string SaveAction { get; set; }     // 保存数据的 Action
         public string ListString { get; set; }     // 列表数据的 Action
 
+        public int HorizontalZoneAmount = 1;
+        public int Width = 450;
+        public int Height = 300;
         public EditorSpecification(string controllerName,string title,bool dialogue) 
         {
             this.ControllerName = controllerName;

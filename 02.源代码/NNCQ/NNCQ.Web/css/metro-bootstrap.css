@@ -653,7 +653,7 @@ a {
   -o-transform: rotateY(360deg);
   transform: rotateY(360deg);
 }
-@font-face {
+/*@font-face {
   font-family: "PT Serif Caption";
   font-style: normal;
   font-weight: 400;
@@ -676,7 +676,7 @@ a {
   font-style: normal;
   font-weight: 700;
   src: local("Segoe UI Bold"), local("Open Sans Bold"), local("OpenSans-Bold"), url(https://themes.googleusercontent.com/static/fonts/opensans/v6/k3k702ZOKiLJc3WVjuplzJ1r3JsPcQLi8jytr04NNhU.woff) format('woff');
-}
+}*/
 .metro .text-rest-state {
   color: #000000;
 }
@@ -703,29 +703,29 @@ a {
   font-style: italic;
 }
 .metro #font .segoe {
-  font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
 }
 .metro #font .segoe-bold {
-  font-family: 'Segoe UI Semibold_', 'Open Sans Bold', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
 }
 .metro #font .segoe-light {
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
 }
 .metro #font .cambria {
-  font-family: 'Cambria_', 'PT Serif Caption', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
 }
 .metro #font .mono {
-  font-family: 'Courier New', monospace;
+  font-family: 'Microsoft YaHei';
 }
 .metro #font .serif {
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: 'Microsoft YaHei';
 }
 .metro #font .sans {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Microsoft YaHei';
 }
 .metro .header,
 .metro .subheader {
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: 300;
   color: #000000;
   letter-spacing: 0.00em;
@@ -740,7 +740,7 @@ a {
   letter-spacing: 0.01em;
 }
 .metro .subheader-secondary {
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: 300;
   color: #000000;
   letter-spacing: 0.00em;
@@ -752,7 +752,7 @@ a {
   line-height: 2.2rem;
 }
 .metro .item-title {
-  font-family: 'Segoe UI Semibold_', 'Open Sans Bold', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: bold;
   color: #000000;
   font-size: 1.6rem;
@@ -760,7 +760,7 @@ a {
   letter-spacing: 0.02em;
 }
 .metro .item-title-secondary {
-  font-family: 'Segoe UI Semibold_', 'Open Sans Bold', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: bold;
   color: #000000;
   font-size: 1.6rem;
@@ -771,7 +771,7 @@ a {
   line-height: 1.4rem;
 }
 .metro .navigation {
-  font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: normal;
   font-style: normal;
   color: rgba(0, 0, 0, 0.6);
@@ -780,7 +780,7 @@ a {
   letter-spacing: 0.02em;
 }
 .metro .body-text {
-  font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: normal;
   font-style: normal;
   color: #000000;
@@ -789,24 +789,24 @@ a {
   letter-spacing: 0.02em;
 }
 .metro .code-text {
-  font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: normal;
   font-style: normal;
   color: #000000;
   font-size: 11pt;
   line-height: 15pt;
   letter-spacing: 0.02em;
-  font-family: 'Courier New', monospace;
+  font-family: 'Microsoft YaHei', monospace;
 }
 .metro .tertiary-text {
-  font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   color: #000000;
   font-size: 1.3rem;
   line-height: 1.5rem;
   font-weight: normal !important;
 }
 .metro .tertiary-text-secondary {
-  font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   color: #000000;
   font-size: 1.3rem;
   line-height: 1.5rem;
@@ -814,14 +814,14 @@ a {
   color: rgba(0, 0, 0, 0.6);
 }
 .metro .readable-text {
-  font-family: 'Cambria_', 'PT Serif Caption', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: normal;
   font-style: normal;
   font-size: 1.8rem;
   line-height: 2rem;
 }
 .metro .menu-title {
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: 300;
   color: #000000;
   letter-spacing: 0.00em;
@@ -831,7 +831,7 @@ a {
   font-size: 4rem;
 }
 .metro .menu-item {
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: 300;
   color: #000000;
   letter-spacing: 0.00em;
@@ -843,7 +843,7 @@ a {
   font-size: 2.2rem;
 }
 .metro .menu-item-secondary {
-  font-family: 'Segoe UI Semibold_', 'Open Sans Bold', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: bold;
   color: #000000;
   font-size: 1.6rem;
@@ -863,7 +863,7 @@ a {
   margin: 10px 0;
 }
 .metro h1 {
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: 300;
   color: #000000;
   letter-spacing: 0.00em;
@@ -871,7 +871,7 @@ a {
   line-height: 4.8rem;
 }
 .metro h2 {
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: 300;
   color: #000000;
   letter-spacing: 0.00em;
@@ -880,7 +880,7 @@ a {
   letter-spacing: 0.01em;
 }
 .metro h3 {
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: 300;
   color: #000000;
   letter-spacing: 0.00em;
@@ -893,7 +893,7 @@ a {
   font-weight: bold;
 }
 .metro h4 {
-  font-family: 'Segoe UI Semibold_', 'Open Sans Bold', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: bold;
   color: #000000;
   font-size: 1.6rem;
@@ -901,7 +901,7 @@ a {
   letter-spacing: 0.02em;
 }
 .metro h5 {
-  font-family: 'Segoe UI Semibold_', 'Open Sans Bold', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: bold;
   color: #000000;
   font-size: 1.6rem;
@@ -912,7 +912,7 @@ a {
   line-height: 1.4rem;
 }
 .metro h6 {
-  font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: normal;
   font-style: normal;
   color: #000000;
@@ -951,13 +951,13 @@ a {
 .metro div,
 .metro span,
 .metro p {
-  font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: normal;
   font-style: normal;
 }
 .metro p {
   margin: 0 0 7pt;
-  font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: normal;
   font-style: normal;
   color: #000000;
@@ -966,7 +966,7 @@ a {
   letter-spacing: 0.02em;
 }
 .metro strong {
-  font-family: 'Segoe UI Semibold_', 'Open Sans Bold', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: bold;
 }
 .metro .text-muted {
@@ -990,7 +990,7 @@ a {
   cursor: help;
 }
 .metro address {
-  font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: normal;
   font-style: normal;
   margin-bottom: 7pt;
@@ -1040,7 +1040,7 @@ a {
 .metro ol {
   margin-left: 5px;
   padding-left: 15px;
-  font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: normal;
   font-style: normal;
   color: #000000;
@@ -1062,7 +1062,7 @@ a {
   counter-reset: li;
   margin-left: 0;
   padding-left: 0;
-  font-family: 'Cambria_', 'PT Serif Caption', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: normal;
   font-style: normal;
   font-size: 1.8rem;
@@ -1087,7 +1087,7 @@ a {
   color: #fff;
   background: #666;
   font-weight: bold;
-  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-family: 'Microsoft YaHei';
   text-align: center;
 }
 .metro ol.styled.rounded > li:before {
@@ -1098,7 +1098,7 @@ a {
   line-height: 20px;
 }
 .metro dl dt {
-  font-family: 'Segoe UI Semibold_', 'Open Sans Bold', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
 }
 .metro dl dd {
   margin-left: 15px;
@@ -1116,7 +1116,7 @@ a {
   margin-left: 180px;
 }
 .metro .prettyprint * {
-  font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: normal;
   font-style: normal;
   color: #000000;
@@ -1162,7 +1162,7 @@ a {
   margin-right: 20px;
 }
 .metro .page .page-header .page-header-content .branding .brand-title {
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: 300;
   color: #000000;
   letter-spacing: 0.00em;
@@ -1172,7 +1172,7 @@ a {
   display: block;
 }
 .metro .page .page-header .page-header-content .branding .brand-slogan {
-  font-family: 'Segoe UI Semibold_', 'Open Sans Bold', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: bold;
   color: #000000;
   font-size: 1.6rem;
@@ -1183,7 +1183,7 @@ a {
   line-height: 1.4rem;
   font-weight: normal;
   font-style: normal;
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   display: block;
 }
 .metro .page .page-header .page-header-content .branding .brand-title,
@@ -1652,7 +1652,7 @@ a {
   cursor: pointer;
   display: inline-block;
   outline: none;
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-size: 14px;
   line-height: 16px;
   margin: auto;
@@ -1737,7 +1737,7 @@ a {
   cursor: pointer;
   display: inline-block;
   outline: none;
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-size: 14px;
   line-height: 16px;
   margin: auto;
@@ -1830,7 +1830,7 @@ a {
   cursor: pointer;
   display: inline-block;
   outline: none;
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-size: 14px;
   line-height: 16px;
   margin: auto;
@@ -1917,7 +1917,7 @@ a {
 }
 .metro .command-button small {
   display: block;
-  font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   color: #000000;
   font-size: 1.3rem;
   line-height: 1.5rem;
@@ -2051,7 +2051,7 @@ a {
   cursor: pointer;
   display: inline-block;
   outline: none;
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-size: 14px;
   line-height: 16px;
   margin: auto;
@@ -2181,7 +2181,7 @@ a {
   border-radius: 0;
   cursor: pointer;
   outline: none;
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-size: 14px;
   line-height: 16px;
   margin: auto;
@@ -2286,7 +2286,7 @@ a {
   min-width: 10px;
   text-align: center;
   vertical-align: middle;
-  font-family: 'Segoe UI Semibold_', 'Open Sans Bold', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
 }
 .metro .shortcut:hover {
   border-color: #e51400;
@@ -3235,7 +3235,7 @@ a {
   cursor: pointer;
   display: inline-block;
   outline: none;
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-size: 14px;
   line-height: 16px;
   margin: auto;
@@ -3463,7 +3463,7 @@ a {
   padding: 0;
   vertical-align: baseline;
   position: relative;
-  font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
 }
 .metro #menu .item-horizontal {
   display: inline-block;
@@ -3471,7 +3471,7 @@ a {
   padding: 0;
   vertical-align: baseline;
   position: relative;
-  font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
 }
 .metro .vertical-menu {
   margin: 0;
@@ -3484,12 +3484,12 @@ a {
   padding: 0;
   vertical-align: baseline;
   position: relative;
-  font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
 }
 .metro .vertical-menu li a {
   display: block;
   text-decoration: none;
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: 300;
   color: #000000;
   letter-spacing: 0.00em;
@@ -3502,7 +3502,7 @@ a {
   color: inherit;
 }
 .metro .vertical-menu li.title {
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: 300;
   color: #000000;
   letter-spacing: 0.00em;
@@ -3520,7 +3520,7 @@ a {
 }
 .metro .vertical-menu.compact li.title {
   margin-bottom: 10px;
-  font-family: 'Segoe UI Semibold_', 'Open Sans Bold', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: bold;
   color: #000000;
   font-size: 1.6rem;
@@ -3534,7 +3534,7 @@ a {
   margin-left: 15px;
 }
 .metro .vertical-menu ul.secondary li a {
-  font-family: 'Segoe UI Semibold_', 'Open Sans Bold', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: bold;
   color: #000000;
   font-size: 1.6rem;
@@ -3557,12 +3557,12 @@ a {
   padding: 0;
   vertical-align: baseline;
   position: relative;
-  font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
 }
 .metro .horizontal-menu li a {
   display: inline-block;
   text-decoration: none;
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: 300;
   color: #000000;
   letter-spacing: 0.00em;
@@ -3611,12 +3611,12 @@ a {
   padding: 0;
   vertical-align: baseline;
   position: relative;
-  font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
 }
 .metro .side-menu li a {
   display: block;
   text-decoration: none;
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: 300;
   color: #000000;
   letter-spacing: 0.00em;
@@ -3629,7 +3629,7 @@ a {
   color: inherit;
 }
 .metro .side-menu li.title {
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: 300;
   color: #000000;
   letter-spacing: 0.00em;
@@ -3647,7 +3647,7 @@ a {
 }
 .metro .side-menu.compact li.title {
   margin-bottom: 10px;
-  font-family: 'Segoe UI Semibold_', 'Open Sans Bold', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: bold;
   color: #000000;
   font-size: 1.6rem;
@@ -3661,7 +3661,7 @@ a {
   margin-left: 15px;
 }
 .metro .side-menu ul.secondary li a {
-  font-family: 'Segoe UI Semibold_', 'Open Sans Bold', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: bold;
   color: #000000;
   font-size: 1.6rem;
@@ -3742,12 +3742,12 @@ a {
   padding: 0;
   vertical-align: baseline;
   position: relative;
-  font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
 }
 .metro .dropdown-menu li a {
   display: block;
   text-decoration: none;
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: 300;
   color: #000000;
   letter-spacing: 0.00em;
@@ -3760,7 +3760,7 @@ a {
   color: inherit;
 }
 .metro .dropdown-menu li.title {
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: 300;
   color: #000000;
   letter-spacing: 0.00em;
@@ -3778,7 +3778,7 @@ a {
 }
 .metro .dropdown-menu.compact li.title {
   margin-bottom: 10px;
-  font-family: 'Segoe UI Semibold_', 'Open Sans Bold', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: bold;
   color: #000000;
   font-size: 1.6rem;
@@ -3792,7 +3792,7 @@ a {
   margin-left: 15px;
 }
 .metro .dropdown-menu ul.secondary li a {
-  font-family: 'Segoe UI Semibold_', 'Open Sans Bold', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: bold;
   color: #000000;
   font-size: 1.6rem;
@@ -4064,7 +4064,7 @@ a {
   padding: 15px;
   line-height: 15px;
   color: inherit;
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-size: 14px;
 }
 .metro .navigation-bar .navigation-bar-content .element:hover,
@@ -4228,7 +4228,7 @@ a {
   padding: 15px;
   line-height: 15px;
   color: inherit;
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-size: 14px;
 }
 .metro .navigation-bar .element-menu > li > a.dropdown-toggle,
@@ -4424,7 +4424,7 @@ a {
 .metro .tile-area .user-id .user-id-name .last-name {
   display: block;
   color: inherit;
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   line-height: 12pt;
 }
 .metro .tile-area .user-id .user-id-name .first-name {
@@ -4813,7 +4813,7 @@ a {
   color: #ffffff;
 }
 .metro .tile-group .tile-group-title {
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-size: 18px;
   line-height: 20px;
   position: absolute;
@@ -5080,10 +5080,10 @@ a {
   margin-left: -18.66666667px;
 }
 .metro .tile {
-  font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
 }
 .metro .tile * {
-  font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
 }
 .metro .tile.scale {
   -webkit-transform: scale(0.98);
@@ -5521,7 +5521,7 @@ a {
   cursor: pointer;
   display: inline-block;
   outline: none;
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-size: 14px;
   line-height: 16px;
   margin: auto;
@@ -5814,7 +5814,7 @@ a {
 }
 .metro .sidebar > ul li.title {
   padding: 20px 20px 10px 20px;
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: 300;
   color: #000000;
   letter-spacing: 0.00em;
@@ -5890,12 +5890,12 @@ a {
   padding: 0;
   vertical-align: baseline;
   position: relative;
-  font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
 }
 .metro .sidebar > ul ul li a {
   display: block;
   text-decoration: none;
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: 300;
   color: #000000;
   letter-spacing: 0.00em;
@@ -5908,7 +5908,7 @@ a {
   color: inherit;
 }
 .metro .sidebar > ul ul li.title {
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: 300;
   color: #000000;
   letter-spacing: 0.00em;
@@ -5926,7 +5926,7 @@ a {
 }
 .metro .sidebar > ul ul.compact li.title {
   margin-bottom: 10px;
-  font-family: 'Segoe UI Semibold_', 'Open Sans Bold', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: bold;
   color: #000000;
   font-size: 1.6rem;
@@ -5940,7 +5940,7 @@ a {
   margin-left: 15px;
 }
 .metro .sidebar > ul ul ul.secondary li a {
-  font-family: 'Segoe UI Semibold_', 'Open Sans Bold', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: bold;
   color: #000000;
   font-size: 1.6rem;
@@ -6392,7 +6392,7 @@ a {
   top: -40px;
   min-width: 30px;
   text-align: center;
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-size: 14px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3), 0 3px 8px rgba(0, 0, 0, 0.2);
   display: none;
@@ -6516,7 +6516,7 @@ a {
   min-height: 24px;
   text-align: center;
   vertical-align: middle;
-  font-family: 'Cambria_', 'PT Serif Caption', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-size: 16pt;
   font-weight: normal;
   padding: 0 0 10px 0;
@@ -6925,7 +6925,7 @@ a {
 .metro .listview-outlook .list .list-content {
   margin: 2px 0;
   padding: 2px 20px;
-  font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-size: 16px;
   color: inherit;
   border-left: 3px transparent solid;
@@ -6981,7 +6981,7 @@ a {
   margin-bottom: 2px;
   background-color: #f0f0f0;
   padding: 4px 20px;
-  font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-size: 11px;
   font-weight: bold;
   color: #333333;
@@ -7359,7 +7359,7 @@ a {
   position: fixed;
   color: #1d1d1d;
   padding: 10px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-size: 12px;
   width: auto;
   max-width: 220px;
@@ -7558,7 +7558,7 @@ a {
   padding: .3em 10px;
   color: #fff;
   font-weight: bold;
-  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-size: 1.5rem;
   text-align: center;
 }
@@ -7648,7 +7648,7 @@ a {
   cursor: pointer;
 }
 .metro .streamer .streams .stream .stream-title {
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-size: 12px;
   line-height: 12px;
 }
@@ -7656,7 +7656,7 @@ a {
   position: absolute;
   left: 5px;
   bottom: 5px;
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-size: 11px;
   line-height: 11px;
 }
@@ -7780,7 +7780,7 @@ a {
 }
 .metro .streamer .events .event-stream .event .event-content-data .title {
   position: relative;
-  font-family: 'Segoe UI Semibold_', 'Open Sans Bold', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-size: 14px;
   line-height: 14px;
   margin: 3px 0 0;
@@ -7788,7 +7788,7 @@ a {
 }
 .metro .streamer .events .event-stream .event .event-content-data .subtitle {
   position: relative;
-  font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-size: 10px;
   line-height: 10px;
   margin: 0;
@@ -7800,7 +7800,7 @@ a {
   display: block;
   top: 36px;
   margin-right: 4px;
-  font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-size: 11px;
   line-height: 11px;
   color: #999999;
@@ -7980,7 +7980,7 @@ a {
   display: block;
   position: relative;
   min-width: 220px;
-  font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   color: #1d1d1d;
   padding: 10px;
   margin: 2px 2px 2px 0;
@@ -8125,7 +8125,7 @@ a {
   cursor: pointer;
   display: inline-block;
   outline: none;
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-size: 14px;
   line-height: 16px;
   margin: auto;
@@ -8276,7 +8276,7 @@ a {
   cursor: pointer;
   display: inline-block;
   outline: none;
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-size: 14px;
   line-height: 16px;
   margin: auto;
@@ -8376,7 +8376,7 @@ a {
   padding: 10px;
   background-color: #eeeeee;
   width: 100%;
-  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: 300;
   color: #000000;
   letter-spacing: 0.00em;
@@ -8445,7 +8445,7 @@ a {
   top: 30px;
   color: #999999 !important;
   margin: 5px 10px;
-  font-family: 'Segoe UI Semibold_', 'Open Sans Bold', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: bold;
   color: #000000;
   font-size: 1.6rem;
@@ -8462,7 +8462,7 @@ a {
 }
 .metro code,
 .metro .code {
-  font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+  font-family: 'Microsoft YaHei';
   font-weight: normal;
   font-style: normal;
   color: #000000;

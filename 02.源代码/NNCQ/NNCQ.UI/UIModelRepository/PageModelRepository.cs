@@ -21,7 +21,7 @@ namespace NNCQ.UI.UIModelRepository
         /// 根据前端提供的实体视图类的集合直接生成全部的列表页面的方法
         /// </summary>
         /// <param name="boVMCollection">前端的业务对象视图模型集合</param>
-        /// <param name="treeNodes">左侧导航树的自引用模式的节点集合，如果为空值，则不适用左侧导航节点空间</param>
+        /// <param name="treeNodes">左侧导航树的自引用模式的节点集合，如果为空值，则不不使用左侧导航节点空间</param>
         /// <param name="paginate">分页器，如果为空，直接将集合全部列出，并且不显示分页指示条</param>
         /// <param name="typeID">用于关联导航树指向节点的链接</param>
         /// <returns></returns>
@@ -615,13 +615,14 @@ namespace NNCQ.UI.UIModelRepository
             /// <summary>
             /// 创建列表数据处理模型
             /// </summary>
-            /// <param name="boVMCollection"></param>
+            /// <param name="boVMCollection">业务实体视图模型对象集合</param>
+            /// <param name="userUDCollumn">是否使用带有 编辑、明细、删除 的数据操作导航行列</param>
             /// <returns></returns>
             private static Muc_MainWorkPlaceDataGridView _GetDataGridView(List<T> boVMCollection ,bool ? userUDCollumn = null) 
             {
                 var useUD = userUDCollumn ?? true;
 
-                var dgv=new Muc_MainWorkPlaceDataGridView();
+                var dgv = new Muc_MainWorkPlaceDataGridView();
                 var boType = typeof(T);
 
                 Attribute[] boVMAttributes = Attribute.GetCustomAttributes(boType);
@@ -716,16 +717,20 @@ namespace NNCQ.UI.UIModelRepository
                             htmlString.Append("<td class='" + tdCssClass + "'>");
                             var property = properties.Where(x => x.Name == colItem.PropertyName).FirstOrDefault();
                             var propertyValue = property.GetValue(boVMItem);
-                            var valueString = propertyValue.ToString();
-                            if (propertyValue.GetType().Name == "PlainFacadeItem") 
+                            var valueString = "";
+                            if (propertyValue != null)
                             {
-                                var tempValue = propertyValue as PlainFacadeItem;
-                                valueString=tempValue.Name;
-                            }
-                            if (propertyValue.GetType().Name == "SelfReferentialItem")
-                            {
-                                var tempValue = propertyValue as SelfReferentialItem;
-                                valueString = tempValue.ItemName;
+                                valueString = propertyValue.ToString();
+                                if (propertyValue.GetType().Name == "PlainFacadeItem")
+                                {
+                                    var tempValue = propertyValue as PlainFacadeItem;
+                                    valueString = tempValue.Name;
+                                }
+                                if (propertyValue.GetType().Name == "SelfReferentialItem")
+                                {
+                                    var tempValue = propertyValue as SelfReferentialItem;
+                                    valueString = tempValue.ItemName;
+                                }
                             }
 
                             htmlString.Append(valueString);
@@ -828,22 +833,41 @@ namespace NNCQ.UI.UIModelRepository
                 var deleteOperationModel = new MucDialogue_Delete(id, "删除数据标题", controller, delete);
                 var htmlString = new StringBuilder();
                 htmlString.Append("<td class='text-center'>");
+
+                #region 编辑操作导航
                 htmlString.Append("<a href='javascript:boCreateOrEdit(\"" + id + "\",\"" + controller + "\",\"" + edit + "\")'>");
-                htmlString.Append("<i class='icon-pencil'  style='color:gray' onmouseover=\"this.style.color='red'\" onmouseout=\"this.style.color='gray'\"></i> </a>");
-                htmlString.Append("<a href='javascript:boDetail(\"" + id + "\",\"" + controller + "\",\"" + detail + "\")'>");
-                htmlString.Append("<i class='icon-file' style='color:gray' onmouseover=\"this.style.color='red'\" onmouseout=\"this.style.color='gray'\"></i>  </a>");
-                htmlString.Append("<a href=\"javascript:boDelete("+
-                    "'" + deleteOperationModel.IconName + "',"+
-                    "'" + deleteOperationModel.CaptionName + "',"+
-                    "" + deleteOperationModel.Width + ","+
-                    "" + deleteOperationModel.Height+ ","+
-                    "'" + id + "',"+
-                    "'" + bovalue + "',"+
-                    "'" + controller + "',"+
-                    "'" + delete + "')\">");
-                //deleteOperationModel.InnerHtmlContent
-                //tIcon,tTitle,tWidth,tHeight,id,boName,controllerName,deletePath
-                htmlString.Append("<i class='icon-remove'  style='color:gray' onmouseover=\"this.style.color='red'\" onmouseout=\"this.style.color='gray'\"></i>  </a>");
+                htmlString.Append("<i class='icon-pencil'  style='color:gray' onmouseover=\"this.style.color='red'\" onmouseout=\"this.style.color='gray'\"></i> </a>"); 
+                #endregion
+
+                #region 明细操作导航
+                var detailString01 = "<a href='javascript:boDetail(\"" + id + "\",\"" + controller + "\",\"" + detail + "\")'>";
+                var detailString02 = "<i class='icon-file' style='color:gray' onmouseover=\"this.style.color='red'\" onmouseout=\"this.style.color='gray'\"></i>  </a>";
+                string[] detailItems = detail.Split('|');
+                if (detailItems.Count() == 2)
+                {
+                    if (detailItems[1].Contains("javascript"))
+                    {
+                        detailString01="<a href='"+detailItems[1]+"(\"" + id + "\")'>";
+                        detailString02="<i class='icon-file' style='color:gray' onmouseover=\"this.style.color='red'\" onmouseout=\"this.style.color='gray'\"></i>  </a>";
+                    }
+                }
+                htmlString.Append(detailString01);
+                htmlString.Append(detailString02);
+                #endregion
+
+                #region 删除操作导航
+                htmlString.Append("<a href=\"javascript:boDelete(" +
+                           "'" + deleteOperationModel.IconName + "'," +
+                           "'" + deleteOperationModel.CaptionName + "'," +
+                           "" + deleteOperationModel.Width + "," +
+                           "" + deleteOperationModel.Height + "," +
+                           "'" + id + "'," +
+                           "'" + bovalue + "'," +
+                           "'" + controller + "'," +
+                           "'" + delete + "')\">");
+                htmlString.Append("<i class='icon-remove'  style='color:gray' onmouseover=\"this.style.color='red'\" onmouseout=\"this.style.color='gray'\"></i>  </a>"); 
+                #endregion
+                
                 htmlString.Append("</td>");
 
                 return htmlString.ToString();
@@ -957,7 +981,7 @@ namespace NNCQ.UI.UIModelRepository
                 htmlString.Append(_GetGotoPageFromExtenal());
                 htmlString.Append(_GetDetail());
                 htmlString.Append(_GetDialog());
-                htmlString.Append(gotopage());
+                htmlString.Append(_RedirectPage());
 
                 htmlString.Append(_GetValidator());
                 htmlString.Append(_GetDelete());
@@ -1082,7 +1106,7 @@ namespace NNCQ.UI.UIModelRepository
 
                 return htmlString.ToString();
             }
-            private static string gotopage()
+            private static string _RedirectPage()
             {
 
                 var htmlString = new StringBuilder();
@@ -1093,6 +1117,7 @@ namespace NNCQ.UI.UIModelRepository
                 htmlString.Append("}");
                 return htmlString.ToString();
             }
+
             private static string _GetGotoPage()
             {
                 var boType = typeof(T);
@@ -1123,11 +1148,6 @@ namespace NNCQ.UI.UIModelRepository
 
             private static string _GetGotoPageFromExtenal()
             {
-                var boType = typeof(T);
-                var headerDivID = "Header_" + boType.Name;
-                var dgvDivID = "DataGridView_" + boType.Name;
-                var bottomDivID = "Bottom_" + boType.Name;
-
                 var htmlString = new StringBuilder();
 
                 htmlString.Append("function boGotoPageFromExtenal(page,controllerName,listAction){");
@@ -1140,13 +1160,9 @@ namespace NNCQ.UI.UIModelRepository
                 htmlString.Append("success: function (data) {");
                 htmlString.Append("$('#divBoMainArea').html(data.Header+data.DataGridView+data.Bottom);");
 
-                //htmlString.Append("$('#" + headerDivID + "').html(data.Header);");
-                //htmlString.Append("$('#" + dgvDivID + "').html(data.DataGridView);");
-                //htmlString.Append("$('#" + bottomDivID + "').html(data.Bottom);");
                 htmlString.Append("}});");
 
                 htmlString.Append("}");
-                //htmlString.Append("}");
 
                 return htmlString.ToString();
             }

@@ -9,13 +9,14 @@ using System.Web;
 
 namespace NNCQ.Web.ViewModels.Organization
 {
-    [EditorSpecification("Person", "人员数据管理", true, SaveAction = "Save", ListString = "List")]
+    [EditorSpecification("Person", "人员数据管理", true, SaveAction = "Save", ListString = "List", HorizontalZoneAmount = 2)]
     [ListHeadSpecification("NNCQ人员数据", ControllerName = "Person", SearchActionPath = "List", CreateActionPath = "CreateOrEdit")]
-    [ListDataGridViewSpecification("Person", 18, ListActionPath = "List", EditActionPath = "CreateOrEdit", DetailActionPath = "Detail", DeleteActionPath = "Delete")]
+    [ListDataGridViewSpecification("Person", 18, ListActionPath = "List", EditActionPath = "CreateOrEdit", DetailActionPath = "Detail|javascript:personDetail", DeleteActionPath = "Delete")]
     [ListNavigator("业务部门", "List", ListNavigatorType.TreeView)]
     [ListHeaderAdditionalButton("<i class='icon-enter'></i> 导入人员", "javascript:importPersonsWithExcel()", 110)]
     [ListHeaderAdditionalButton("<i class='icon-exit'></i> 导出人员", "javascript:outportPersonsWithExcel()", 110)]
     [ExtensionJavaScriptFile("../../Scripts/NNCQ/nncq-Person.js")]
+
     public class PersonVM
     {
         [Key]
@@ -102,13 +103,14 @@ namespace NNCQ.Web.ViewModels.Organization
         [DetailItemSpecification(EditorItemType.TextBox, Width = 300)]
         public string BirthdayString { get; set; }
 
-        [EditorItemSpecification(EditorItemType.TextArea, Width = 300)]
+        [EditorItemSpecification(EditorItemType.TextArea, Width = 300, HorizontalZone = 2)]
         [DetailItemSpecification(EditorItemType.TextBox, Width = 300)]
         [Display(Name = "简要说明")]
         [StringLength(1000, ErrorMessage = "你输入的数据超出限制1000个字符的长度。")]
         public string Description { get; set; }
 
-        [EditorItemSpecification(EditorItemType.DorpdownOptionWithPlainFacadeItem, Width = 300)]
+        [EditorItemSpecification(EditorItemType.DorpdownOptionWithPlainFacadeItem, Width = 300, HorizontalZone = 2)]
+        [Required(ErrorMessage = "身份证件类型不能为空值。")]
         [Display(Name = "身份证件类型")]
         public string CredentialsTypeID { get; set; }
         [DetailItemSpecification(EditorItemType.PlainFacadeItem, Width = 300)]
@@ -117,14 +119,14 @@ namespace NNCQ.Web.ViewModels.Organization
         [PlainFacadeItemSpecification("CredentialsTypeID")]
         public List<PlainFacadeItem> CredentialsTypeCollection { get; set; }
 
-        [EditorItemSpecification(EditorItemType.TextBox, Width = 300)]
+        [EditorItemSpecification(EditorItemType.TextBox, Width = 300, HorizontalZone = 2)]
         [DetailItemSpecification(EditorItemType.TextBox, Width = 300)]
         [Required(ErrorMessage = "身份证件编号不能为空值。")]
         [Display(Name = "身份证件编号")]
         [StringLength(50, ErrorMessage = "你输入的数据超出限制50个字符的长度。")]
         public string CredentialsCode { get; set; }
 
-        [EditorItemSpecification(EditorItemType.DorpdownOptionWithPlainFacadeItem, Width = 300)]
+        [EditorItemSpecification(EditorItemType.DorpdownOptionWithPlainFacadeItem, Width = 300, HorizontalZone = 2)]
         [Display(Name = "工作岗位")]
         public string JobTitleID { get; set; }
         [ListItemSpecification("工作岗位", "08", 110, false)]
@@ -134,7 +136,7 @@ namespace NNCQ.Web.ViewModels.Organization
         [PlainFacadeItemSpecification("JobTitleID")]
         public List<PlainFacadeItem> JobTitleCollection { get; set; }
 
-        [EditorItemSpecification(EditorItemType.DorpdownOptionWithPlainFacadeItem, Width = 300)]
+        [EditorItemSpecification(EditorItemType.DorpdownOptionWithPlainFacadeItem, Width = 300, HorizontalZone = 2)]
         [Display(Name = "岗位职级")]
         public string JobLevelID { get; set; }
         [ListItemSpecification("岗位职级", "09", 110, false)]
@@ -144,15 +146,17 @@ namespace NNCQ.Web.ViewModels.Organization
         [PlainFacadeItemSpecification("JobLevelID")]
         public List<PlainFacadeItem> JobLevelCollection { get; set; }
 
-        [EditorItemSpecification(EditorItemType.TextBox, Width = 300)]
+        [EditorItemSpecification(EditorItemType.TextBox, Width = 300, HorizontalZone = 2)]
         [DetailItemSpecification(EditorItemType.TextBox, Width = 300)]
         [Required(ErrorMessage = "查询密码。")]
         [Display(Name = "查询密码")]
         [StringLength(50, ErrorMessage = "你输入的数据超出限制50个字符的长度。")]
         public string InquiryPassword { get; set; }
 
-        [EditorItemSpecification(EditorItemType.Hidden, Width = 300)]
+        [EditorItemSpecification(EditorItemType.Hidden, Width = 300, HorizontalZone = 2)]
         public string SortCode { get; set; }
+
+
 
         public PersonVM() 
         {

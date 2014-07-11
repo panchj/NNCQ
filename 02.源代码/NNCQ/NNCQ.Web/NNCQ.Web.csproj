@@ -318,6 +318,7 @@
     <Content Include="Views\Shared\_HeaderForAdmin.cshtml" />
     <Content Include="Views\Organization\Department\DepartmentConfig.cshtml" />
     <Content Include="Views\Organization\Department\_DepartmentConfigDetail.cshtml" />
+    <Content Include="Views\Organization\Person\_CustomDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

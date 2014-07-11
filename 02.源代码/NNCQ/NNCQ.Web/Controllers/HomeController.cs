@@ -38,7 +38,6 @@ namespace NNCQ.Web.Controllers
                 logonStatus.IsLogon = true;
                 logonStatus.Message = "../../Home";
             }
-            logonStatus.Message=getTestString();
             return Json(logonStatus);
         }
 
@@ -47,7 +46,7 @@ namespace NNCQ.Web.Controllers
             var htmlString = new StringBuilder();
             htmlString.Append("<div id='datepicker' class='input-control text' data-role='datepicker' data-format='yyyy-mm-dd' data-position='bottom' data-effect='fade'>");
             htmlString.Append("<input type='text'>");
-            //htmlString.Append("<button class='btn btn-date'></button>");
+            htmlString.Append("<button class='btn btn-date'></button>");
             htmlString.Append("</div>");
             return htmlString.ToString();
 

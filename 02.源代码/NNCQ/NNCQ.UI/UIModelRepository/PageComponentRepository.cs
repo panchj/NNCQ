@@ -11,6 +11,10 @@ using System.Web.WebPages.Html;
 
 namespace NNCQ.UI.UIModelRepository
 {
+    /// <summary>
+    /// 通用的页面组件生成器
+    /// </summary>
+    /// <typeparam name="T">按照本框架定制的视图模型泛型</typeparam>
     public class PageComponentRepository<T> where T : class
     {
         /// <summary>
@@ -38,8 +42,8 @@ namespace NNCQ.UI.UIModelRepository
             var dialog = new MucDialogue_CreateOrEdit();
             dialog.CaptionName = preString + editorSpecification.Title;
             dialog.IconName = preIcon;
-            dialog.Width = 500;
-            dialog.Height = 300;
+            dialog.Width = editorSpecification.Width * editorSpecification.HorizontalZoneAmount + 30;
+            dialog.Height = editorSpecification.Height;
 
             var divName = boType.Name + editorSpecification.ControllerName;
 
@@ -221,7 +225,6 @@ namespace NNCQ.UI.UIModelRepository
 
             var dialog = new MucDialogue_Detail();
             dialog.CaptionName = "明细数据："+editorSpecification.Title;
-            // dialog.IconName = preIcon;
             dialog.Width = 500;
             dialog.Height = 300;
             dialog.InnerHtmlContent=_GetDetail(boVM);
@@ -277,9 +280,10 @@ namespace NNCQ.UI.UIModelRepository
                         {
                             editItem.FieldDisplayName = "Hidden";
                         }
+                        editItem.HorizontalZone = editAtrribute.HorizontalZone;
+                        editItem.DataType = editAtrribute.ItemType;
                         editItems.Add(editItem);
                     }
-
                 }
 
             }
@@ -291,40 +295,59 @@ namespace NNCQ.UI.UIModelRepository
             foreach (var item in editItems.Where(d => d.FieldDisplayName == "Hidden"))
                 htmlString.Append(item.FieldEditContent);
 
-            htmlString.Append("<table style='width:100%'>");
-            foreach (var item in editItems.Where(d => d.FieldDisplayName != "Hidden")) //
+            var uintSpan = "span" + (12 / editorAttribute.HorizontalZoneAmount);
+            htmlString.Append("<div class='grid fluid'><div class='row'>");
+            for (int i = 1; i < editorAttribute.HorizontalZoneAmount+1; i++) 
             {
-                htmlString.Append("<tr>");
-                htmlString.Append("<td style='width:"+maxLength+"px;text-align:right;vertical-align:top'>" + item.FieldDisplayName + "：</td><td>" + item.FieldEditContent + "</td>");
-                var statusString = "<i class='icon-pencil'></>";
-                //var errStyle = "";
-                var errMessage = "";
-                if (vItems != null) 
+                htmlString.Append("<div class='" + uintSpan + "'>");
+                #region 单一输入区域的组件
+                htmlString.Append("<table style='width:100%'>");
+                foreach (var item in editItems.Where(d => d.FieldDisplayName != "Hidden")) 
                 {
-                    var eItems = vItems.Where(n => n.Name == item.FieldName);
-                    if (eItems.Count() > 0)
+                    if (item.HorizontalZone == i)
                     {
-                        foreach (var eItem in eItems)
+                        var v_Align = "vertical-align:center";
+                        var m_String = "margin-top:-10px";
+                        if (item.DataType == EditorItemType.TextArea)
                         {
-                            //errStyle = "error-state";
-                            errMessage = errMessage + eItem.ErrorMessage + "\n";
+                            v_Align = "vertical-align:top";
+                            m_String = "";
                         }
-                    }
+                        htmlString.Append("<tr>");
+                        htmlString.Append("<td style='width:" + maxLength + "px;text-align:right;" + v_Align + "'><div style='" + m_String + "'>" + item.FieldDisplayName + "：</div></td><td>" + item.FieldEditContent + "</td>");
+                        var statusString = "<i class='icon-pencil'></>";
+                        //var errStyle = "";
+                        var errMessage = "";
+                        if (vItems != null)
+                        {
+                            var eItems = vItems.Where(n => n.Name == item.FieldName);
+                            if (eItems.Count() > 0)
+                            {
+                                foreach (var eItem in eItems)
+                                {
+                                    errMessage = errMessage + eItem.ErrorMessage + "\n";
+                                }
+                            }
 
-                    if (!String.IsNullOrEmpty(errMessage))
-                    {
-                        statusString = "<i class='icon-cancel-2 fg-red'></i>";
-                    }
-                    else 
-                    {
-                        statusString = "<i class='icon-checkmark fg-green'></i>";
+                            if (!String.IsNullOrEmpty(errMessage))
+                            {
+                                statusString = "<i class='icon-cancel-2 fg-red'></i>";
+                            }
+                            else
+                            {
+                                statusString = "<i class='icon-checkmark fg-green'></i>";
+                            }
+                        }
+                        htmlString.Append("<td style='width:10px;vertical-align:top'><div id='validStatus_" + item.FieldName + "'>" + statusString + "</div></td>");
+
+                        htmlString.Append("</tr>");
                     }
                 }
-                htmlString.Append("<td style='width:10px;vertical-align:top'><div id='validStatus_"+item.FieldName+"'>"+statusString+"</div></td>");
-                
-                htmlString.Append("</tr>");
+                htmlString.Append("</table>"); 
+                #endregion
+                htmlString.Append("</div>");
             }
-            htmlString.Append("</table>");
+            htmlString.Append("</div></div>");
 
             return htmlString.ToString();
         }
@@ -419,7 +442,7 @@ namespace NNCQ.UI.UIModelRepository
                         editItem.FieldName = pItem.Name;
                         editItem.FieldDisplayName = displayName;
                         editItem.FieldEditContent = _GetDetailFieldContent(detailAtrribute.ItemType, itemValue);
-
+                        //editItem.HorizontalZone=
                         editItems.Add(editItem);
                     }
 
@@ -495,6 +518,8 @@ namespace NNCQ.UI.UIModelRepository
             public string FieldName { get; set; }
             public string FieldDisplayName { get; set; }
             public string FieldEditContent { get; set; }
+            public int HorizontalZone { get; set; }
+            public EditorItemType DataType { get; set; }
         }
 
         class EditorItem
