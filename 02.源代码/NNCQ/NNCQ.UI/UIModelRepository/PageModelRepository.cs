@@ -1106,6 +1106,11 @@ namespace NNCQ.UI.UIModelRepository
 
                 return htmlString.ToString();
             }
+
+            /// <summary>
+            /// 直接通过重新定位页面
+            /// </summary>
+            /// <returns></returns>
             private static string _RedirectPage()
             {
 

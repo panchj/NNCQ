@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<NNCQ.UI.Models.SelfReferentialItem>
 
-<div class="navigation-bar fixed-top">
+<div class="navigation-bar dark fixed-top">
     <div class="navigation-bar-content">
         <div class="element">
             <span class="icon-grid-view"></span>&nbsp;<span style="font-size:17px">业务数据管理与维护系统 </span>
         </div>
         <span class="element-divider"></span>
 
-        @foreach (var item in Model.Where(p=>p.ID==p.ParentID).OrderBy(s => s.SortCode))
+        @foreach (var item in Model.Where(p => p.ID == p.ParentID).OrderBy(s => s.SortCode))
         {
             var rightString = "";
             if (item.IconString == "icon-cog")

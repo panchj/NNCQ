@@ -18,7 +18,7 @@ namespace NNCQ.UI.UIModelRepository
     public class PageComponentRepository<T> where T : class
     {
         /// <summary>
-        /// 以对话框方式曾宪业务对象编辑场景
+        /// 以对话框方式呈现业务对象编辑场景
         /// </summary>
         /// <param name="boVM"></param>
         /// <param name="isNew"></param>
@@ -126,29 +126,18 @@ namespace NNCQ.UI.UIModelRepository
             htmlString.Append("var options = {");
             htmlString.Append("dataType: 'json',");
             htmlString.Append("success: function (data) {");
-            htmlString.Append("if(data.IsOK){");
-            //htmlString.Append("$.Dialog.close();");
-            htmlString.Append("if(data.ExtenssionFunctionString!=''){");
-            htmlString.Append("refreshDepartmentTreeView('" + editorSpecification.ControllerName + "',data.ExtenssionFunctionString);");
-            htmlString.Append("}");
-
-            htmlString.Append("boGotoPage(data.PageIndex,'" + editorSpecification.ControllerName + "','" + editorSpecification.ListString + "','\"+data.TypeID+\"');");
-            htmlString.Append("}else{");
-            htmlString.Append("document.getElementById('Editor_" + editorSpecification.ControllerName + "').innerHTML = data;");
-            htmlString.Append("}}");
             htmlString.Append("};");
             htmlString.Append("$('#EditorForm_" + editorSpecification.ControllerName + "').ajaxForm(options);");
             htmlString.Append("</script>");
 
-            htmlString.Append("<form action='" + editorSpecification.ControllerName + "/" + editorSpecification.SaveAction + "' method='post' id='EditorForm_" + editorSpecification.ControllerName + "' >");// data-ajax-update='#Editor_" + editorAttribute.ControllerName + "' data-ajax-mode='replace' data-ajax='true'>"); 
+            htmlString.Append("<form action='../../" + editorSpecification.ControllerName + "/" + editorSpecification.SaveAction + "' method='post' id='EditorForm_" + editorSpecification.ControllerName + "'data-ajax-update='#Editor_" + editorSpecification.ControllerName + "' data-ajax-mode='replace' data-ajax='true' >");// data-ajax-update='#Editor_" + editorAttribute.ControllerName + "' data-ajax-mode='replace' data-ajax='true'>"); 
 
             htmlString.Append("<div id='Editor_" + editorSpecification.ControllerName + "' name='Editor_" + editorSpecification.ControllerName + "'>");
             htmlString.Append(_GetEditor(boVM));
             htmlString.Append("</div>");
 
             htmlString.Append("<div class='form-actions' style='text-align:right'><br/>");
-            htmlString.Append("<input  type='submit' class='button primary' style='height:30px' value='确定' />  ");
-            //htmlString.Append("<button class='button' type='button' onclick='$.Dialog.close()'  style='height:30px'>取消</button>");
+            htmlString.Append("<button class='button primary' style='height:30px' value=''>确定</button>");
             htmlString.Append("</div>");
             htmlString.Append("</form>");
 
@@ -316,7 +305,7 @@ namespace NNCQ.UI.UIModelRepository
                         htmlString.Append("<tr>");
                         htmlString.Append("<td style='width:" + maxLength + "px;text-align:right;" + v_Align + "'><div style='" + m_String + "'>" + item.FieldDisplayName + "：</div></td><td>" + item.FieldEditContent + "</td>");
                         var statusString = "<i class='icon-pencil'></>";
-                        //var errStyle = "";
+
                         var errMessage = "";
                         if (vItems != null)
                         {

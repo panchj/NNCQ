@@ -65,7 +65,8 @@ namespace NNCQ.Web.Controllers.Organization
                 isNew = true;
             }
             var boVM = new DepartmentTypeVM(bo);
-            var editor = PageComponentRepository<DepartmentTypeVM>.CreateOrEditDialog(boVM, isNew);
+            //var editor = PageComponentRepository<DepartmentTypeVM>.CreateOrEditDialog(boVM, isNew);
+            var editor = PageComponentRepository<DepartmentTypeVM>.CreateOrEditPage(boVM, isNew);
 
             return Json(editor);
         }
@@ -113,7 +114,9 @@ namespace NNCQ.Web.Controllers.Organization
                 boVM.MapToBo(bo);
                 _Service.AddOrEditAndSave(bo);
 
-                return Json(PageComponentRepository<DepartmentTypeVM>.SaveOK(true, "1", ""));
+                // 这里采用直接跳转的方式，避开 AjaxForm 回转处理，跳转的时候，在本框架中，一般跳回Index，
+                // 如果需要定位页码，类型等，请考虑 Index 中配置好参数，在下面的跳转调用中对应配置好参数即可。
+                return JavaScript("window.location.href ='../DepartmentType/Index';");
             }
             else
             {
@@ -132,7 +135,8 @@ namespace NNCQ.Web.Controllers.Organization
                     }
                 }
 
-                var editor = PageComponentRepository<DepartmentTypeVM>.UpdateCreateOrEditDialog(boVM, false, vItems).InnerHtmlContent;
+                //var editor = PageComponentRepository<DepartmentTypeVM>.UpdateCreateOrEditDialog(boVM, false, vItems).InnerHtmlContent;
+                var editor = PageComponentRepository<DepartmentTypeVM>.UpdateCreateOrEditPage(boVM, false, vItems).InnerHtmlContent;
                 return Json(editor);
             }
 

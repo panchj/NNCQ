@@ -8,7 +8,7 @@ using System.Web;
 
 namespace NNCQ.Web.ViewModels.Organization
 {
-    [EditorSpecification("DepartmentType", "部门类型定义数据", true, SaveAction = "Save", ListString = "List")]
+    [EditorSpecification("DepartmentType", "部门类型定义数据", false, SaveAction = "Save", ListString = "List")]
     [ListHeadSpecification("部门类型定义数据管理", ControllerName = "DepartmentType", SearchActionPath = "", CreateActionPath = "CreateOrEdit")]
     [ListDataGridViewSpecification("DepartmentType", 18, ListActionPath = "List", EditActionPath = "CreateOrEdit", DetailActionPath = "Detail", DeleteActionPath = "Delete")]
     public class DepartmentTypeVM

@@ -9,13 +9,28 @@ using System.Web;
 
 namespace NNCQ.Web.ViewModels.Organization
 {
-    [EditorSpecification("Person", "人员数据管理", true, SaveAction = "Save", ListString = "List", HorizontalZoneAmount = 2)]
+
+    #region 列表表头页面关联元素规格
     [ListHeadSpecification("NNCQ人员数据", ControllerName = "Person", SearchActionPath = "List", CreateActionPath = "CreateOrEdit")]
-    [ListDataGridViewSpecification("Person", 18, ListActionPath = "List", EditActionPath = "CreateOrEdit", DetailActionPath = "Detail|javascript:personDetail", DeleteActionPath = "Delete")]
-    [ListNavigator("业务部门", "List", ListNavigatorType.TreeView)]
     [ListHeaderAdditionalButton("<i class='icon-enter'></i> 导入人员", "javascript:importPersonsWithExcel()", 110)]
     [ListHeaderAdditionalButton("<i class='icon-exit'></i> 导出人员", "javascript:outportPersonsWithExcel()", 110)]
-    [ExtensionJavaScriptFile("../../Scripts/NNCQ/nncq-Person.js")]
+    #endregion   
+ 
+    #region 左侧导航树数据规格
+    [ListNavigator("业务部门", "List", ListNavigatorType.TreeView)] 
+    #endregion
+
+    #region 列表表体内容规格定义
+    [ListDataGridViewSpecification("Person", 18, ListActionPath = "List", EditActionPath = "CreateOrEdit", DetailActionPath = "Detail|javascript:personDetail", DeleteActionPath = "Delete")]
+    #endregion
+
+    #region 编辑与新建数据处理的对话框的规格定义
+    [EditorSpecification("Person", "人员数据管理", true, SaveAction = "Save", ListString = "List", HorizontalZoneAmount = 2)]
+    #endregion
+
+    #region 扩展的 javascript 文件。
+    [ExtensionJavaScriptFile("../../Scripts/NNCQ/nncq-Person.js")] 
+    #endregion
 
     public class PersonVM
     {
@@ -34,7 +49,6 @@ namespace NNCQ.Web.ViewModels.Organization
         public SelfReferentialItem ParentItem { get; set; }
         [SelfReferentialItemSpecification("ParentItemID")]
         public List<SelfReferentialItem> ParentItemColection { get; set; }
-
 
         [ListItemSpecification("工号", "01", 150, false)]
         [EditorItemSpecification(EditorItemType.TextBox, Width = 300)]
