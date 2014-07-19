@@ -65,6 +65,8 @@ namespace NNCQ.Web.Controllers.Organization
                 isNew = true;
             }
             var boVM = new DepartmentTypeVM(bo);
+            
+            //! 使用调转的方式包括对话框和页面方式
             //var editor = PageComponentRepository<DepartmentTypeVM>.CreateOrEditDialog(boVM, isNew);
             var editor = PageComponentRepository<DepartmentTypeVM>.CreateOrEditPage(boVM, isNew);
 
