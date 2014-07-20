@@ -63,7 +63,7 @@ namespace NNCQ.Web.Controllers.Organization
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult List(string typeID)
+        public ActionResult List(string typeID,string keyword)
         {
             var tID = Guid.Parse(typeID);
             var boCollection = _Service.FindBy(x => x.ParentDapartment.ID == tID).OrderBy(s => s.SortCode);

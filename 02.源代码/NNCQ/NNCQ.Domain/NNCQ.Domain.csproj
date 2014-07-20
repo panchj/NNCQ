@@ -96,6 +96,7 @@
     <Compile Include="Core\IEntityRepository.cs" />
     <Compile Include="Core\IQueryableExtensions.cs" />
     <Compile Include="Core\PaginatedList.cs" />
+    <Compile Include="Files\FileType.cs" />
     <Compile Include="Migrations\DepartmentAndPersonSeed.cs" />
     <Compile Include="Migrations\UserAndRoleSeed.cs" />
     <Compile Include="Migrations\Configuration.cs" />

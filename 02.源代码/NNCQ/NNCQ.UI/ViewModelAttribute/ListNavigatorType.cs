@@ -8,6 +8,6 @@ namespace NNCQ.UI.ViewModelAttribute
 {
     public enum ListNavigatorType
     {
-        None,TreeView,SideBar
+        None, TreeView, SideBar, JQueryTree
     }
 }

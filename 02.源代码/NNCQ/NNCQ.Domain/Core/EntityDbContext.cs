@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using NNCQ.Domain.Application;
+using NNCQ.Domain.Files;
 using NNCQ.Domain.Organization;
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,7 @@ namespace NNCQ.Domain.Core
         public IDbSet<Person> Persons { get; set; }
         public IDbSet<PersonsInDepartment> PersonsInDepartments { get; set; }
 
-
+        public IDbSet<FileType> FileTypes { get; set; }
 
         public static EntityDbContext Create()
         {

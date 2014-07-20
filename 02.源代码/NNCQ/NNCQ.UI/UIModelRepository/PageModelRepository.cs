@@ -41,19 +41,38 @@ namespace NNCQ.UI.UIModelRepository
                 {
                     var nvAttribute = leftNavigatorAttribute as ListNavigator;
                     leftNavigatorTitle = nvAttribute.Title;
-                    if (nvAttribute.NavigatorType == ListNavigatorType.TreeView)
+                    switch (nvAttribute.NavigatorType)
                     {
-                        pageModel.HasLeftNavigator = true;
-                        pageModel.LeftNavigator = LeftNavigatorWithTreeViewInitializer.GetLeftNavigator(treeNodes, leftNavigatorTitle);
-                    }
-                    else
-                    {
-                        if (nvAttribute.NavigatorType == ListNavigatorType.SideBar)
-                        {
+                        case ListNavigatorType.None:
+                            break;
+                        case ListNavigatorType.TreeView:
+                            pageModel.HasLeftNavigator = true;
+                            pageModel.LeftNavigator = LeftNavigatorWithTreeViewInitializer.GetLeftNavigator(treeNodes, leftNavigatorTitle);
+                            break;
+                        case ListNavigatorType.SideBar:
                             pageModel.HasLeftNavigator = true;
                             pageModel.LeftNavigator = LeftNavigatorWithSideBarInitializer.GetLeftNavigator(treeNodes, leftNavigatorTitle,typeID);
-                        }
+                            break;
+                        case ListNavigatorType.JQueryTree:
+                            pageModel.HasLeftNavigator = true;
+                            pageModel.LeftNavigator = JQueryTreeViewInitializer.GetLeftNavigator(treeNodes, leftNavigatorTitle, typeID);
+                            break;
+                        default:
+                            break;
                     }
+                    //if (nvAttribute.NavigatorType == ListNavigatorType.TreeView)
+                    //{
+                    //    pageModel.HasLeftNavigator = true;
+                    //    pageModel.LeftNavigator = LeftNavigatorWithTreeViewInitializer.GetLeftNavigator(treeNodes, leftNavigatorTitle);
+                    //}
+                    //else
+                    //{
+                    //    if (nvAttribute.NavigatorType == ListNavigatorType.SideBar)
+                    //    {
+                    //        pageModel.HasLeftNavigator = true;
+                    //        pageModel.LeftNavigator = LeftNavigatorWithSideBarInitializer.GetLeftNavigator(treeNodes, leftNavigatorTitle,typeID);
+                    //    }
+                    //}
                 }
             } 
             #endregion
@@ -138,6 +157,12 @@ namespace NNCQ.UI.UIModelRepository
         {
             return LeftNavigatorWithTreeViewInitializer.GetLeftNavigator(treeNodes, title);
         }
+
+        public static Muc_LeftNavigator GetJQueryTreeViewNavigator(List<SelfReferentialItem> treeNodes, string title, string typeID = null)
+        {
+            return LeftNavigatorWithTreeViewInitializer.GetLeftNavigator(treeNodes, title);
+        }
+
 
         /// <summary>
         /// 层次导航树生成器
@@ -444,7 +469,30 @@ namespace NNCQ.UI.UIModelRepository
         /// </summary>
         class JQueryTreeViewInitializer
         {
+            public static Muc_LeftNavigator GetLeftNavigator(List<SelfReferentialItem> treeNodes, string title,string typeID)
+            {
+                var leftNavigator = new Muc_LeftNavigator();
+                leftNavigator.Name = "";
+                leftNavigator.InnerHtmlContent = _GetInnerHtmlContent(treeNodes, title,typeID);
+                return leftNavigator;
+            }
 
+
+            private static string _GetInnerHtmlContent(List<SelfReferentialItem> treeNodes, string title,string typeID) 
+            {
+                var boType = typeof(T);
+                Attribute[] boVMAttributes = Attribute.GetCustomAttributes(boType);
+                var nAttribute = boVMAttributes.Where(n => n.GetType().Name == "ListNavigator").FirstOrDefault() as ListNavigator;
+
+                var actionPath = nAttribute.NavigatorAction;
+                var isAJAX = false;
+                var divName = "";
+                var divHeight = "";
+                var isCollapsed = true;
+                var isSolidHeight = false;
+                var contentString = TreeViewBuilder.GetTreeViewHtmlContent(treeNodes, title, actionPath, isAJAX, divName, null, divHeight, isCollapsed, isSolidHeight);
+                return contentString;
+            }
         }
 
         /// <summary>
@@ -987,6 +1035,7 @@ namespace NNCQ.UI.UIModelRepository
                 htmlString.Append(_GetDelete());
                 htmlString.Append(_GetAdditionColOperationByPageFunction());
                 htmlString.Append(_GetLeftNavigatorRefreshFunction());
+                htmlString.Append(_GetDatePicker());
 
                 htmlString.Append("</script>");
 
@@ -1361,6 +1410,16 @@ namespace NNCQ.UI.UIModelRepository
                 htmlString.Append("success: function (data) {");
                 htmlString.Append("document.getElementById('divLeftNavigator').innerHTML = data;");
                 htmlString.Append("}});");
+                htmlString.Append("}");
+                return htmlString.ToString();
+
+            }
+
+            private static string _GetDatePicker() 
+            {
+                var htmlString = new StringBuilder();
+                htmlString.Append("function getCustumerDatePicker(dDivName) {");
+                htmlString.Append("$('#' + dDivName).datepicker({ format: 'yyyy-mm-dd', locale: 'zhCN' });");
                 htmlString.Append("}");
                 return htmlString.ToString();
 

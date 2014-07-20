@@ -10,11 +10,11 @@ using System.Web;
 namespace NNCQ.Web.ViewModels.Organization
 {
     [EditorSpecification("Department", "部门数据", true, SaveAction = "Save", ListString = "List")]
-    [ListHeadSpecification("部门管理", ControllerName = "Department", SearchActionPath = "", CreateActionPath = "CreateOrEdit")]
+    [ListHeadSpecification("部门管理", ControllerName = "Department", SearchActionPath = "List", CreateActionPath = "CreateOrEdit")]
     [ListDataGridViewSpecification("Department", 18, ListActionPath = "List", EditActionPath = "CreateOrEdit", DetailActionPath = "Detail", DeleteActionPath = "Delete")]
     [ListNavigator("系统业务部门", "List", ListNavigatorType.TreeView)]
-    //[ListHeaderAdditionalButton("Test1", "javascript:function1()",60)]
-    //[ListHeaderAdditionalButton("Test2", "javascript:function2()",60)]
+    //[ListHeaderAdditionalButton("Test1", "javascript:function1()", 60)]
+    //[ListHeaderAdditionalButton("Test2", "javascript:function2()", 60)]
     [ExtensionJavaScriptFile("../../Scripts/NNCQ/nncq-Department.js")]
     public class DepartmentVM
     {
@@ -27,9 +27,11 @@ namespace NNCQ.Web.ViewModels.Organization
         [EditorItemSpecification(EditorItemType.DorpdownOptionWithSelfReferentialItem, Width = 300)]
         [Display(Name = "上级部门")]
         public string ParentItemID { get; set; }
+        
         [DetailItemSpecification(EditorItemType.SelfReferentialItem, Width = 300)]
         [Display(Name = "上级部门")]
         public SelfReferentialItem ParentItem { get; set; }
+        
         [SelfReferentialItemSpecification("ParentItemID")]
         public List<SelfReferentialItem> ParentItemColection { get; set; }
 

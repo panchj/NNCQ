@@ -2,3 +2,7 @@
 function departmentConfig(id) {
     window.location.href = '../../Department/DepartmentConfig/'+id;
 }
+
+function function1() {
+    alert("Test1");
+}

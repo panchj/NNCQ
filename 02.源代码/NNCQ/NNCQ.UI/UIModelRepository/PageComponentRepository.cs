@@ -481,6 +481,7 @@ namespace NNCQ.UI.UIModelRepository
                     case EditorItemType.Sex:
                         break;
                     case EditorItemType.Date:
+
                         break;
                     case EditorItemType.DateTime:
                         break;
@@ -609,22 +610,11 @@ namespace NNCQ.UI.UIModelRepository
             public static string A05_Date(string name, string errStyle, string valueString, string initialStattus, string errMessage)
             {
                 var htmlString = new StringBuilder();
-                //htmlString.Append("<div id='css_" + name + "' class='input-control text " + errStyle + "' ");// 
-                htmlString.Append("<div class='input-control text' data-role='datepicker' data-format='yyyy-mm-dd' data-position='bottom' data-effect='fade'>");
-                htmlString.Append("<input type='text'>");
+                htmlString.Append("<div id='dt_"+name+"' class='input-control text'>");
+                htmlString.Append("<input id='" + name + "' name='" + name + "' type='text' value='" + valueString + "' readonly='readonly' onclick='javascript:getCustumerDatePicker(\"dt_"+name+"\")' />");
+                //htmlString.Append("<button class='btn btn-date'></button>");
                 htmlString.Append("</div>");
 
-                //htmlString.Append(" data-date='2014-01-01' ");
-                //htmlString.Append(" data-format='yyyy年yy月dd日' ");
-                //htmlString.Append(" data-effect='slide' ");
-                //htmlString.Append(" data-week-start='1' ");
-                //htmlString.Append(" data-other-days='1' ");
-                //htmlString.Append(">");
-                //htmlString.Append("<input id='" + name + "' name='" + name + "' type='text' />");// value='" + valueString + "'   onchange='" + initialStattus + "'
-                //htmlString.Append("<button class='btn-date'></button>"); //tabindex='-1'
-                ////htmlString.Append("<div id='errorMeessage_" + name + "'><small class='fg-red'>" + errMessage + "</small></div>");
-                //htmlString.Append("</div>");
-                //htmlString.Append("<div class='input-control text' data-role='datepicker' data-week-start='1'><input type='text'><button class='btn btn-date'></button></div>");
                 return htmlString.ToString();
 
             }
@@ -771,5 +761,171 @@ namespace NNCQ.UI.UIModelRepository
             ExtenssionFunctionString = "";
         }
     }
+
+    public class TreeViewBuilder
+    {
+        private static string _Title { get; set; }
+        private static List<SelfReferentialItem> _TreeNodes { get; set; }
+        private string TreeViewHtmlContent { get; set; }
+        private static string _TreeViewID { get; set; }
+        private static string _TreeViewColID { get; set; }
+        private static string _ControllerName { get; set; }
+        private static string _TargetDivName { get; set; }
+        private static bool _IsAjax = false;
+        private static bool _IsComposite = false;
+        private static bool _IsSolidHeight = true;
+
+        public static string GetTreeViewHtmlContent(
+            List<SelfReferentialItem> treeNodes,
+            string title,
+            string controllerName = null,
+            bool? isAJAX = null,
+            string divName = null,
+            bool? isComposite = null,
+            string divHeight = null,
+            bool? isCollapsed = null,
+            bool? isSolidHeight = null
+            )
+        {
+            _ControllerName = controllerName;
+            _TreeNodes = treeNodes;
+            _Title = title;
+            _TreeViewID = Guid.NewGuid().ToString();
+            _TreeViewColID = Guid.NewGuid().ToString();
+            if (isAJAX != null)
+                _IsAjax = (bool)isAJAX;
+            if (!String.IsNullOrEmpty(divName))
+                _TargetDivName = divName;
+            _IsComposite = isComposite ?? false;
+            _IsSolidHeight = isSolidHeight ?? true;
+
+            return _GetTreeViewHtmlContent(divHeight, isCollapsed);
+        }
+
+        private static string GetJScript(bool? isCollapsed = null)
+        {
+            var collapsed = "false";
+            if (isCollapsed != null)
+                collapsed = isCollapsed.ToString().ToLower();
+
+            var htmlContent =
+                "\n\n<script type='text/javascript'>" +
+                "\n    $(function () {" +
+                "\n        $('#" + _TreeViewID + "').treeview({" +
+                "\n            collapsed: " + collapsed + ", " +
+                "\n            animated: 'medium'," +
+                "\n            control: '#" + _TreeViewColID + "', " +
+                "\n            persist: 'location'" +
+                "\n        });" +
+                "\n    })" +
+                "\n</script>\n\n";
+            return htmlContent;
+        }
+
+        // 创建树插件
+        private static string _GetTreeViewHtmlContent(string divHeight = null, bool? isCollapsed = null)
+        {
+            var heightString = "";
+            if (!String.IsNullOrEmpty(divHeight))
+                heightString = "style='height:" + divHeight + "px'";
+            var treeViewContent = new StringBuilder();
+            treeViewContent.Append(GetJScript(isCollapsed));
+            if (!_IsComposite)
+                //    treeViewContent.Append("<div class='treeheader'><h4 style='margin-top:5px;margin-left:5px'>" + _Title + " &nbsp;</h4></div>");
+                //else
+                treeViewContent.Append("<div class='treeheader'><h4 style='margin-top:5px;margin-left:5px'>" + _Title + " &nbsp;</h4></div>");
+            treeViewContent.Append("<div id='" + _TreeViewID + "' " + heightString + ">");
+            treeViewContent.Append("<ul id='tree'>");
+            treeViewContent.Append(_BuildRootNodes());
+            treeViewContent.Append("</ul>");
+            treeViewContent.Append("</div>");
+            return treeViewContent.ToString();
+        }
+
+        // 创建根节点
+        private static string _BuildRootNodes()
+        {
+            var rootNodesContent = new StringBuilder();
+            var rootNodes = _TreeNodes.Where(rn => rn.ID == rn.ParentID || rn.ParentID == "");
+            foreach (var rootNode in rootNodes)
+            {
+                rootNodesContent.Append("<li id='" + rootNode.ID+ "'>");
+                rootNodesContent.Append(GetALinkString(rootNode.OperateName, rootNode.ItemName));
+
+                rootNodesContent.Append(_BuildSubNodes(rootNode));
+                rootNodesContent.Append("</li>");
+            }
+            return rootNodesContent.ToString();
+        }
+
+        // 递归创建子节点
+        private static string _BuildSubNodes(SelfReferentialItem rootNode)
+        {
+            var subNodesContent = new StringBuilder();
+            var subNodes = _TreeNodes.Where(sn => sn.ParentID == rootNode.ID && sn.ID != sn.ParentID);
+            if (subNodes.Count() > 0)
+            {
+                subNodesContent.Append("<ul>");
+                foreach (var subNode in subNodes)
+                {
+                    subNodesContent.Append("<li id='" + subNode.ID + "'>");
+                    subNodesContent.Append(GetALinkString(subNode.OperateName, subNode.ItemName));
+                    subNodesContent.Append(_BuildSubNodes(subNode));
+                    subNodesContent.Append("</li>");
+                }
+                subNodesContent.Append("</ul>");
+            }
+            return subNodesContent.ToString();
+        }
+
+        private static string GetALinkString(string link, string displayName)
+        {
+            var aLinkString = "";
+            if (!String.IsNullOrEmpty(link))
+            {
+                if (String.IsNullOrEmpty(_ControllerName))
+                {
+                    if (_IsAjax)
+                    {
+                        aLinkString = "<a " +
+                            "data-ajax='true' " +
+                            //"data-ajax-confirm='确认继续操作的提示信息' " +
+                            "data-ajax-method='Post' " +
+                            "data-ajax-mode='replace' " +
+                            "data-ajax-update='#" + _TargetDivName + "' " +
+                            "href='" + link + "' " +
+                            "class='itemlink'>" + displayName + "</a>";
+                    }
+                    else
+                    {
+                        aLinkString = "<a href='" + link + "ss' target='' class='itemlink'>" + displayName + "</a>";
+                    }
+                }
+                else
+                {
+                    if (_IsAjax)
+                    {
+                        aLinkString = "<a " +
+                            "data-ajax='true' " +
+                            //"data-ajax-confirm='确认继续操作的提示信息' " +
+                            "data-ajax-method='Post' " +
+                            "data-ajax-mode='replace' " +
+                            "data-ajax-update='#" + _TargetDivName + "' " +
+                            "href='../../" + _ControllerName + link + "' " +
+                            "class='itemlink'>" + displayName + "</a>";
+                    }
+                    else
+                    {
+                        aLinkString = "<a href='../../" + _ControllerName + link + "' target='' class='itemlink'>" + displayName + "</a>";
+                    }
+                }
+            }
+            else
+                aLinkString = displayName;
+
+            return aLinkString;
+        }
+    }
+
 
 }

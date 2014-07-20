@@ -19,6 +19,7 @@ namespace NNCQ.Web.App_Start
                 "~/Scripts/jquery.fileupload.js",
                 "~/Scripts/jquery.iframe-transport.js",
                 "~/Scripts/jquery.xdomainrequest.min.js",
+                "~/Scripts/jquery-ui-1.10.4.min.js",
                 "~/Scripts/jquery.xdr-transport.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
@@ -31,6 +32,7 @@ namespace NNCQ.Web.App_Start
                 "~/css/metro-bootstrap.css",
                 "~/css/iconFont.min.css"
                 ));
+
         }
     }
 }

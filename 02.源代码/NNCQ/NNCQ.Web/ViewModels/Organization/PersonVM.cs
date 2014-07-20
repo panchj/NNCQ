@@ -84,6 +84,15 @@ namespace NNCQ.Web.ViewModels.Organization
         [PlainFacadeItemSpecification("Sex")]
         public List<PlainFacadeItem> SexSelector { get; set; }
 
+        [EditorItemSpecification(EditorItemType.Date, Width = 300)]
+        [DetailItemSpecification(EditorItemType.TextBox, Width = 300)]
+        [Display(Name = "出生日期")]
+        public DateTime Birthday { get; set; }
+        [ListItemSpecification("出生日期", "07", 80, false)]
+        [Display(Name = "出生日期")]
+        [DetailItemSpecification(EditorItemType.TextBox, Width = 300)]
+        public string BirthdayString { get; set; }
+
         [ListItemSpecification("固定电话", "04", 150, false)]
         [EditorItemSpecification(EditorItemType.TextBox, Width = 300)]
         [DetailItemSpecification(EditorItemType.TextBox, Width = 300)]
@@ -107,15 +116,6 @@ namespace NNCQ.Web.ViewModels.Organization
         [StringLength(150, ErrorMessage = "你输入的数据超出限制6个字符的长度。")]
         public string Email { get; set; }
 
-        //[EditorItemSpecification(EditorItemType.Date, Width = 300)]
-        [EditorItemSpecification(EditorItemType.TextBox, Width = 300)]
-        [DetailItemSpecification(EditorItemType.TextBox, Width = 300)]
-        [Display(Name = "出生日期")]
-        public DateTime Birthday { get; set; }
-        [ListItemSpecification("出生日期", "07", 80, false)]
-        [Display(Name = "出生日期")]
-        [DetailItemSpecification(EditorItemType.TextBox, Width = 300)]
-        public string BirthdayString { get; set; }
 
         [EditorItemSpecification(EditorItemType.TextArea, Width = 300, HorizontalZone = 2)]
         [DetailItemSpecification(EditorItemType.TextBox, Width = 300)]

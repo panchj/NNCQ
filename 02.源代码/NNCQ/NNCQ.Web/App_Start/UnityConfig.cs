@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using NNCQ.Domain.Core;
 using NNCQ.Domain.Organization;
 using NNCQ.Domain.Application;
+using NNCQ.Domain.Files;
 
 namespace NNCQ.Web.App_Start
 {
@@ -43,6 +44,8 @@ namespace NNCQ.Web.App_Start
 			container.RegisterType<IEntityRepository<JobTitle>, EntityRepository<JobTitle>>();
 			container.RegisterType<IEntityRepository<JobTitleInDepartment>, EntityRepository<JobTitleInDepartment>>(); 
 			#endregion
+
+            container.RegisterType<IEntityRepository<FileType>, EntityRepository<FileType>>(); 
 
 			DependencyResolver.SetResolver(new UnityDependencyResolver(container));
 		}
