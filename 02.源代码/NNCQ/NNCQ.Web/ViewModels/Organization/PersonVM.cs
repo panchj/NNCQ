@@ -114,6 +114,7 @@ namespace NNCQ.Web.ViewModels.Organization
         [Required(ErrorMessage = "电子邮件不能为空值。")]
         [Display(Name = "电子邮件")]
         [StringLength(150, ErrorMessage = "你输入的数据超出限制6个字符的长度。")]
+        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "非法的电子邮件格式。")]
         public string Email { get; set; }
 
 
