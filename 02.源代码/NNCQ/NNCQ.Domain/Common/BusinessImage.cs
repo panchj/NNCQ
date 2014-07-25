@@ -19,7 +19,7 @@ namespace NNCQ.Domain.Common
         public string Description { get; set; }      // 图片说明
         [StringLength(100)]
         public string SortCode { get; set; }         // 内部业务编码
-
+        [StringLength(100)]
         public string DisplayName { get; set; }      // 图片显示名称
         [StringLength(256)]
         public string OriginalFileName { get; set; } // 图片原始文件

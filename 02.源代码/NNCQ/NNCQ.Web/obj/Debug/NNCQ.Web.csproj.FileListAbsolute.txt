@@ -48,3 +48,9 @@ D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\EntityFramework.SqlServer.xml
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\System.Net.Http.Extensions.xml
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\System.Net.Http.Primitives.xml
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\obj\Debug\NNCQ.Web.csproj.App.config
+D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\System.Net.Http.Formatting.dll
+D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\System.Web.Http.dll
+D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\System.Web.Http.WebHost.dll
+D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\System.Net.Http.Formatting.xml
+D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\System.Web.Http.xml
+D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\System.Web.Http.WebHost.xml

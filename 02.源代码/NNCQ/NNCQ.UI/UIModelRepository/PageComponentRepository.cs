@@ -82,8 +82,6 @@ namespace NNCQ.UI.UIModelRepository
             htmlString.Append("</div>");
             htmlString.Append("</form>");
 
-
-
             dialog.InnerHtmlContent = htmlString.ToString();
 
             return dialog;

@@ -19,7 +19,6 @@ namespace NNCQ.Domain.Common
         public string Description { get; set; } // 
         [StringLength(50)]
         public string SortCode { get; set; }
-
         public DateTime AttachmentTimeUploaded { get; set; }           // 附件上传时间
         [StringLength(500)]
         public string AttachmentOriginalFileName { get; set; }         // 附件原始文件名称
