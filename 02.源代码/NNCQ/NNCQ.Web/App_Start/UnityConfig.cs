@@ -8,6 +8,8 @@ using NNCQ.Domain.Core;
 using NNCQ.Domain.Organization;
 using NNCQ.Domain.Application;
 using NNCQ.Domain.Files;
+using NNCQ.Domain.Common;
+using System.Web.Http;
 
 namespace NNCQ.Web.App_Start
 {
@@ -28,7 +30,11 @@ namespace NNCQ.Web.App_Start
 			container.RegisterType<IEntityRepository<SystemWorkPlace>, EntityRepository<SystemWorkPlace>>();
 			container.RegisterType<IEntityRepository<SystemWorkSection>, EntityRepository<SystemWorkSection>>();
 			container.RegisterType<IEntityRepository<SystemWorkTask>, EntityRepository<SystemWorkTask>>();
-			container.RegisterType<IEntityRepository<SystemWorkTaskInRole>, EntityRepository<SystemWorkTaskInRole>>(); 
+			container.RegisterType<IEntityRepository<SystemWorkTaskInRole>, EntityRepository<SystemWorkTaskInRole>>();
+
+			container.RegisterType<IEntityRepository<BusinessFile>, EntityRepository<BusinessFile>>();
+			container.RegisterType<IEntityRepository<BusinessImage>, EntityRepository<BusinessImage>>();
+
 			#endregion
 
 			#region 业务组织中人员与部门管理部分
@@ -45,9 +51,13 @@ namespace NNCQ.Web.App_Start
 			container.RegisterType<IEntityRepository<JobTitleInDepartment>, EntityRepository<JobTitleInDepartment>>(); 
 			#endregion
 
-            container.RegisterType<IEntityRepository<FileType>, EntityRepository<FileType>>(); 
+			container.RegisterType<IEntityRepository<FileType>, EntityRepository<FileType>>();
 
+            // MVC控制器和一般的类注入解析
 			DependencyResolver.SetResolver(new UnityDependencyResolver(container));
+            // WebAPI控制器注入解析
+            GlobalConfiguration.Configuration.DependencyResolver = new Unity.WebApi.UnityDependencyResolver(container);
+
 		}
 	}
 }

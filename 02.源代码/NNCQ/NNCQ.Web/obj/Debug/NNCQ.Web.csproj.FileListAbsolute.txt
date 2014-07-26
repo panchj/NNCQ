@@ -54,3 +54,4 @@ D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\System.Web.Http.WebHost.dll
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\System.Net.Http.Formatting.xml
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\System.Web.Http.xml
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\System.Web.Http.WebHost.xml
+D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.Web\bin\Unity.WebApi.dll

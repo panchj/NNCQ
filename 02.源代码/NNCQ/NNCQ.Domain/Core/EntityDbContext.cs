@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using NNCQ.Domain.Application;
+using NNCQ.Domain.Common;
 using NNCQ.Domain.Files;
 using NNCQ.Domain.Organization;
 using System;
@@ -23,6 +24,9 @@ namespace NNCQ.Domain.Core
         public IDbSet<SystemWorkSection> SystemWorkSections { get; set; }
         public IDbSet<SystemWorkTask> SystemWorkTasks { get; set; }
         public IDbSet<SystemWorkTaskInRole> SystemWorkTaskInRole { get; set; }
+
+        public IDbSet<BusinessFile> BusinessFiles { get; set; }
+        public IDbSet<BusinessImage> BusinessImages { get; set; }
 
         public IDbSet<DepartmentType> DepartmentTypes { get; set; }
         public IDbSet<Department> Departments { get; set; }

@@ -1,0 +1,76 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var testID = Guid.NewGuid();
+}
+
+<button onclick="javascript:uploadSingleFile('@testID')">上传单一文件</button>
+<button onclick="javascript:uploadMultiFile('@testID')">上传多份文件</button>
+<button onclick="javascript:callUploadImagesApi('@testID')">上传单一图片</button>
+<button onclick="javascript:callUploadImagesApi('@testID')">上传多份图片</button>
+
+<script>
+    function uploadSingleFile(objectID) {
+        $.ajax({
+            cache: false,
+            type: 'POST',
+            async: false,
+            url: "../CommonUpload/SingleFile?objectID=" + objectID,
+            success: function (data) {
+                openSingleFileDialog(data);
+            }
+        });
+    }
+
+    function uploadMultiFile(objectID) {
+        $.ajax({
+            cache: false,
+            type: 'POST',
+            async: false,
+            url: "../CommonUpload/MultiFile?objectID=" + objectID,
+            success: function (data) {
+                openMultiFileDialog(data);
+            }
+        });
+    }
+
+
+    function openSingleFileDialog(htmlString) {
+        $.Dialog({
+            shadow: true,
+            overlay: false,
+            draggable: true,
+            icon: '<span class="icon-upload"></span>',
+            title: 'Draggable window',
+            width: 550,
+            height:180,
+            padding: 10,
+            content: '',
+            overlayClickClose:false,
+            onShow: function () {
+                $.Dialog.title("请选择需要上传的文件，每次只能选择一份文件。");
+                $.Dialog.content(htmlString);
+            }
+        });
+    }
+
+    function openMultiFileDialog(htmlString) {
+        $.Dialog({
+            shadow: true,
+            overlay: false,
+            draggable: true,
+            icon: '<span class="icon-upload"></span>',
+            title: 'Draggable window',
+            width: 550,
+            height: 330,
+            padding: 10,
+            content: '',
+            overlayClickClose: false,
+            onShow: function () {
+                $.Dialog.title("请选择需要上传的文件，可以依次选择多份文件。");
+                $.Dialog.content(htmlString);
+            }
+        });
+    }
+
+
+</script>

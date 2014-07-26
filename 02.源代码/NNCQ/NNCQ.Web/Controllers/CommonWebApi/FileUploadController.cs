@@ -13,6 +13,9 @@ using System.Web.Script.Serialization;
 
 namespace NNCQ.Web.Controllers.CommonWebApi
 {
+    /// <summary>
+    /// 作为方法示范，目前尚未使用到。
+    /// </summary>
     public class FileUploadController : ApiController
     {
         private readonly JavaScriptSerializer _JS = new JavaScriptSerializer { MaxJsonLength = 41943040 };

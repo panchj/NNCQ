@@ -1,0 +1,74 @@
+﻿<form action="/api/BusinessImageUpload" enctype="multipart/form-data">
+    <div>
+        <table style="width:100%">
+            <tr>
+                <td>
+                    <input type="file" id="fileupload" name="fileupload" accept="" multiple="multiple" class="button" style="width:100%;height:40px">
+                </td>
+                <td style="width:75px">
+                    <button id="btnUploadAll" class="button primary pull-right" type="button" style="height:40px"><i class="icon-upload"></i> 上传</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="progress-bar hide" id="overallbar" data-value="0"></div>
+                </td>
+                <td>
+                    <div id="totalIndecator"></div>
+                </td>
+            </tr>
+        </table>
+        <table style="width:100%">
+            <tr>
+                <td>
+                    <div class="hide" id="filelistholder" style="OVERFLOW-Y: scroll; SCROLLBAR-ARROW-COLOR: #48b4fc; SCROLLBAR-BASE-COLOR: #bbeeff; HEIGHT: 200px"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>
+
+<script type="text/javascript">
+    $(function () {
+
+        $('#fileupload').fileupload({
+            dataType: "json",
+            url: "/api/CommonUploadProcess?fileType=commonFile&relID=@ViewBag.ObjectID",
+            limitConcurrentUploads: 1,
+            sequentialUploads: true,
+            progressInterval: 100,
+            maxChunkSize: 1000000000,
+            add: function (e, data) {
+
+                $('#overallbar').removeClass('hide');
+                $('#filelistholder').removeClass('hide');
+                data.context = $('<div/>').text(data.files[0].name).appendTo('#filelistholder');
+                $('</div><span class="indicator"></span>').appendTo(data.context);
+
+                $('#btnUploadAll').click(function () {
+                    data.submit();
+                });
+            },
+            done: function (e, data) {
+                data.context.text(data.files[0].name + '【 完成 】');
+            },
+            // 总体进度
+            progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                var pb = $("#overallbar").progressbar();
+                pb.progressbar('value', progress);
+                $("#totalIndecator").html('【' + progress + '%】');
+
+                // 完成上传之后，更新上传文件的列表
+                if (progress == '100') {
+                    //document.getElementById("filelistholder").innerHTML = "";
+                }
+            },
+            progress: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                data.context.find('.indicator').html('【'+progress + '%】');
+            }
+        });
+    });
+</script>
+
