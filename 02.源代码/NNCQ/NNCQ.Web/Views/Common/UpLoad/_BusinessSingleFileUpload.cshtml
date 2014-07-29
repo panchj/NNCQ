@@ -1,5 +1,5 @@
 ﻿<!-- 单一文件的上传处理 -->
-<form action="/api/CommonUploadProcess" enctype="multipart/form-data">
+<form action="/api/CommonUploadProcess" enctype="multipart/form-data" id="singleFileForm">
     <div>
         <table style="width:100%">
             <tr>
@@ -86,9 +86,12 @@
                     }
                 }
                 $('#uploadFilePercent').html('（' + sizeString + '）');
+                $('#btnSingleFileUpload').clone(true).data(data);
 
                 if (isValidFile == true) {
                     $('#btnSingleFileUpload').click(function () {
+                        //data = $('#singleFileForm')
+                        //var $this = $(this), data = $this.data();
                         data.url = "/api/CommonUploadProcess?isSingle=true&fileType=commonFile&relID=@ViewBag.ObjectID" + "&fileName=" + document.getElementById('uploadFileName').innerHTML;
                         data.submit();
                     });

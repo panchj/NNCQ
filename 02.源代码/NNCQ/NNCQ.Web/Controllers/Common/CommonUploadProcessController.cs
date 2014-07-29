@@ -22,8 +22,6 @@ namespace NNCQ.Web.Controllers.Common
         private readonly IEntityRepository<BusinessFile> _FileService;  
         private readonly IEntityRepository<BusinessImage> _ImageService;
 
-        //private 
-
         public CommonUploadProcessController(IEntityRepository<BusinessFile> fService, IEntityRepository<BusinessImage> iService)
         {
             this._FileService = fService;
@@ -37,11 +35,6 @@ namespace NNCQ.Web.Controllers.Common
             var defaultUploadFilesUrl = System.Web.HttpContext.Current.Server.MapPath(HttpContext.Current.Request["folder"] + "\\");
             var imgaeRecord = new BusinessImage();
             var fileRecord = new BusinessFile();
-
-            if (isSingle) 
-            {
-
-            }
 
             var mainID = Guid.NewGuid();
 
@@ -135,6 +128,7 @@ namespace NNCQ.Web.Controllers.Common
             }
         }
 
+        // 下面的方法暂时不需要处理
         private Task<string> _ProcessUploadFile(
             CustomMultipartFormDataStreamProvider provider,
             List<string> files,
@@ -186,24 +180,6 @@ namespace NNCQ.Web.Controllers.Common
                 #endregion
             }
             return null;
-        }
-    }
-
-    [DataContract]
-    public class FileDesc 
-    {
-        
-        [DataMember]
-        public string name { get; set; }
-        [DataMember]
-        public string path { get; set; }
-        [DataMember]
-        public long size { get; set; }
-        public FileDesc(string n, string p, long s)
-        {
-            name = n;
-            path = p;
-            size = s;
         }
     }
 

@@ -17,7 +17,6 @@ namespace NNCQ.Domain.Common
         public static void SaveSingleWithUniquenessRelevanceID(this IEntityRepository<BusinessFile> BusinessFileRepository, BusinessFile file) 
         {
             var pFile = BusinessFileRepository.GetSingleBy(x => x.RelevanceObjectID == file.RelevanceObjectID);
-            // var fFileCollection = BusinessFileRepository.GetAll().Where(x => x.RelevanceObjectID == file.RelevanceObjectID);
 
             if (pFile == null)
             {
@@ -30,20 +29,6 @@ namespace NNCQ.Domain.Common
 
                 BusinessFileRepository.DeleteAndSave(pFile);
                 BusinessFileRepository.AddAndSave(file);
-                //pFile.Name                       = file.Name;
-                //pFile.Description                = file.Description;
-                //pFile.SortCode                   = file.SortCode;
-                //pFile.AttachmentOriginalFileName = file.AttachmentOriginalFileName;
-                //pFile.AttachmentTimeUploaded     = file.AttachmentTimeUploaded;
-                //pFile.AttachmentUploadPath       = file.AttachmentUploadPath;
-                //pFile.BinaryContent              = file.BinaryContent;
-                //pFile.IsInDB                     = file.IsInDB;
-                //pFile.FileSize                   = file.FileSize;
-                //pFile.RelevanceObjectID          = file.RelevanceObjectID;
-                //pFile.UploadFileSuffix           = file.UploadFileSuffix;
-
-                //BusinessFileRepository.EditAndSave(pFile);
-                //file.ID = pFile.ID;
             }
         }
 
@@ -52,7 +37,7 @@ namespace NNCQ.Domain.Common
             // 清除物理文件
             if (System.IO.File.Exists(filePath))
             {
-                //System.IO.File.Delete(filePath);
+                System.IO.File.Delete(filePath);
             }
         }
     }

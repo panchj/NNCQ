@@ -21,18 +21,9 @@ namespace NNCQ.Domain.Common
             {
                 var filePath = file.UploadPath + file.ID + "_" + file.Name + file.UploadFileSuffix;
                 _DeleteFile(filePath);
+                BusinessImageRepository.DeleteAndSave(pFile);
+                BusinessImageRepository.AddAndSave(file);
 
-                pFile.Name = file.Name;
-                pFile.Description = file.Description;
-                pFile.SortCode = file.SortCode;
-                pFile.OriginalFileName = file.OriginalFileName;
-                pFile.UploadedTime = file.UploadedTime;
-                pFile.UploadPath = file.UploadPath;
-                pFile.RelevanceObjectID = file.RelevanceObjectID;
-                pFile.UploadFileSuffix = file.UploadFileSuffix;
-
-                BusinessImageRepository.EditAndSave(pFile);
-                file.ID = pFile.ID;
             }
         }
 

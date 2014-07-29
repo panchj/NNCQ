@@ -621,7 +621,6 @@
     <Compile Include="Controllers\Application\SystemWorkSectionController.cs" />
     <Compile Include="Controllers\Application\SystemWorkTaskController.cs" />
     <Compile Include="Controllers\CommonWebApi\FileUploadController.cs" />
-    <Compile Include="Controllers\Common\CkEdtorController.cs" />
     <Compile Include="Controllers\Common\CommonUploadProcessController.cs" />
     <Compile Include="Controllers\Common\CommonUploadController.cs" />
     <Compile Include="Controllers\Files\FileTypeController.cs" />
@@ -670,7 +669,6 @@
     <Content Include="Views\Common\UpLoad\_BusinessMultiFileUpload.cshtml" />
     <Content Include="Views\Common\UpLoad\_BusinessSingleFileUpload.cshtml" />
     <Content Include="Views\Common\UpLoad\Index.cshtml" />
-    <Content Include="Views\CkEdtor\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
