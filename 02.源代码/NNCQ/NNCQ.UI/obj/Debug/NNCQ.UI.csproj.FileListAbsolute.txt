@@ -23,4 +23,3 @@ D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.UI\bin\Debug\System.Web.Razor.xml
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.UI\bin\Debug\System.Web.WebPages.xml
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.UI\bin\Debug\System.Web.WebPages.Deployment.xml
 D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.UI\bin\Debug\System.Web.WebPages.Razor.xml
-D:\06.HubGit\NNCQ\02.源代码\NNCQ\NNCQ.UI\obj\Debug\NNCQ.UI.csprojResolveAssemblyReference.cache

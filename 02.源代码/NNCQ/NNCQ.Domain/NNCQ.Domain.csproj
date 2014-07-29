@@ -88,7 +88,9 @@
     <Compile Include="Application\SystemWorkTask.cs" />
     <Compile Include="Application\SystemWorkTaskInRole.cs" />
     <Compile Include="Common\BusinessFile.cs" />
+    <Compile Include="Common\BusinessFileExtenssions.cs" />
     <Compile Include="Common\BusinessImage.cs" />
+    <Compile Include="Common\BusinessImageExtenssions.cs" />
     <Compile Include="Core\DeleteStatus.cs" />
     <Compile Include="Core\EntityDbContext.cs" />
     <Compile Include="Core\EntityRepository.cs" />
@@ -128,6 +130,7 @@
       <Name>NNCQ.UI</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

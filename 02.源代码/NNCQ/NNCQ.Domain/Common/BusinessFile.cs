@@ -28,6 +28,7 @@ namespace NNCQ.Domain.Common
         [StringLength(10)]
         public string UploadFileSuffix { get; set; }                   // 上传文件的后缀名
         public byte[] BinaryContent { get; set; }                      // 附件存放的二进制内容
+        public long FileSize { get; set; }
         public Guid RelevanceObjectID { get; set; }                    // 关联对象ID
 
         public BusinessFile() 

@@ -28,6 +28,7 @@ namespace NNCQ.Domain.Common
         public string UploadPath { get; set; }       // 图片上传保存路径
         [StringLength(256)]
         public string UploadFileSuffix { get; set; } // 上传文件的后缀名
+        public long FileSize { get; set; }
 
         public int X { get; set; }
         public int Y { get; set; }

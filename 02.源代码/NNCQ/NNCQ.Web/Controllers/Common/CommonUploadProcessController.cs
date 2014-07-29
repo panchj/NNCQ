@@ -22,6 +22,8 @@ namespace NNCQ.Web.Controllers.Common
         private readonly IEntityRepository<BusinessFile> _FileService;  
         private readonly IEntityRepository<BusinessImage> _ImageService;
 
+        //private 
+
         public CommonUploadProcessController(IEntityRepository<BusinessFile> fService, IEntityRepository<BusinessImage> iService)
         {
             this._FileService = fService;
@@ -30,26 +32,31 @@ namespace NNCQ.Web.Controllers.Common
 
         [HttpGet]
         [HttpPost]
-        public async Task<HttpResponseMessage> CommonUploadProcess(bool isSingle, string fileType, string relID)
+        public async Task<HttpResponseMessage> CommonUploadProcess(bool isSingle, string fileType, string relID, string fileName)
         {
             var defaultUploadFilesUrl = System.Web.HttpContext.Current.Server.MapPath(HttpContext.Current.Request["folder"] + "\\");
             var imgaeRecord = new BusinessImage();
             var fileRecord = new BusinessFile();
 
-            var rID = Guid.NewGuid();
+            if (isSingle) 
+            {
+
+            }
+
+            var mainID = Guid.NewGuid();
 
             switch (fileType)
             {
-                case "commonFile": 
-                    rID = fileRecord.ID;
+                case "commonFile":
+                    mainID = fileRecord.ID;
                     defaultUploadFilesUrl += System.Configuration.ConfigurationManager.AppSettings["DefaultCommonFileUploadUrl"];
                     break;
                 case "imageFile":
-                    rID = imgaeRecord.ID;
+                    mainID = imgaeRecord.ID;
                     defaultUploadFilesUrl += System.Configuration.ConfigurationManager.AppSettings["DefaultCommonImageUploadUrl"];
                     break;
                 default:
-                    rID = fileRecord.ID;
+                    mainID = fileRecord.ID;
                     defaultUploadFilesUrl += System.Configuration.ConfigurationManager.AppSettings["DefaultCommonUploadUrl"];
                     break;
             }
@@ -63,87 +70,122 @@ namespace NNCQ.Web.Controllers.Common
             {
                 throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType); 
             }
+            CustomMultipartFormDataStreamProvider provider = new CustomMultipartFormDataStreamProvider(defaultUploadFilesUrl, mainID + "_"); //mainID + "_"
 
-            CustomMultipartFormDataStreamProvider provider = new CustomMultipartFormDataStreamProvider(defaultUploadFilesUrl, rID+"_"); 
-            
-            List<string> files = new List<string>(); 
-            try
+            var initialFileName = fileName.ToLower();
+            var fileSize = (long)Request.Content.Headers.ContentLength;
+            var tempFileName = provider.TempFileName;
+            if (tempFileName != null)
+                initialFileName = tempFileName;
+
+            List<string> files = new List<string>();
+
+            if (initialFileName.ToLower() == fileName.ToLower())
             {
-                await Request.Content.ReadAsMultipartAsync(provider);
-                foreach (MultipartFileData file in provider.FileData) 
+                try
                 {
-                    files.Add(Path.GetFileName(file.LocalFileName));
-
-                    #region 持久化关系处理
-
-
-                    var localFileName = Path.GetFileName(file.LocalFileName).ToLower();
-                    var saveFileSuffix = Path.GetExtension(file.LocalFileName).ToLower();
-                    var saveFileName = localFileName.Substring((rID + "_").Length, localFileName.Length - (rID + "_").Length - saveFileSuffix.Length);
-
-                    switch (fileType)
+                    //await _ProcessUploadFile(provider, files, fileType, imgaeRecord, fileRecord, defaultUploadFilesUrl, mainID, relID, fileSize);
+                    await Request.Content.ReadAsMultipartAsync(provider);
+                    foreach (MultipartFileData file in provider.FileData)
                     {
-                        case "imageFile":
-                            // 对于单一文件的处理，先清理当前数据库的数据和物理磁盘文件
-                            if (isSingle)
-                            {
-                                var iFiles = _ImageService.GetAll().Where(x => x.RelevanceObjectID == Guid.Parse(relID));
-                                foreach (var iItem in iFiles)
-                                {
-                                    _ImageService.Delete(iItem);
-                                    var iFilePath = iItem.UploadPath + iItem.Name + iItem.UploadFileSuffix;
-                                    if (File.Exists(iFilePath))
-                                    {
-                                        File.Delete(iFilePath);
-                                    }
-                                }
-                                _ImageService.Save();
-                            }
-                            imgaeRecord.Name = saveFileName;
-                            imgaeRecord.UploadPath = defaultUploadFilesUrl;
-                            imgaeRecord.Description = "图形文件。";
-                            imgaeRecord.OriginalFileName = localFileName;
-                            imgaeRecord.UploadFileSuffix = saveFileSuffix;
-                            imgaeRecord.UploadedTime = DateTime.Now;
-                            imgaeRecord.RelevanceObjectID = Guid.Parse(relID);
-                            _ImageService.AddOrEditAndSave(imgaeRecord);
-                            break;
-                        default:
-                            // 对于单一文件的处理，先清理当前数据库的数据和物理磁盘文件
-                            //if (isSingle)
-                            //{
-                            //    var iFiles = _FileService.GetAll().Where(x => x.RelevanceObjectID == Guid.Parse(relID));
-                            //    foreach (var iItem in iFiles)
-                            //    {
-                            //        _FileService.DeleteAndSave(iItem);
-                            //        var iFilePath = iItem.AttachmentUploadPath + iItem.Name + iItem.UploadFileSuffix;
-                            //        if (File.Exists(iFilePath))
-                            //        {
-                            //            File.Delete(iFilePath);
-                            //        }
-                            //    }
-                            //}
+                        files.Add(Path.GetFileName(file.LocalFileName));
 
-                            fileRecord.Name = saveFileName;
-                            fileRecord.AttachmentUploadPath = defaultUploadFilesUrl;
-                            fileRecord.Description = "普通文件。";
-                            fileRecord.AttachmentOriginalFileName = localFileName;
-                            fileRecord.UploadFileSuffix = saveFileSuffix;
-                            fileRecord.AttachmentTimeUploaded = DateTime.Now;
-                            fileRecord.RelevanceObjectID = Guid.Parse(relID);
-                            _FileService.AddOrEditAndSave(fileRecord);
+                        #region 持久化关系处理
 
-                            break;
-                    } 
-                    #endregion
+                        var localFileName = Path.GetFileName(file.LocalFileName).ToLower();
+                        var saveFileSuffix = Path.GetExtension(file.LocalFileName).ToLower();
+                        var saveFileName = localFileName.Substring((mainID + "_").Length, localFileName.Length - (mainID + "_").Length - saveFileSuffix.Length);
+                        switch (fileType)
+                        {
+                            case "imageFile":
+                                imgaeRecord.Name = saveFileName;
+                                imgaeRecord.UploadPath = defaultUploadFilesUrl;
+                                imgaeRecord.Description = "图形文件";
+                                imgaeRecord.OriginalFileName = localFileName;
+                                imgaeRecord.UploadFileSuffix = saveFileSuffix;
+                                imgaeRecord.UploadedTime = DateTime.Now;
+                                imgaeRecord.FileSize = (long)fileSize;
+                                imgaeRecord.RelevanceObjectID = Guid.Parse(relID);
+                                _ImageService.SaveSingleWithUniquenessRelevanceID(imgaeRecord);
+                                break;
+                            default:
+                                fileRecord.Name = saveFileName;
+                                fileRecord.AttachmentUploadPath = defaultUploadFilesUrl;
+                                fileRecord.Description = "普通文件";
+                                fileRecord.AttachmentOriginalFileName = localFileName;
+                                fileRecord.UploadFileSuffix = saveFileSuffix;
+                                fileRecord.AttachmentTimeUploaded = DateTime.Now;
+                                fileRecord.FileSize = (long)fileSize;
+                                fileRecord.RelevanceObjectID = Guid.Parse(relID);
+                                _FileService.SaveSingleWithUniquenessRelevanceID(fileRecord);
+                                break;
+                        }
+                        #endregion
+                    }
+                    return Request.CreateResponse(HttpStatusCode.OK, files);
                 }
-                return Request.CreateResponse(HttpStatusCode.OK, files); 
+                catch (System.Exception e)
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                }
             }
-            catch (System.Exception e) 
+            else
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                return Request.CreateResponse(HttpStatusCode.OK, files);
             }
+        }
 
+        private Task<string> _ProcessUploadFile(
+            CustomMultipartFormDataStreamProvider provider,
+            List<string> files,
+            string fileType, 
+            BusinessImage imgaeRecord,
+            BusinessFile fileRecord,
+            string defaultUploadFilesUrl,
+            Guid mainID,
+            string relID,
+            long fileSize
+            ) 
+        {
+
+            Request.Content.ReadAsMultipartAsync(provider);
+            foreach (MultipartFileData file in provider.FileData)
+            {
+                files.Add(Path.GetFileName(file.LocalFileName));
+
+                #region 持久化关系处理
+
+                var localFileName = Path.GetFileName(file.LocalFileName).ToLower();
+                var saveFileSuffix = Path.GetExtension(file.LocalFileName).ToLower();
+                var saveFileName = localFileName.Substring((mainID + "_").Length, localFileName.Length - (mainID + "_").Length - saveFileSuffix.Length);
+                switch (fileType)
+                {
+                    case "imageFile":
+                        imgaeRecord.Name = saveFileName;
+                        imgaeRecord.UploadPath = defaultUploadFilesUrl;
+                        imgaeRecord.Description = "图形文件";
+                        imgaeRecord.OriginalFileName = localFileName;
+                        imgaeRecord.UploadFileSuffix = saveFileSuffix;
+                        imgaeRecord.UploadedTime = DateTime.Now;
+                        imgaeRecord.FileSize = (long)fileSize;
+                        imgaeRecord.RelevanceObjectID = Guid.Parse(relID);
+                        _ImageService.SaveSingleWithUniquenessRelevanceID(imgaeRecord);
+                        break;
+                    default:
+                        fileRecord.Name = saveFileName;
+                        fileRecord.AttachmentUploadPath = defaultUploadFilesUrl;
+                        fileRecord.Description = "普通文件";
+                        fileRecord.AttachmentOriginalFileName = localFileName;
+                        fileRecord.UploadFileSuffix = saveFileSuffix;
+                        fileRecord.AttachmentTimeUploaded = DateTime.Now;
+                        fileRecord.FileSize = (long)fileSize;
+                        fileRecord.RelevanceObjectID = Guid.Parse(relID);
+                        _FileService.SaveSingleWithUniquenessRelevanceID(fileRecord);
+                        break;
+                }
+                #endregion
+            }
+            return null;
         }
     }
 
@@ -169,11 +211,14 @@ namespace NNCQ.Web.Controllers.Common
     public class CustomMultipartFormDataStreamProvider : MultipartFormDataStreamProvider 
     {
         private string _AppendString = "";
+        public string TempFileName { get; set; }
         public CustomMultipartFormDataStreamProvider(string path, string appendString) : base(path) { _AppendString = appendString; } 
         public override string GetLocalFileName(HttpContentHeaders headers) 
         {
             var fileName = headers.ContentDisposition.FileName.Replace("\"", String.Empty);
+            TempFileName = fileName;
             return _AppendString + fileName; ;
         }
     }
+
 }

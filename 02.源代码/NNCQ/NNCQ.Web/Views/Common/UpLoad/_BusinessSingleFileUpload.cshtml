@@ -32,7 +32,6 @@
             </table>
         </div>
         <div class="hide" id="displayUploadResult">
-
         </div>
         <div id="fileValidMessage"></div>
     </div>
@@ -41,30 +40,33 @@
 <script type="text/javascript">
 
     $(function () {
+        var currentFileName = document.getElementById('uploadFileName').innerHTML;
         $('#singleFileUpload').fileupload({
             dataType: "json",
             url: "/api/CommonUploadProcess?isSingle=true&fileType=commonFile&relID=@ViewBag.ObjectID",
             limitConcurrentUploads: 1,
             sequentialUploads: true,
             progressInterval: 100,
+            singleFileUploads: false,
+            replaceFileInput:false,
+            limitMultiFileUploads: 1,
             maxChunkSize: 4 * 1024 * 1024 * 1024,
+
             // 添加文件的时候事件
             add: function (e, data) {
-
                 var isValidFile = true;
                 var fileValidString = "";
-
                 // 判断文件类型限制
                 if (data.files[0].name.indexOf('com') > 0 || data.files[0].name.indexOf('exe') > 0 || data.files[0].name.indexOf('bat') > 0) {
                     isValidFile = false;
                     fileValidString = "受限制的文件类型，无法上传。";
-
                 }
                 // 判断文件大小限制
                 if (data.files[0].size > 4 * 1024 * 1024 * 1024) {
                     isValidFile = false;
                     fileValidString = "文件大小超出限制范围，无法上传。";
                 }
+
                 $('#fileValidMessage').html("");
                 $('#overallbar').removeClass('hide');
                 var pb1 = $("#overallbar").progressbar();
@@ -85,9 +87,9 @@
                 }
                 $('#uploadFilePercent').html('（' + sizeString + '）');
 
-
                 if (isValidFile == true) {
                     $('#btnSingleFileUpload').click(function () {
+                        data.url = "/api/CommonUploadProcess?isSingle=true&fileType=commonFile&relID=@ViewBag.ObjectID" + "&fileName=" + document.getElementById('uploadFileName').innerHTML;
                         data.submit();
                     });
                 }
@@ -107,14 +109,80 @@
                 var pb = $("#overallbar").progressbar();
                 pb.progressbar('value', progress);
                 $("#totalIndecator").html('【' + progress + '%】');
-                //
-                if (progress == '100') {
+
+                if (progress >= '100') {
                 }
             },
             // 组件自动生成的进度数据
             progress: function (e, data) {
                 var progress = parseInt(data.loaded / data.total * 100, 10);
-            }
+            },
+
+            //filesContainer: $('table.files'),
+            //uploadTemplateId: null,
+            //downloadTemplateId: null,
+            //uploadTemplate: function (o) {
+            //    var rows = $();
+            //    $.each(o.files, function (index, file) {
+            //        var row = $('<tr class="template-upload fade">' +
+            //            '<td><span class="preview"></span></td>' +
+            //            '<td><p class="name"></p>' +
+            //            '<div class="error"></div>' +
+            //            '</td>' +
+            //            '<td><p class="size"></p>' +
+            //            '<div class="progress"></div>' +
+            //            '</td>' +
+            //            '<td>' +
+            //            (!index && !o.options.autoUpload ?
+            //                '<button class="start" disabled>Start</button>' : '') +
+            //            (!index ? '<button class="cancel">Cancel</button>' : '') +
+            //            '</td>' +
+            //            '</tr>');
+            //        row.find('.name').text(file.name);
+            //        row.find('.size').text(o.formatFileSize(file.size));
+            //        if (file.error) {
+            //            row.find('.error').text(file.error);
+            //        }
+            //        rows = rows.add(row);
+            //    });
+            //    return rows;
+            //},
+            //downloadTemplate: function (o) {
+            //    var rows = $();
+            //    $.each(o.files, function (index, file) {
+            //        var row = $('<tr class="template-download fade">' +
+            //            '<td><span class="preview"></span></td>' +
+            //            '<td><p class="name"></p>' +
+            //            (file.error ? '<div class="error"></div>' : '') +
+            //            '</td>' +
+            //            '<td><span class="size"></span></td>' +
+            //            '<td class="delete"><button>Delete</button></td>' +
+            //            '</tr>');
+            //        row.find('.size').text(o.formatFileSize(file.size));
+            //        if (file.error) {
+            //            row.find('.name').text(file.name);
+            //            row.find('.error').text(file.error);
+            //        } else {
+            //            row.find('.name').append($('<a></a>').text(file.name));
+            //            if (file.thumbnailUrl) {
+            //                row.find('.preview').append(
+            //                    $('<a></a>').append(
+            //                        $('<img>').prop('src', file.thumbnailUrl)
+            //                    )
+            //                );
+            //            }
+            //            row.find('a')
+            //                .attr('data-gallery', '')
+            //                .prop('href', file.url);
+            //            row.find('.delete button')
+            //                .attr('data-type', file.delete_type)
+            //                .attr('data-url', file.delete_url);
+            //        }
+            //        rows = rows.add(row);
+            //    });
+            //    return rows;
+            //}
+
         });
 
 

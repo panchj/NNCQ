@@ -1,5 +1,6 @@
 ﻿using NNCQ.Domain.Common;
 using NNCQ.Domain.Core;
+using NNCQ.Domain.Organization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,10 @@ namespace NNCQ.Web.Controllers.Common
         /// <returns></returns>
         public ActionResult Index()
         {
+            var demoRelevanceObject = _FileService.GetSingleRelevanceBy<Department>(x=>x.Name.Contains("总"));
+
+            ViewBag.RelevanceObjectID = demoRelevanceObject.ID;
+
             return View("../../Views/Common/Upload/Index");
         }
 
@@ -138,7 +143,7 @@ namespace NNCQ.Web.Controllers.Common
         public ActionResult DeleteSingleFile(Guid fileID)
         {
             var file = _FileService.GetSingle(fileID);
-            var filePath = file.AttachmentUploadPath + file.Name + file.ID+"_"+ file.UploadFileSuffix;
+            var filePath = file.AttachmentUploadPath + file.ID+"_" + file.Name + file.UploadFileSuffix;
             // 清除数据库记录
             _FileService.DeleteAndSave(file);
             // 清除物理文件
@@ -195,4 +200,6 @@ namespace NNCQ.Web.Controllers.Common
         public bool IsSucceded { get; set; }
         public string InnerHtml { get; set; }
     }
+
+
 }

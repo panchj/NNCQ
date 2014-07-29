@@ -1,6 +1,6 @@
 ﻿@{
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-    var testID = Guid.NewGuid();
+    var testID = ViewBag.RelevanceObjectID;
 }
 
 <button onclick="javascript:uploadSingleFile('@testID')">上传单一文件</button>
@@ -8,7 +8,12 @@
 <button onclick="javascript:callUploadImagesApi('@testID')">上传单一图片</button>
 <button onclick="javascript:callUploadImagesApi('@testID')">上传多份图片</button>
 
+<br/>
+<textarea class="ckeditor" id="a" name="a">
+</textarea>
+
 <script>
+
     function uploadSingleFile(objectID) {
         $.ajax({
             cache: false,
@@ -32,7 +37,6 @@
             }
         });
     }
-
 
     function openSingleFileDialog(htmlString) {
         $.Dialog({
@@ -71,6 +75,5 @@
             }
         });
     }
-
 
 </script>

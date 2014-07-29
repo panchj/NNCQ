@@ -20,7 +20,8 @@ namespace NNCQ.Web.App_Start
                 "~/Scripts/jquery.iframe-transport.js",
                 "~/Scripts/jquery.xdomainrequest.min.js",
                 "~/Scripts/jquery-ui-1.10.4.min.js",
-                "~/Scripts/jquery.xdr-transport.js"));
+                "~/Scripts/jquery.xdr-transport.js"
+                ));
 
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                 "~/Scripts/modernizr-*"));
@@ -28,9 +29,19 @@ namespace NNCQ.Web.App_Start
             bundles.Add(new ScriptBundle("~/bundles/metroScript").Include(
                 "~/js/metro.min.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/CkEditor").Include(
+                "~/ckeditor/ckeditor.js"
+                //"~/ckeditor/adapters/jquery.js"
+                //"~/Scripts/ckeditor/style.js"
+                ));
+
             bundles.Add(new StyleBundle("~/metroCss").Include(
                 "~/css/metro-bootstrap.css",
                 "~/css/iconFont.min.css"
+                ));
+
+            bundles.Add(new StyleBundle("~/CkEditorCss").Include(
+                "~/ckeditor/contents.css"
                 ));
 
         }
