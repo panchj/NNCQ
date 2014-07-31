@@ -24,7 +24,7 @@ namespace NNCQ.Domain.Common
             }
             else 
             {
-                var filePath = file.AttachmentUploadPath + file.ID + "_" + file.Name + file.UploadFileSuffix;
+                var filePath = file.UploadPath + file.ID + "_" + file.Name + file.UploadFileSuffix;
                 _DeleteFile(filePath);
 
                 BusinessFileRepository.DeleteAndSave(pFile);

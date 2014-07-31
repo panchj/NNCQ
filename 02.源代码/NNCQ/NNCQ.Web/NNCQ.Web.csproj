@@ -157,6 +157,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CkEditor\jquery.js" />
     <Content Include="Content\themes\base\images\animated-overlay.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -621,6 +622,7 @@
     <Compile Include="Controllers\Application\SystemWorkSectionController.cs" />
     <Compile Include="Controllers\Application\SystemWorkTaskController.cs" />
     <Compile Include="Controllers\CommonWebApi\FileUploadController.cs" />
+    <Compile Include="Controllers\Common\CommonPersonController.cs" />
     <Compile Include="Controllers\Common\CommonUploadProcessController.cs" />
     <Compile Include="Controllers\Common\CommonUploadController.cs" />
     <Compile Include="Controllers\Files\FileTypeController.cs" />
@@ -669,6 +671,8 @@
     <Content Include="Views\Common\UpLoad\_BusinessMultiFileUpload.cshtml" />
     <Content Include="Views\Common\UpLoad\_BusinessSingleFileUpload.cshtml" />
     <Content Include="Views\Common\UpLoad\Index.cshtml" />
+    <Content Include="Views\Common\Person\Index.cshtml" />
+    <Content Include="Views\Common\Person\_SinglePersonSelector.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -678,7 +682,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Contents\" />
     <Folder Include="Content\NNCQ\" />
     <Folder Include="UploadFiles\" />
   </ItemGroup>

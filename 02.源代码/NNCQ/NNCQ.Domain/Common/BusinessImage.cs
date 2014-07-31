@@ -29,6 +29,8 @@ namespace NNCQ.Domain.Common
         [StringLength(256)]
         public string UploadFileSuffix { get; set; } // 上传文件的后缀名
         public long FileSize { get; set; }
+        [StringLength(20)]
+        public string iconString { get; set; }       // 文件物理格式图标
 
         public int X { get; set; }
         public int Y { get; set; }

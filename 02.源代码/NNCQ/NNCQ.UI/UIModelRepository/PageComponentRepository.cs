@@ -386,14 +386,14 @@ namespace NNCQ.UI.UIModelRepository
                 case EditorItemType.CheckBox:
                     htmlString.Append(EditorItem.A07_CheckBox(boVM, name, errStyle, valueString, initialStattus, errMessage, errMessageStyle));
                     break;
-                case EditorItemType.YesNo:
-                    //htmlString.Append(EditorItem.A08_YesNo(boVM, name, errStyle, valueString, initialStattus, errMessage, errMessageStyle));
-                    break;
                 case EditorItemType.Date:
                     htmlString.Append(EditorItem.A05_Date(name, errStyle, valueString, initialStattus, errMessage));
                     break;
                 case EditorItemType.Hidden:
                     htmlString.Append(EditorItem.A08_Hidden(name,valueString));
+                    break;
+                case EditorItemType.HtmlTextEditor:
+                    htmlString.Append(EditorItem.A09_HtmlStringEditor(name,valueString));
                     break;
                 default:
                     htmlString.Append(EditorItem.A01_TextBox(name, errStyle, valueString, initialStattus, errMessage));
@@ -474,12 +474,7 @@ namespace NNCQ.UI.UIModelRepository
                         break;
                     case EditorItemType.ComboBox:
                         break;
-                    case EditorItemType.YesNo:
-                        break;
-                    case EditorItemType.Sex:
-                        break;
                     case EditorItemType.Date:
-
                         break;
                     case EditorItemType.DateTime:
                         break;
@@ -490,8 +485,12 @@ namespace NNCQ.UI.UIModelRepository
                         htmlString.Append(sItem.ItemName);
                         break;
                     case EditorItemType.PlainFacadeItem:
+                        var pItem = itemValue as PlainFacadeItem;
+                        htmlString.Append(pItem.Name);
                         break;
                     case EditorItemType.Hidden:
+                        break;
+                    case EditorItemType.HtmlTextEditor:
                         break;
                     default:
                         break;
@@ -610,11 +609,8 @@ namespace NNCQ.UI.UIModelRepository
                 var htmlString = new StringBuilder();
                 htmlString.Append("<div id='dt_"+name+"' class='input-control text'>");
                 htmlString.Append("<input id='" + name + "' name='" + name + "' type='text' value='" + valueString + "' readonly='readonly' onclick='javascript:getCustumerDatePicker(\"dt_"+name+"\")' />");
-                //htmlString.Append("<button class='btn btn-date'></button>");
                 htmlString.Append("</div>");
-
                 return htmlString.ToString();
-
             }
 
             public static string A06_ComboBox(T boVM, string name, string errStyle, string valueString, string initialStattus, string errMessage, string errMessageStyle) 
@@ -682,48 +678,20 @@ namespace NNCQ.UI.UIModelRepository
                 return htmlString.ToString();
             }
 
-            //public static string A08_YesNo(T boVM, string name, string errStyle, string valueString, string initialStattus, string errMessage, string errMessageStyle)
-            //{
-            //    var htmlString = new StringBuilder();
-            //    initialStattus = "javascript:initialValidateStatus(\"css_" + name + "\",\"errorMeessage_" + name + "\",\"validStatus_" + name + "\",\"input-control select\")";
-            //    var sItemCollection = new List<PlainFacadeItem>();
-            //    PropertyInfo[] properties = typeof(T).GetProperties();
-            //    foreach (var pItem in properties)
-            //    {
-            //        var pAtrribute = Attribute.GetCustomAttributes(pItem).Where(n => n.GetType().Name == "PlainFacadeItemSpecification");
-            //        foreach (var aItem in pAtrribute)
-            //        {
-            //            var sPropertyAttribute = aItem as PlainFacadeItemSpecification;
-            //            if (sPropertyAttribute.RelevanceID == name)
-            //            {
-            //                sItemCollection = pItem.GetValue(boVM) as List<PlainFacadeItem>;
-            //            }
-            //        }
-            //    }
-
-            //    foreach (var item in sItemCollection)
-            //    {
-            //        var selected = "";
-            //        if (item.ID == valueString)
-            //            selected = "checked";
-
-            //        htmlString.Append("<div class='input-control radio' data-role='input-control' style='margin-right:10px;margin-top:-2px'>");
-            //        htmlString.Append("<label><input type='radio' value='" + item.ID + "' name='radio01' " + selected + " /><span class='check'></span>" + item.Name + "</label></div>");
-            //    }
-            //    htmlString.Append("<div id='errorMeessage_" + name + "'><small class='fg-red'>" + errMessage + "</small></div>");
-            //    //htmlString.Append("<div class='input-control checkbox margin10' data-role='input-control'><label>Check me out<input type='checkbox' disabled checked /><span class='check'></span></label></div>");
-            //    //htmlString.Append("<div class='input-control radio margin10' data-role='input-control'><label><input type='radio' name='r1' checked /><span class='check'></span>Check me out</label></div>");
-            //    //htmlString.Append("<div class='input-control text' data-role='datepicker' data-date='2013-11-13' data-effect='slide' data-other-days='1'><input type='text'><button class='btn-date'></button></div>");
-            //    return htmlString.ToString();
-            //}
-
-
             public static string  A08_Hidden(string name,string valueString)
             {
                 var htmlString = new StringBuilder();
                 htmlString.Append("<input type='hidden' value='" + valueString + "' name='" + name + "' id='" + name + "' />");
                 return htmlString.ToString();
             }
+            public static string A09_HtmlStringEditor(string name, string valueString)
+            {
+                var htmlString = new StringBuilder();
+                htmlString.Append("<textarea name='" + name + "' id='" + name + "' onclick='javascript:getCustumerCkEditor(\""+name+"\")'>" + valueString + "</textarea>");
+                //htmlString.Append("<script>CKEDITOR.replace('"+name+"');</script>");
+                return htmlString.ToString();
+            }
+
         }
     }
 

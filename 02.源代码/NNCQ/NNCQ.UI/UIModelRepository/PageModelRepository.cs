@@ -1036,6 +1036,7 @@ namespace NNCQ.UI.UIModelRepository
                 htmlString.Append(_GetAdditionColOperationByPageFunction());
                 htmlString.Append(_GetLeftNavigatorRefreshFunction());
                 htmlString.Append(_GetDatePicker());
+                htmlString.Append(_GetCkEditor());
 
                 htmlString.Append("</script>");
 
@@ -1424,6 +1425,33 @@ namespace NNCQ.UI.UIModelRepository
                 return htmlString.ToString();
 
             }
+
+            private static string _GetCkEditor()
+            {
+                var htmlString = new StringBuilder();
+                htmlString.Append("function getCustumerCkEditor(textareaID) {");
+                htmlString.Append("CKEDITOR.replace(textareaID,{");
+                htmlString.Append("language:'zh-cn',");
+                htmlString.Append("toolbarGroups:[");
+                htmlString.Append("{ name: 'document',    groups: [ 'mode', 'document', 'doctools' ] },");
+                htmlString.Append("{ name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },");
+                htmlString.Append("{ name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },");
+                htmlString.Append("{ name: 'links' },");
+                htmlString.Append("{ name: 'insert' },");
+                htmlString.Append("{ name: 'forms' },");
+                htmlString.Append("{ name: 'tools' },");
+                htmlString.Append("'/',");
+                htmlString.Append("{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },");
+                htmlString.Append("{ name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align' ] },");
+                htmlString.Append(" { name: 'styles' }");
+                htmlString.Append("]");
+                htmlString.Append("});");
+                htmlString.Append("}");
+                return htmlString.ToString();
+
+            }
+
+
         }
 
         /// <summary>

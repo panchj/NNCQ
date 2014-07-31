@@ -18,12 +18,11 @@ namespace NNCQ.UI.ViewModelAttribute
         DorpdownOptionWithEnum,
         ComboBox, 
         CheckBox,
-        YesNo, 
-        Sex, 
         Date, 
         DateTime, 
         Time, 
         Hidden,
+        HtmlTextEditor,
         SelfReferentialItem,
         PlainFacadeItem
     }

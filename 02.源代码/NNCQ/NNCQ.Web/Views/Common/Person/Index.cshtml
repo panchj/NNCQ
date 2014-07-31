@@ -1,0 +1,54 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div id="singlePersonForDisplay">单人</div>
+<input type="hidden" id="singlePersonID" name="singlePersonID" value="">
+<button onclick="javascript: getSinglePerson('singlePersonID', 'singlePersonForDisplay')">选择单个人员</button>
+
+<br />
+<div id="multiPersonString">多人</div>
+<input type="hidden" id="multiPersonIDs" name="multiPersonIDs" value="">
+<button onclick="javascript:uploadMultiFile('multiPerson')">选择多个人员(字符串结果)</button>
+
+<br />
+<div id="multiPersonTable">多人</div>
+<input type="hidden" id="multiPersonTableIDs" name="multiPersonTableIDs" value="">
+<button onclick="javascript:uploadMultiFile('multiPerson')">选择多个人员(列表结果)</button>
+
+@section Scripts {
+    <script>
+        function getSinglePerson(selectedPersonIDItem, selectObjectDisplayDiv) {
+            var selectedObjectID = document.getElementById(selectedPersonIDItem).value;
+            $.ajax({
+                cache: false,
+                type: 'POST',
+                async: false,
+                url: "../CommonPerson/SinglePerson?selectedPersonID=" + selectedObjectID + "&selectedPersonIDItem=" + selectedPersonIDItem + "&selectedPersonDisplayDiv=" + selectObjectDisplayDiv,
+                success: function (data) {
+                    openSinglePersonDialog(data);
+                }
+            });
+        }
+
+        function openSinglePersonDialog(htmlString) {
+            $.Dialog({
+                shadow: true,
+                overlay: true,
+                draggable: true,
+                icon: '<span class="icon-user"></span>',
+                title: 'Draggable window',
+                width: 350,
+                height: 550,
+                padding: 10,
+                content: '',
+                overlayClickClose: false,
+                onShow: function () {
+                    $.Dialog.title("请选择人员，每次只能选择一位人员。");
+                    $.Dialog.content(htmlString);
+                }
+            });
+        }
+
+    </script>
+}

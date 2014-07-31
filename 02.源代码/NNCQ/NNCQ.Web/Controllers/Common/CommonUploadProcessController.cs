@@ -103,9 +103,9 @@ namespace NNCQ.Web.Controllers.Common
                                 break;
                             default:
                                 fileRecord.Name = saveFileName;
-                                fileRecord.AttachmentUploadPath = defaultUploadFilesUrl;
+                                fileRecord.UploadPath = defaultUploadFilesUrl;
                                 fileRecord.Description = "普通文件";
-                                fileRecord.AttachmentOriginalFileName = localFileName;
+                                fileRecord.OriginalFileName = localFileName;
                                 fileRecord.UploadFileSuffix = saveFileSuffix;
                                 fileRecord.AttachmentTimeUploaded = DateTime.Now;
                                 fileRecord.FileSize = (long)fileSize;
@@ -167,9 +167,9 @@ namespace NNCQ.Web.Controllers.Common
                         break;
                     default:
                         fileRecord.Name = saveFileName;
-                        fileRecord.AttachmentUploadPath = defaultUploadFilesUrl;
+                        fileRecord.UploadPath = defaultUploadFilesUrl;
                         fileRecord.Description = "普通文件";
-                        fileRecord.AttachmentOriginalFileName = localFileName;
+                        fileRecord.OriginalFileName = localFileName;
                         fileRecord.UploadFileSuffix = saveFileSuffix;
                         fileRecord.AttachmentTimeUploaded = DateTime.Now;
                         fileRecord.FileSize = (long)fileSize;

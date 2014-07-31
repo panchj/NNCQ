@@ -31,7 +31,7 @@ namespace NNCQ.Web.App_Start
 
             bundles.Add(new ScriptBundle("~/bundles/CkEditor").Include(
                 "~/ckeditor/ckeditor.js"
-                //"~/ckeditor/adapters/jquery.js"
+                //"~/ckeditor/jquery.js"
                 //"~/Scripts/ckeditor/style.js"
                 ));
 

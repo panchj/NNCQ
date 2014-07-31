@@ -11,6 +11,7 @@ namespace NNCQ.UI.ViewModelAttribute
     {
         public EditorItemType ItemType { get; set; }
         public int Width { get; set; }
+        public int Height { get; set; }
         public int HorizontalZone = 1;
 
         public EditorItemSpecification(EditorItemType itemType) 

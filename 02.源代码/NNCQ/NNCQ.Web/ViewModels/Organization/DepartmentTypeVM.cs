@@ -28,7 +28,7 @@ namespace NNCQ.Web.ViewModels.Organization
         public string Name { get; set; }
 
         [ListItemSpecification("简要说明", "03", 0, false)]
-        [EditorItemSpecification(EditorItemType.TextArea, Width = 300)]
+        [EditorItemSpecification(EditorItemType.HtmlTextEditor, Width = 300)]
         [DetailItemSpecification(EditorItemType.TextBox, Width = 300)]
         [Display(Name = "简要说明")]
         [StringLength(1000, ErrorMessage = "你输入的数据超出限制1000个字符的长度。")]

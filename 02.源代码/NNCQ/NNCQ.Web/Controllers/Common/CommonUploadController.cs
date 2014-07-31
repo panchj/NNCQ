@@ -143,7 +143,7 @@ namespace NNCQ.Web.Controllers.Common
         public ActionResult DeleteSingleFile(Guid fileID)
         {
             var file = _FileService.GetSingle(fileID);
-            var filePath = file.AttachmentUploadPath + file.ID+"_" + file.Name + file.UploadFileSuffix;
+            var filePath = file.UploadPath + file.ID+"_" + file.Name + file.UploadFileSuffix;
             // 清除数据库记录
             _FileService.DeleteAndSave(file);
             // 清除物理文件
