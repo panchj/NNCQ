@@ -10,7 +10,7 @@ namespace NNCQ.Web.ViewModels.Organization
 {
     [EditorSpecification("JobTitle", "工作岗位定义数据", true, SaveAction = "Save", ListString = "List")]
     [ListHeadSpecification("工作岗位定义数据管理", ControllerName = "JobTitle", SearchActionPath = "", CreateActionPath = "CreateOrEdit")]
-    [ListDataGridViewSpecification("JobTitle", 18, ListActionPath = "List", EditActionPath = "CreateOrEdit", DetailActionPath = "Detail", DeleteActionPath = "Delete")]
+    [ListDataGridViewSpecification("JobTitle", 18, ListActionPath = "List", EditActionPath = "CreateOrEdit", DetailActionPath = "Detail", DeleteActionPath = "Delete",IsUseCURD=false)]
     public class JobTitleVM
     {
         [Key]

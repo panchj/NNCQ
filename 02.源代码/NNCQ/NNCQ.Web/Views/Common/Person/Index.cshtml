@@ -24,7 +24,7 @@
                 cache: false,
                 type: 'POST',
                 async: false,
-                url: "../CommonPerson/SinglePerson?selectedPersonID=" + selectedObjectID + "&selectedPersonIDItem=" + selectedPersonIDItem + "&selectedPersonDisplayDiv=" + selectObjectDisplayDiv,
+                url: '../CommonPerson/SinglePerson?selectedPersonID=' + selectedObjectID + '&selectedPersonIDItem=' + selectedPersonIDItem + '&selectedPersonDisplayDiv=' + selectObjectDisplayDiv,
                 success: function (data) {
                     openSinglePersonDialog(data);
                 }

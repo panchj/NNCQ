@@ -500,7 +500,7 @@ namespace NNCQ.UI.UIModelRepository
         /// </summary>
         public class MainWorkPlaceInitializer
         {
-            public static Muc_MainWorkPlace GetMainWorkPlace(List<T> boVMCollection, MucPaginate paginate, bool? userUDCollumn = null) 
+            public static Muc_MainWorkPlace GetMainWorkPlace(List<T> boVMCollection, MucPaginate paginate, bool? userUDCollumn=null) 
             {
 
                 var mainWorkPLace = new Muc_MainWorkPlace();
@@ -518,6 +518,7 @@ namespace NNCQ.UI.UIModelRepository
                 // 生成列表的表头
                 mainWorkPLace.MainWorkPlaceHeadBar = _GetHeadbar();
                 // 生成列表的表体
+                userUDCollumn = sAttribute.IsUseCURD;
                 mainWorkPLace.MainWorkPlaceDataGridView = _GetDataGridView(boVMCollection, userUDCollumn);
                 // 根据分页器的状态生成列表底部
                 if (paginate != null)
@@ -727,8 +728,12 @@ namespace NNCQ.UI.UIModelRepository
                     #endregion
 
                 }
-                if (properties.Where(x => x.Name.ToLower() == "id").FirstOrDefault()!=null)
-                    listColumnHeaderItems.Add(_GetDefaultOperationCol());
+
+                if ((bool)userUDCollumn)
+                {
+                    if (properties.Where(x => x.Name.ToLower() == "id").FirstOrDefault() != null)
+                        listColumnHeaderItems.Add(_GetDefaultOperationCol());
+                }
 
                 #endregion
 
@@ -853,9 +858,11 @@ namespace NNCQ.UI.UIModelRepository
                             }
                         }
 
-                        htmlString.Append("<td> </td>");
+                        if ((bool)userUDCollumn)
+                        {
+                            htmlString.Append("<td> </td>");
+                        }
                         htmlString.Append("</tr>");
-
                     }
                 }
 
@@ -1447,6 +1454,41 @@ namespace NNCQ.UI.UIModelRepository
                 htmlString.Append("]");
                 htmlString.Append("});");
                 htmlString.Append("}");
+                return htmlString.ToString();
+            }
+
+            private static string _GetSinglePersonDialog() 
+            {
+                var htmlString = new StringBuilder();
+
+                htmlString.Append("function getSinglePersonDialog(selectedPersonIDItem, selectObjectDisplayDiv) {");
+                htmlString.Append("var selectedObjectID = document.getElementById(selectedPersonIDItem).value;");
+                htmlString.Append("$.ajax({");
+                htmlString.Append("cache: true,");
+                htmlString.Append("type: 'POST',");
+                htmlString.Append("async: true,");
+                htmlString.Append("url: '../CommonPerson/SinglePerson?selectedPersonID=' + selectedObjectID + '&selectedPersonIDItem=' + selectedPersonIDItem + '&selectedPersonDisplayDiv=' + selectObjectDisplayDiv,");
+                htmlString.Append("success: function (data) {");
+                htmlString.Append("openSinglePersonDialogForSelect(data);");
+                htmlString.Append("}});}");
+
+                htmlString.Append("function openSinglePersonDialogForSelect(htmlString) {");
+                htmlString.Append("$.Dialog({");
+                htmlString.Append("shadow: true,");
+                htmlString.Append("overlay: true,");
+                htmlString.Append("draggable: true,");
+                htmlString.Append("icon: '<span class=\"icon-user\"></span>',");
+                htmlString.Append("title: 'Draggable window',");
+                htmlString.Append("width: 350,");
+                htmlString.Append("height: 550,");
+                htmlString.Append("padding: 10,");
+                htmlString.Append("content: '',");
+                htmlString.Append("overlayClickClose: false,");
+                htmlString.Append("onShow: function () {");
+                htmlString.Append("$.Dialog.title('请选择人员，每次只能选择一位人员。');");
+                htmlString.Append("$.Dialog.content(htmlString);");
+                htmlString.Append("}");
+                htmlString.Append("});}");
                 return htmlString.ToString();
 
             }

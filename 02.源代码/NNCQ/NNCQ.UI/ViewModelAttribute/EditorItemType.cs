@@ -24,6 +24,7 @@ namespace NNCQ.UI.ViewModelAttribute
         Hidden,
         HtmlTextEditor,
         SelfReferentialItem,
-        PlainFacadeItem
+        PlainFacadeItem,
+        SinglePerson
     }
 }

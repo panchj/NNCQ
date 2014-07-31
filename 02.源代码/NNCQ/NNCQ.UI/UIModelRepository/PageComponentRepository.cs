@@ -688,10 +688,24 @@ namespace NNCQ.UI.UIModelRepository
             {
                 var htmlString = new StringBuilder();
                 htmlString.Append("<textarea name='" + name + "' id='" + name + "' onclick='javascript:getCustumerCkEditor(\""+name+"\")'>" + valueString + "</textarea>");
-                //htmlString.Append("<script>CKEDITOR.replace('"+name+"');</script>");
                 return htmlString.ToString();
             }
 
+            public static string A10_SinglePerson(string name, string valueString) 
+            {
+                var htmlString = new StringBuilder();
+                htmlString.Append("<input type='hidden' id='"+name+"' name='"+name+"' value=''>");
+                htmlString.Append("<table style='width:100%'>");
+                htmlString.Append("<tr>");
+                htmlString.Append("<td class='text-left' style='border-bottom-style:solid;border-bottom-width:1px'><div id='" + name + "Display'></div></td>");
+                htmlString.Append("<td class='text-right' style='width:80px'>");
+                htmlString.Append("<button class='primary' style='height:28px' onclick='javascript:getSinglePersonDialog(\"" + name + "\", \"" + name + "Display\")'> <i class='icon-checkmark'></i> 确定 </button>");
+                htmlString.Append("</td>");
+                htmlString.Append("</tr>");
+                htmlString.Append("</table>");
+                return htmlString.ToString();
+
+            }
         }
     }
 
